@@ -7,7 +7,7 @@
     | Nombre | Foto | Biografía | Rol | Responsabilidades |
     |---|---|---|---|---|
     | Jose Manuel Rodriguez | | Escribe tu biografía | Líder de Proyecto | <ul><li>A</li><li>B</li><li>C</li></ul> |
-    | Santiago Castro | | | Líder de Desarrollo | |
+    | Santiago Castro | | Soy una persona responsable y aplicada :) | Líder de Desarrollo | <ul><li>A</li><li>B</li><li>C</li></ul> |
     | Nicolás David Rincon | | | Líder de Arquitectura | |
     | Laura Valentina Ovalle | | | Líder de Diseño | |
     | Michael Joel Gonzalez | | | Líder de Documentación | |
