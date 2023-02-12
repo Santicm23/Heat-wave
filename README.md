@@ -8,6 +8,6 @@
     |---|---|---|---|---|
     | Jose Manuel Rodriguez | | Escribe tu biografía | Líder de Proyecto | <ul><li>A</li><li>B</li><li>C</li></ul> |
     | Santiago Castro | | | Líder de Desarrollo | |
-    | Nicolás David Rincon | | Hola | Líder de Arquitectura | |
+    | Nicolás David Rincon | | Hola | Líder de Arquitectura | <ul><li>Hola</li><li>B</li><li>C</li></ul> |
     | Laura Valentina Ovalle | | lalalupsi | Líder de Diseño | <ul><li>A</li><li>B</li><li>C</li></ul> |
     | Michael Joel Gonzalez | | | Líder de Documentación | |
