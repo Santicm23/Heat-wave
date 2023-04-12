@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/Santicm23/Heat-wave/issues"
   },
-  "homepage": "https://github.com/Santicm23/Heat-wave#readme"
+  "homepage": "https://github.com/Santicm23/Heat-wave#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
 }
