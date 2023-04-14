@@ -1,9 +1,17 @@
-# Heat-wave
+# **Heat-wave**
 
-- **`Nombre de Grupo`**: Scalae
-- **`Nombre de Proyecto`**: Heat wave
-- **`Integrantes`**:
+## *¿Como empezar?*: 
+- Instalar servidor: `npm install`
+- Iniciar servidor:
+    - `npm start` (en producción)
+    - `nodemon dist/app` (en desarrollo)
+
+
+## *Nuestro Equipo*:
+- *Nombre de Grupo*: Scalae
+- **Integrantes**:
     <!-- Nombre, foto, biografía(Un párrafo), rol, responsabilidades -->
+    <!-- TODO: completar tabla -->
     | Nombre | Foto | Biografía | Rol | Responsabilidades |
     |---|---|---|---|---|
     | Jose Manuel Rodriguez | | Nací en Bogotá, Colombia el 25 de abril de 2003, me encanta la programación, el dibujo y cualquier tipo de deporte. Actualmente estoy estudiando el cuarto semestre de ingeniería de sistemas. Ademas considero que tengo habilidades blandas sobresalientes, lo que me permite conectar fácilmente con los demás y asumir un papel de liderazgo con facilidad. | Líder de Proyecto | <ul><li>A</li><li>B</li><li>C</li></ul> |

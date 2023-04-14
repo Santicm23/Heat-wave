@@ -2,10 +2,10 @@
   "name": "heat-wave",
   "version": "0.0.1",
   "description": "- **`Nombre de Grupo`**: Scalae\r - **`Nombre de Proyecto`**: Heat wave\r - **`Integrantes`**:\r     <!-- Nombre, foto, biografía(Un párrafo), rol, responsabilidades -->\r     | Nombre | Foto | Biografía | Rol | Responsabilidades |\r     |---|---|---|---|---|\r     | Jose Manuel Rodriguez | | Escribe tu biografía | Líder de Proyecto | <ul><li>A</li><li>B</li><li>C</li></ul> |\r     | Santiago Castro | | Nací el 30/10/2003 en Bogotá Colombia, me encanta jugar tenis, programar, tocar piano y jugar ajedrez. Ahora mismo estudio ingeniería de sistemas y estoy viendo mi cuarto semestre. Soy una persona responsable y aplicada :) | Líder de Desarrollo | <ul><li>A</li><li>B</li><li>C</li></ul> |\r     | Nicolás David Rincon | | Hola | Líder de Arquitectura | <ul><li>Hola</li><li>B</li><li>C</li></ul> |\r     | Laura Valentina Ovalle | | Nací el 5 de octubre del 2004 en Bogotá Colombia, mis pasatiempos favoritos son leer, escuchar música y hacer ejercicio. Actualmente me encuentro cursando el 4 semestre de Ingeniería de Sistemas. Mis principales habilidades son la creatividad, disciplina y liderazgo| Líder de Diseño | <ul><li>A</li><li>B</li><li>C</li></ul> |\r     | Michael Joel Gonzalez | | | Líder de Documentación | |",
-  "main": "app.js",
+  "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node dist/app.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,18 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "express-validator": "^6.15.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3",
+    "sequelize": "^6.31.0",
+    "socket.io": "^4.6.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "eslint": "^8.38.0",
+    "typescript": "^5.0.4"
   }
 }
