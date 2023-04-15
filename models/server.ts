@@ -5,6 +5,9 @@ import express, { Application } from 'express';
 import hashtagsRouter from '../routes/hashtags'
 
 
+
+import cuentasRouter from "../routes/cuentas";
+
 class Server {
     private app: Application;
     private port: string;
@@ -27,7 +30,7 @@ class Server {
     }
 
     routes() {
-        // this.app.use('/app/cuentas', );                     // ruta cuentas
+        this.app.use('/app/cuentas', cuentasRouter);        // ruta cuentas
         this.app.use('/app/hashtags', hashtagsRouter);      // ruta hashtags
     }
 
