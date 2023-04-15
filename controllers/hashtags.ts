@@ -2,32 +2,32 @@
 import { Request, Response } from 'express';
 
 
-export const getHashtags = (req: Request, res: Response) => {
+export const getPublicaciones = (req: Request, res: Response) => {
     res.json({
-        msg:'Pedir Hashtags'
+        msg:'Pedir Publicaciones'
     });
 }
 
-export const getHashtag = (req: Request, res: Response) => {
+export const getPublicacion = (req: Request, res: Response) => {
     res.json({
-        msg:'Pedir Hashtag'
+        msg:'Pedir Publicacion'
     });
 }
 
-export const postHashtag = (req: Request, res: Response) => {
+export const postPublicacion = (req: Request, res: Response) => {
     res.json({
-        msg:'Crear Hashtag'
+        msg:'Crear Publicacion'
     });
 }
 
-export const putHashtag = (req: Request, res: Response) => {
+export const putPublicacion = (req: Request, res: Response) => {
     res.json({
-        msg:'Modificar Hashtag'
+        msg:'Modificar Publicacion'
     });
 }
 
-export const deleteHashtag = (req: Request, res: Response) => {
+export const deletePublicacion = (req: Request, res: Response) => {
     res.json({
-        msg:'Eliminar Hashtag'
+        msg:'Eliminar Publicacion'
     });
 }

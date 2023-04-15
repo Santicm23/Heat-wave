@@ -1,34 +1,37 @@
 
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 
 export const getCuentas = (req: Request, res: Response) => {
     res.json({
-        msg: "Pedir cuentas"
+        msg: 'Pedir cuentas'
     }) 
 }
 
 export const getCuenta = (req: Request, res: Response) => {
+    const { id } = req.params;
+
     res.json({
-        msg: "Pedir cuenta"
+        msg: 'Pedir cuenta',
+        id
     }) 
 }
 
 export const postCuenta = (req: Request, res: Response) => {
     res.json({
-        msg: "Crear cuenta"
+        msg: 'Crear cuenta'
     }) 
 }
 
 export const putCuenta = (req: Request, res: Response) => {
     res.json({
-        msg: "Modificar cuenta"
+        msg: 'Modificar cuenta'
     }) 
 }
 
 export const deleteCuenta = (req: Request, res: Response) => {
     res.json({
-        msg: "Eliminar cuenta"
+        msg: 'Eliminar cuenta'
     }) 
 }
 
