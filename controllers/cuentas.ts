@@ -1,4 +1,6 @@
+
 import { Request, Response } from "express";
+
 
 export const getCuentas = (req: Request, res: Response) => {
     res.json({

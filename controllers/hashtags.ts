@@ -4,30 +4,30 @@ import { Request, Response } from 'express';
 
 export const getHashtags = (req: Request, res: Response) => {
     res.json({
-        msg:'Pediste Hashtags'
+        msg:'Pedir Hashtags'
     });
 }
 
 export const getHashtag = (req: Request, res: Response) => {
     res.json({
-        msg:'Pediste Hashtag'
+        msg:'Pedir Hashtag'
     });
 }
 
 export const postHashtag = (req: Request, res: Response) => {
     res.json({
-        msg:'Creando Hashtag'
+        msg:'Crear Hashtag'
     });
 }
 
 export const putHashtag = (req: Request, res: Response) => {
     res.json({
-        msg:'Modificando Hashtag'
+        msg:'Modificar Hashtag'
     });
 }
 
 export const deleteHashtag = (req: Request, res: Response) => {
     res.json({
-        msg:'Borrando Hashtag'
+        msg:'Eliminar Hashtag'
     });
 }
