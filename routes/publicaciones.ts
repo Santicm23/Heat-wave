@@ -1,7 +1,7 @@
 
 import { Router } from 'express';
 
-import { deletePublicacion, getPublicacion, getPublicaciones, postPublicacion, putPublicacion } from '../controllers/hashtags';
+import { deletePublicacion, getPublicacion, getPublicaciones, postPublicacion, putPublicacion } from '../controllers/publicaciones';
 
 
 const router = Router();

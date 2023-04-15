@@ -24,7 +24,7 @@ class Server {
         this.routes();      // fijar rutas
     }
 
-    middlewares() {
+    public middlewares() : void {
         this.app.use(cors());                   // para seguridad y compatibilidad con el navegador
 
         this.app.use(express.json());           // para el uso de json (rest API)
@@ -32,12 +32,12 @@ class Server {
         this.app.use(express.static('public')); // para el despliegue del front end en la carpeta 'public'
     }
 
-    routes() {
+    public routes() : void {
         this.app.use(this.paths.cuentas, cuentasRouter);                // ruta cuentas
         this.app.use(this.paths.publicaciones, publicacionesRouter);    // ruta hashtags
     }
 
-    listen() {
+    public listen() : void {
         this.app.listen(this.port, () => {
             console.log(`Server running on port ${this.port}`);
         });

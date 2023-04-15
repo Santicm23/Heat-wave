@@ -1,45 +1,42 @@
-import Publicacion from "./publicacion";
+
+import Comentario from './comentario';
+import PublicacionMusica from './publicacionMusica';
 
 
-class PublicacionFeed extends Publicacion {
-    private imagen: string;
-    private sonido: string;
+class PublicacionFeed extends PublicacionMusica {
     private descripcion: string;
+    private comentarios: Array<Comentario>;
 
-    constructor(fecha: Date, likes: number, imagen: string, sonido: string, descripcion: string) {
-        super(fecha, likes);
-        this.imagen = imagen;
-        this.sonido = sonido;
+    constructor(sonido: string, imagen: string = '',  descripcion: string = '', fecha: Date = new Date(), likes: number = 0) {
+        super(sonido, imagen, fecha, likes);
         this.descripcion = descripcion;
+        this.comentarios = [];
     }
 
     public subir() {
         console.log("Subiendo publicación");
     }
 
-    public get getImagen() : string {
-        return this.imagen;
-    }
- 
-    public set setImagen(imagen : string) {
-        this.imagen = imagen;
-    }
-
-    public get getSonido() : string {
-        return this.sonido;
-    }
- 
-    public set setSonido(sonido : string) {
-        this.sonido = sonido;
-    }
-
     public get getDescripcion() : string {
         return this.descripcion;
     }
  
-    public set setDescripcion(descripcion : string) {
+    public set setDescripcion(descripcion: string) {
         this.descripcion = descripcion;
     }
+
+    public get getComentarios() : Array<Comentario> {
+        return this.comentarios;
+    }
+    
+    public set setComentarios(comentario: Array<Comentario>) {
+        this.comentarios = comentario;
+    }
+
+    public crearComentario(texto: string) : void {
+        this.comentarios.push(new Comentario(texto));
+    }
 }
+
 
 export default PublicacionFeed;
