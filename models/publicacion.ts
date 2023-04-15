@@ -14,7 +14,6 @@ abstract class Publicacion {
     public get getFecha() : Date {
         return this.fecha;
     }
-
     
     public set setFecha(fecha: Date) {
         this.fecha = fecha;
