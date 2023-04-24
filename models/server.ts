@@ -2,9 +2,9 @@
 import cors from 'cors';
 import express, { Application } from 'express';
 
-import publicacionesRouter from '../routes/posts'
-
-import cuentasRouter from '../routes/accounts';
+import accountsRouter from '../routes/accounts';
+import db from '../db/connection';
+import postsRouter from '../routes/posts';
 
 
 class Server {
@@ -23,6 +23,8 @@ class Server {
         this.middlewares(); // configuraciones
 
         this.routes();      // fijar rutas
+
+        this.dbConnection();
     }
 
     public middlewares() : void {
@@ -34,14 +36,28 @@ class Server {
     }
 
     public routes() : void {
-        this.app.use(this.paths.accounts, cuentasRouter);                // ruta cuentas
-        this.app.use(this.paths.posts, publicacionesRouter);    // ruta hashtags
+        this.app.use(this.paths.accounts, accountsRouter);                // ruta cuentas
+        this.app.use(this.paths.posts, postsRouter);    // ruta hashtags
     }
 
     public listen() : void {
         this.app.listen(this.port, () => {
             console.log(`Server running on port ${this.port}`);
         });
+    }
+
+    async dbConnection() : Promise<void> {
+        try {
+            
+            await db.authenticate();
+            console.log('Base de Datos conectados');
+            
+        } catch (error: string | any) {
+            console.error(
+                `Error conectandose a la base de datos:\n
+                    "${error}"`
+            );
+        }
     }
 }
 
