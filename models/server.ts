@@ -11,8 +11,9 @@ class Server {
     private app: Application;
     private port: string;
     private paths = {
-        cuentas: '/app/cuentas',
-        publicaciones: '/app/publicacion'
+        auth: '/auth',
+        cuentas: '/cuentas',
+        publicaciones: '/publicaciones'
     }
 
     constructor() {
