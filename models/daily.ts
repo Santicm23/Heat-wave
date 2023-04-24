@@ -1,13 +1,13 @@
 
-import PublicacionMusica from './publicacionMusica';
+import PublicacionMusica from './musicPost';
 
 
 class Daily extends PublicacionMusica {
-    constructor(sonido: string, imagen: string = '', fecha: Date = new Date(), likes: number = 0) {
-        super(sonido, imagen, fecha, likes);
+    constructor(sound: string, image: string = '', date: Date = new Date()) {
+        super(sound, image, date);
     }
 
-    public subir() {
+    public upload() {
         console.log('subiendo una daily :)');
     }
 }
