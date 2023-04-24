@@ -2,9 +2,9 @@
 import cors from 'cors';
 import express, { Application } from 'express';
 
-import publicacionesRouter from '../routes/publicaciones'
+import publicacionesRouter from '../routes/posts'
 
-import cuentasRouter from '../routes/cuentas';
+import cuentasRouter from '../routes/accounts';
 
 
 class Server {
@@ -12,8 +12,8 @@ class Server {
     private port: string;
     private paths = {
         auth: '/auth',
-        cuentas: '/cuentas',
-        publicaciones: '/publicaciones'
+        accounts: '/acounts',
+        posts: '/publicaciones'
     }
 
     constructor() {
@@ -34,8 +34,8 @@ class Server {
     }
 
     public routes() : void {
-        this.app.use(this.paths.cuentas, cuentasRouter);                // ruta cuentas
-        this.app.use(this.paths.publicaciones, publicacionesRouter);    // ruta hashtags
+        this.app.use(this.paths.accounts, cuentasRouter);                // ruta cuentas
+        this.app.use(this.paths.posts, publicacionesRouter);    // ruta hashtags
     }
 
     public listen() : void {

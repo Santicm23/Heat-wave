@@ -2,13 +2,13 @@
 import { Request, Response } from 'express';
 
 
-export const getCuentas = (req: Request, res: Response) => {
+export const getAccounts = (req: Request, res: Response) => {
     res.json({
         msg: 'Pedir cuentas'
     }) 
 }
 
-export const getCuenta = (req: Request, res: Response) => {
+export const getAccount = (req: Request, res: Response) => {
     const { id } = req.params;
 
     res.json({
@@ -17,19 +17,19 @@ export const getCuenta = (req: Request, res: Response) => {
     }) 
 }
 
-export const postCuenta = (req: Request, res: Response) => {
+export const postAccount = (req: Request, res: Response) => {
     res.json({
         msg: 'Crear cuenta'
     }) 
 }
 
-export const putCuenta = (req: Request, res: Response) => {
+export const putAccount = (req: Request, res: Response) => {
     res.json({
         msg: 'Modificar cuenta'
     }) 
 }
 
-export const deleteCuenta = (req: Request, res: Response) => {
+export const deleteAccount = (req: Request, res: Response) => {
     res.json({
         msg: 'Eliminar cuenta'
     }) 
