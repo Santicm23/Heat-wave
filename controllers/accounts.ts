@@ -34,4 +34,3 @@ export const deleteAccount = (req: Request, res: Response) => {
         msg: 'Eliminar cuenta'
     }) 
 }
-
