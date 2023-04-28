@@ -12,7 +12,7 @@ class Server {
     private port: string;
     private paths = {
         auth: '/auth',
-        accounts: '/acounts',
+        accounts: '/accounts',
         posts: '/publicaciones'
     }
 

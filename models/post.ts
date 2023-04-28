@@ -1,10 +1,12 @@
+import { Model } from 'sequelize';
 
 
-abstract class Post {
+abstract class Post extends Model {
     private date: Date;
     private likes: number;
 
     constructor(date: Date) {
+        super();
         this.date = date;
         this.likes = 0;
     }
