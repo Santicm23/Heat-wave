@@ -18,13 +18,22 @@ export const getAccounts = async(req: Request, res: Response) => {
     });
 }
 
-export const getAccount = (req: Request, res: Response) => {
+export const getAccount = async(req: Request, res: Response) => {
     const { id } = req.params;
+    const account = await Account.findByPk(id);
 
-    res.json({
-        msg: 'Pedir cuenta',
-        id
-    }) 
+    if (account == null){
+        res.json({
+            msg: `No existe una cuenta con el username: ${id}`
+        })
+    } else{
+        res.json({
+            attributes: ['username', 'name', 'email', 'password', 'image'],
+            where: {
+                active: true
+            }
+        })
+    }
 }
 
 export const postAccount = async(req: Request, res: Response) => {
