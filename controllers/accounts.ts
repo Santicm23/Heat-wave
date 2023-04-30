@@ -24,30 +24,82 @@ export const getAccount = (req: Request, res: Response) => {
     res.json({
         msg: 'Pedir cuenta',
         id
-    }) 
+    });
 }
 
 export const postAccount = async(req: Request, res: Response) => {
 
     const { body } = req;
 
-    const account = new Account(body);
-    await account.save();
+    try {
+        
+        const account = await Account.create(body);
 
-    res.json({
-        msg: 'Cuenta creada exitosamente',
-        account
-    }) 
+        res.json({
+            msg: 'Cuenta creada exitosamente',
+            account
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+            msg: `Algo salió mal: ${error}`
+        });
+    }
 }
 
-export const putAccount = (req: Request, res: Response) => {
-    res.json({
-        msg: 'Modificar cuenta'
-    }) 
+export const putAccount = async(req: Request, res: Response) => {
+
+    const { username } = req.params;
+    const { name, password, image } = req.body;
+    
+    try {
+        
+        const account = await Account.findByPk(username);
+        
+        await account?.update({
+            name,
+            password,
+            image
+        });
+    
+        return res.json({
+            msg: 'Cuenta actualizada exitosamente',
+            account
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+            msg: `Algo salió mal: ${error}`
+        });
+    }
 }
 
-export const deleteAccount = (req: Request, res: Response) => {
-    res.json({
-        msg: 'Eliminar cuenta'
-    }) 
+export const deleteAccount = async(req: Request, res: Response) => {
+
+    const { username } = req.params;
+
+    try {
+        
+        const account = await Account.findByPk(username);
+        
+        await account?.update({
+            active: false
+        });
+    
+        return res.json({
+            msg: 'Cuenta eliminada exitosamente',
+            account
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+            msg: `Algo salió mal: ${error}`
+        });
+    }
 }

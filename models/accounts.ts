@@ -15,44 +15,42 @@ class Account extends Model<InferAttributes<Account>, InferCreationAttributes<Ac
     declare image: CreationOptional<string | null>;
 }
 
-Account.init(
-    {
-        username: {
-            type: DataTypes.STRING,
-            primaryKey: true
-        },
-        name: {
-            type: DataTypes.STRING
-        },
-        email: {
-            type: DataTypes.STRING,
-            unique: true
-        },
-        password: {
-            type: DataTypes.STRING,
-            set(pass: string) {
-                this.setDataValue('password', encrypt_pass(pass));
-            }
-        },
-        active: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: true
-        },
-        google: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false
-        },
-        image: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            defaultValue: null
+Account.init({
+    username: {
+        type: DataTypes.STRING,
+        primaryKey: true
+    },
+    name: {
+        type: DataTypes.STRING
+    },
+    email: {
+        type: DataTypes.STRING,
+        unique: true
+    },
+    password: {
+        type: DataTypes.STRING,
+        set(pass: string) {
+            this.setDataValue('password', encrypt_pass(pass));
         }
     },
-    {
-        tableName: 'Accounts',
-        sequelize: db
+    active: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+    },
+    google: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
     }
-)
+},
+{
+    tableName: 'Accounts',
+    sequelize: db
+});
 
 
 export default Account;

@@ -9,11 +9,11 @@ export interface CustomRequest extends Request {
     authAccount: string
 }
 
-export const generateJWT = (uid: string) => {
+export const generateJWT = (username: string) => {
     return new Promise((resolve, reject) => {
 
         const payload = {
-            uid
+            username
         };
 
         jwt.sign(payload, SECRETORPRIVATEKEY, {expiresIn: '4h'},

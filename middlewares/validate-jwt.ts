@@ -2,6 +2,9 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
 
+import { usernameExists } from '../helpers/db-validators';
+import Account from '../models/accounts';
+
 
 const SECRETORPRIVATEKEY: Secret = process.env.SECRETORPRIVATEKEY || '';
 
@@ -15,7 +18,14 @@ const validateJWT = async(req: Request, res: Response, next: NextFunction) => {
     }
 
     try {
-        const { uid } = jwt.verify(token, SECRETORPRIVATEKEY) as JwtPayload;
+        const { username } = jwt.verify(token, SECRETORPRIVATEKEY) as JwtPayload;
+
+        const account = await usernameExists(username) as Account;
+
+        if (!account.active) 
+            throw new Error(`La cuenta fue eliminada.`);
+        
+        req.body.account = account;
 
         next();
     } catch (error) {

@@ -55,7 +55,7 @@ class Server {
         } catch (error: string | any) {
             console.error(
                 `Error conectandose a la base de datos:\n
-                    "${error}"`
+                    '${error}'`
             );
         }
     }
