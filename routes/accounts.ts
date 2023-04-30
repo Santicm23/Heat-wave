@@ -12,7 +12,7 @@ const router = Router();
 
 router.get('/', getAccounts);
 
-router.get('/:id', getAccount);
+router.get('/:username', check('username').custom(usernameExists), getAccount);
 
 router.post('/', [
     check('username', 'El nombre de usuario no es válido').notEmpty().trim().matches(/[\w_]+/),
