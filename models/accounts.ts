@@ -48,7 +48,7 @@ Account.init({
     }
 },
 {
-    tableName: 'Accounts',
+    tableName: 'accounts',
     sequelize: db
 });
 

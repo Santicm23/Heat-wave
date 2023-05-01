@@ -31,9 +31,11 @@ export const uniqueEmail = async(email: string): Promise<void> => {
 export const usernameExists = async(username: string): Promise<Account | void> => {
     const existAccount = await Account.findByPk(username);
 
-    if (!existAccount) {
+    if (!existAccount || !existAccount.active) {
         throw new Error(`El nombre de usuario '${username}' no existe`);
     }
+    console.log("aaaaa");
+    
     
     return existAccount;
 }
