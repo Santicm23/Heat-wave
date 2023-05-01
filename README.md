@@ -4,7 +4,7 @@
 - Instalar servidor: `npm install`
 - Iniciar servidor:
     - `npm start` (en producción)
-    - `nodemon dist/app` (en desarrollo)
+    - `tsc --watch` y en otra consola `nodemon dist/app` (en desarrollo)
 
 
 ## *Nuestro Equipo*:
