@@ -1,0 +1,159 @@
+
+
+CREATE TABLE accounts (
+    `username` VARCHAR(255) PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL,
+    `email` VARCHAR(255) NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    `active` TINYINT NOT NULL DEFAULT 1,
+    `google` TINYINT NOT NULL DEFAULT 1,
+    `image` VARCHAR(255) DEFAULT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE (`email`)
+);
+
+CREATE TABLE songs (
+    `id_song` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL,
+    `sound` VARCHAR(255) NOT NULL,
+    `duration` TIME NOT NULL,
+    `author` VARCHAR(255) NOT NULL,
+    `album` VARCHAR(255),
+    `image` VARCHAR(255) DEFAULT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE chats (
+    `id_chat` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL,
+    `num_accounts` INT(11) NOT NULL DEFAULT 0,
+    `description` TEXT DEFAULT NULL,
+    `image` VARCHAR(255) DEFAULT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE visibilities (
+    `id_visibility` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE (`name`)
+);
+
+CREATE TABLE states (
+    `id_state` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE (`name`)
+);
+
+CREATE TABLE playlists (
+    `id_playlist` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL,
+    `num_songs` INT(11) NOT NULL DEFAULT 0,
+    `duration` TIME NOT NULL DEFAULT 0,
+    `path` VARCHAR(255) NOT NULL DEFAULT '/',
+    `likes` INT(11) NOT NULL DEFAULT 0,
+    `username` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (username) REFERENCES accounts(username)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE dailys (
+    `id_daily` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `likes` INT(11) NOT NULL DEFAULT 0,
+    `image` VARCHAR(255) DEFAULT NULL,
+    `username` VARCHAR(255) NOT NULL,
+    `id_song` BIGINT(20) UNSIGNED NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (username) REFERENCES accounts(username)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_song) REFERENCES songs(id_song)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE messages (
+    `id_message` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `text` TEXT NOT NULL,
+    `likes` INT(11) NOT NULL DEFAULT 0,
+    `username` VARCHAR(255) NOT NULL,
+    `id_chat` BIGINT(20) UNSIGNED NOT NULL,
+    `id_state` BIGINT(20) UNSIGNED NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (username) REFERENCES accounts(username)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_chat) REFERENCES chats(id_chat)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE feed_posts (
+    `id_feed_post` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL,
+    `likes` INT(11) NOT NULL DEFAULT 0,
+    `description` TEXT NOT NULL,
+    `location` VARCHAR(255) DEFAULT NULL,
+    `id_playlist` BIGINT(20) UNSIGNED NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_playlist) REFERENCES playlists(id_playlist)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE comments (
+    `id_comment` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `text` TEXT NOT NULL,
+    `likes` INT(11) NOT NULL DEFAULT 0,
+    `id_feed_post` BIGINT(20) UNSIGNED NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (username) REFERENCES accounts(username)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_feed_post) REFERENCES feed_posts(id_feed_post)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE chatXaccount (
+    `id_chat` BIGINT(20) UNSIGNED,
+    `username` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`id_chat`, `username`),
+    FOREIGN KEY (id_chat) REFERENCES chats(id_chat)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (username) REFERENCES accounts(username)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE accountXplaylist (
+    `username` VARCHAR(255) NOT NULL,
+    `id_playlist` BIGINT(20) UNSIGNED,
+    PRIMARY KEY (`username`, `id_playlist`),
+    FOREIGN KEY (id_playlist) REFERENCES playlists(id_playlist)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (username) REFERENCES accounts(username)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE songXfeed_post (
+    `id_song` BIGINT(20) UNSIGNED,
+    `id_feed_post` BIGINT(20) UNSIGNED,
+    PRIMARY KEY (`id_song`, `id_feed_post`),
+    FOREIGN KEY (id_song) REFERENCES songs(id_song)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_feed_post) REFERENCES feed_posts(id_feed_post)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE feed_post_images (
+    `id_feed_post` BIGINT(20) UNSIGNED,
+    `image` VARCHAR(255),
+    PRIMARY KEY (`id_feed_post`, `image`),
+    FOREIGN KEY (id_feed_post) REFERENCES feed_posts(id_feed_post)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
