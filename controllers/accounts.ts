@@ -2,38 +2,34 @@
 import { Request, Response } from 'express';
 
 import Account from '../models/accounts';
+import { username_not_exists, something_went_wrong } from '../helpers/json-errors';
+import { account_select } from '../helpers/data-repr';
 
 
-const select = {
-    attributes: ['username', 'name', 'email', 'password', 'image'],
-    where: {
-        active: true
-    }
-};
 
 export const getAccounts = async(req: Request, res: Response) => {
 
     try {
         
-        const accounts = await Account.findAll(select);
+        const accounts = await Account.findAll(account_select());
 
-        if (accounts.length == 1)
-            return res.json({
+        if (accounts.length == 1) {
+            res.json({
                 msg: `1 cuenta encontrada`,
                 accounts
             });
+        } else {
+            res.json({
+                msg: `${accounts.length} cuentas encontradas`,
+                accounts
+            });
+        }
 
-        return res.json({
-            msg: `${accounts.length} cuentas encontradas`,
-            accounts
-        });
 
     } catch (error) {
         console.error(error);
 
-        return res.status(500).json({
-            msg: `Algo salió mal: ${error}`
-        });
+        res.status(500).json(something_went_wrong(error));
     }
 
     
@@ -44,32 +40,33 @@ export const getAccount = async(req: Request, res: Response) => {
 
     try {
         
-        const account = await Account.findByPk(username, select);
-        
-        res.json({
+        const account = await Account.findByPk(username);
+
+        if (!account || !account.active)
+            return res.status(404).json(username_not_exists(username));
+
+        return res.json({
             msg: 'Cuenta encontrada exitosamente',
             account
         });
 
+
     } catch (error) {
         console.error(error);
 
-        return res.status(500).json({
-            msg: `Algo salió mal: ${error}`
-        });
+        return res.status(500).json(something_went_wrong(error));
     }
 
 }
 
 export const postAccount = async(req: Request, res: Response) => {
-
     const { body } = req;
 
     try {
         
         const account = await Account.create(body);
 
-        res.json({
+        return res.json({
             msg: 'Cuenta creada exitosamente',
             account
         });
@@ -77,22 +74,22 @@ export const postAccount = async(req: Request, res: Response) => {
     } catch (error) {
         console.error(error);
 
-        return res.status(500).json({
-            msg: `Algo salió mal: ${error}`
-        });
+        return res.status(500).json(something_went_wrong(error));
     }
 }
 
 export const putAccount = async(req: Request, res: Response) => {
-
     const { username } = req.params;
     const { name, password, image } = req.body;
     
     try {
         
         const account = await Account.findByPk(username);
+
+        if (!account || !account.active)
+            return res.status(404).json(username_not_exists(username));
         
-        await account?.update({
+        await account.update({
             name,
             password,
             image
@@ -106,21 +103,21 @@ export const putAccount = async(req: Request, res: Response) => {
     } catch (error) {
         console.error(error);
 
-        return res.status(500).json({
-            msg: `Algo salió mal: ${error}`
-        });
+        return res.status(500).json(something_went_wrong(error));
     }
 }
 
 export const deleteAccount = async(req: Request, res: Response) => {
-
     const { username } = req.params;
 
     try {
         
         const account = await Account.findByPk(username);
+
+        if (!account || !account.active)
+            return res.status(404).json(username_not_exists(username));
         
-        await account?.update({
+        await account.update({
             active: false
         });
     
@@ -132,8 +129,6 @@ export const deleteAccount = async(req: Request, res: Response) => {
     } catch (error) {
         console.error(error);
 
-        return res.status(500).json({
-            msg: `Algo salió mal: ${error}`
-        });
+        return res.status(500).json(something_went_wrong(error));
     }
 }

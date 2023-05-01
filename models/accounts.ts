@@ -13,6 +13,15 @@ class Account extends Model<InferAttributes<Account>, InferCreationAttributes<Ac
     declare active: CreationOptional<boolean>;
     declare google: CreationOptional<boolean>;
     declare image: CreationOptional<string | null>;
+
+    public getRepr(): object {
+        return {
+            username: this.username,
+            name: this.name,
+            email: this.email,
+            image: this.image
+        }
+    }
 }
 
 Account.init({

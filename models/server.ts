@@ -5,6 +5,7 @@ import express, { Application } from 'express';
 import accountsRouter from '../routes/accounts';
 import db from '../db/connection';
 import postsRouter from '../routes/posts';
+import authRouter from '../routes/auth';
 
 
 class Server {
@@ -36,8 +37,9 @@ class Server {
     }
 
     public routes() : void {
-        this.app.use(this.paths.accounts, accountsRouter);                // ruta cuentas
-        this.app.use(this.paths.posts, postsRouter);    // ruta hashtags
+        this.app.use(this.paths.accounts, accountsRouter);              // ruta cuentas
+        this.app.use(this.paths.posts, postsRouter);                    // ruta hashtags
+        this.app.use(this.paths.auth, authRouter);                      // ruta autentificación
     }
 
     public listen() : void {

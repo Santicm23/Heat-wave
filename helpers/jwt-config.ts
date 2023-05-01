@@ -1,15 +1,10 @@
 
-import { Request } from 'express';
 import jwt, { Secret } from 'jsonwebtoken';
 
 
 const SECRETORPRIVATEKEY: Secret = process.env.SECRETORPRIVATEKEY || '';
 
-export interface CustomRequest extends Request {
-    authAccount: string
-}
-
-export const generateJWT = (username: string) => {
+export const generateJWT = (username: string): Promise<String | undefined> => {
     return new Promise((resolve, reject) => {
 
         const payload = {
