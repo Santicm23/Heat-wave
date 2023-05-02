@@ -1,5 +1,4 @@
 
-
 DROP TABLE feed_post_images;
 DROP TABLE accountXplaylist;
 DROP TABLE songXfeed_post;
@@ -14,6 +13,16 @@ DROP TABLE visibilities;
 DROP TABLE chats;
 DROP TABLE songs;
 DROP TABLE accounts;
+DROP TABLE roles;
+
+
+CREATE TABLE roles (
+    `id_role` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL,
+    `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE (`name`)
+);
 
 CREATE TABLE accounts (
     `username` VARCHAR(255) PRIMARY KEY,
@@ -23,8 +32,11 @@ CREATE TABLE accounts (
     `active` TINYINT NOT NULL DEFAULT 1,
     `google` TINYINT NOT NULL DEFAULT 1,
     `image` VARCHAR(255) DEFAULT NULL,
+    `role` BIGINT(20) UNSIGNED NOT NULL,
     `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (`role`) REFERENCES roles(id_role)
+        ON DELETE CASCADE ON UPDATE CASCADE,
     UNIQUE (`email`)
 );
 
@@ -173,3 +185,9 @@ CREATE TABLE feed_post_images (
     FOREIGN KEY (id_feed_post) REFERENCES feed_posts(id_feed_post)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
+-- inserts:
+
+INSERT INTO roles(`name`) values('ADMIN');
+INSERT INTO roles(`name`) values('USER');

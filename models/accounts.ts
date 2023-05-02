@@ -5,6 +5,26 @@ import db from '../db/connection';
 import { encrypt_pass } from '../helpers/encrypt';
 
 
+class Role extends Model<InferAttributes<Role>, InferCreationAttributes<Role>> {
+    declare id_role: number;
+    declare name: string;
+}
+
+Role.init({
+    id_role: {
+        type: DataTypes.BIGINT,
+        primaryKey: true
+    },
+    name: {
+        type: DataTypes.STRING,
+        unique: true
+    }
+},
+{
+    tableName: 'roles',
+    sequelize: db
+});
+
 class Account extends Model<InferAttributes<Account>, InferCreationAttributes<Account>> {
     declare username: string;
     declare name: string;
@@ -13,6 +33,7 @@ class Account extends Model<InferAttributes<Account>, InferCreationAttributes<Ac
     declare active: CreationOptional<boolean>;
     declare google: CreationOptional<boolean>;
     declare image: CreationOptional<string | null>;
+    declare role: number;
 
     public getRepr(): object {
         return {
@@ -54,6 +75,13 @@ Account.init({
         type: DataTypes.STRING,
         allowNull: true,
         defaultValue: null
+    },
+    role: {
+        type: DataTypes.BIGINT,
+        references: {
+            model: Role,
+            key: 'id_role'
+        }
     }
 },
 {
