@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Open Sans',sans-serif;
+}
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100hv;
+    background: linear-gradient(45deg,#dea719,#d9ad3c);
+}
+#logo
+{
+    position: absolute;
+    height: 70%;
+    top: -20vh;
+}
+.container
+{
+    position: relative;
+    width: 450px;
+    height: 450px;
+    top: 13vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container .waves
+{
+    left: -5vh;
+    top: -10vh;
+    width: 520px;
+    height: 520px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container .login
+{
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+.container .login h2
+{
+    font-size: 2em;
+    color: #fff;
+}
+.container .login .inputBx input
+{
+    position: relative;
+    width: 100%;
+    padding: 12px 20px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 40px;
+    font-size: 1.2em;
+    color: #fff;
+    box-shadow: none;
+    outline: none;
+}
+.container .login .inputBx input[type="submit"]
+{
+    background: linear-gradient(45deg,#ff357a,#fff172);
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+.container .login .inputBx input::placeholder
+{
+    color: rgba(255, 255, 255, 0.75);
+}
+.container .login .links
+{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+
+}
+.container .login .links a
+{
+    color: white;
+    text-decoration: none;
+    
+}
+.container i
+{
+    position: absolute;
+    inset: 0;
+    border: 2px solid #fff;
+    transition: 0.5s;
+}
+.container i:nth-child(1)
+{
+    border-radius:  82% 18% 70% 30% / 22% 77% 23% 78% ;
+    animation: animate 6s linear infinite;
+}
+.container i:nth-child(2)
+{
+    border-radius:  49% 51% 39% 61% / 20% 42% 58% 80% ;
+    animation: animate 5s linear infinite;
+}
+.container i:nth-child(3)
+{
+    border-radius:  49% 51% 39% 61% / 20% 21% 79% 80%  ;
+    animation: animate2 4s linear infinite;
+}
+@keyframes animate
+{
+    0%
+    {
+        transform: rotate(0deg);
+    }
+    100%
+    {
+        transform: rotate(360deg);
+    }
+}
+@keyframes animate2
+{
+    0%
+    {
+        transform: rotate(360deg);
+    }
+    100%
+    {
+        transform: rotate(0deg);
+    }
+}
+.container:hover i
+{
+    border: 6px solid var(--clr);
+    filter: drop-shadow(0 0 20px var(--clr));
+
+}
