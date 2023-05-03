@@ -12,7 +12,8 @@ body
     justify-content: center;
     align-items: center;
     min-height: 100hv;
-    background: linear-gradient(45deg,#dea719,#d9ad3c);
+    background: radial-gradient( circle, #ddbc68 , #e5a70b );
+    overflow-y: hidden;
 }
 #logo
 {
@@ -25,7 +26,7 @@ body
     position: relative;
     width: 450px;
     height: 450px;
-    top: 13vh;
+    top: 17vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -145,4 +146,40 @@ body
     border: 6px solid var(--clr);
     filter: drop-shadow(0 0 20px var(--clr));
 
+}
+.forms
+{
+    position: relative;
+    width: 250px;
+}
+.forms input
+{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1em;
+}
+.forms span
+{
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 1em;
+    text-transform: uppercase;
+    transition: 0.5s;
+}
+.forms input:valid ~ span,
+.forms input:focus ~ span
+{
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.65em;
+    padding: 0 10px;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    background: radial-gradient( circle, #ddbc68 , #e5a70b );
+    letter-spacing: 0.2em;
+    color: white;
 }
