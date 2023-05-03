@@ -31,7 +31,7 @@ body
     min-height: 70%;
     max-width: 100%;
     max-height: 100%;
-    top: -6vh;
+    top: 6vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,7 +39,7 @@ body
 .container .waves
 {
     left: 2%;
-    top: -25%;
+    top: -17%;
     width: 140vh;
     height: 140vh;
     display: flex;
