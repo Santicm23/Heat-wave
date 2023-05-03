@@ -9,17 +9,6 @@ class Chat extends Model<InferAttributes<Chat>, InferCreationAttributes<Chat>> {
     declare num_accounts: number;
     declare image: CreationOptional<string>;
     declare creation_date: Date;
-
-    public getRepr(): object {
-        return {
-            id_chat: this.id_chat,
-            name: this.name,
-            description: this.description,
-            num_accounts: this.num_accounts,
-            image: this.image,
-            creation_date: this.creation_date
-        }
-    }
 }
 
 Chat.init({

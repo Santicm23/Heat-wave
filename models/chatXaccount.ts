@@ -4,16 +4,10 @@ import db from '../db/connection';
 import Account from './accounts';
 import Chat from './chat';
 
+
 class chatXaccount extends Model<InferAttributes<chatXaccount>, InferCreationAttributes<chatXaccount>> {
     declare username: string;
     declare id_chat: number;
-
-    public getRepr(): object {
-        return {
-            username: this.username,
-            id_chat: this.id_chat
-        }
-    }
 }
 
 chatXaccount.init({
@@ -41,5 +35,6 @@ chatXaccount.init({
 
 chatXaccount.belongsTo(Account, {foreignKey: 'username'});
 chatXaccount.belongsTo(Chat, {foreignKey: 'id_chat'});
+
 
 export default chatXaccount;

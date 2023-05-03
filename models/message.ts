@@ -1,9 +1,11 @@
+
 import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
 import db from '../db/connection';
 import Account from './accounts';
 import Chat from './chat';
 import State from './state';
+
 
 class Message extends Model<InferAttributes<Message>, InferCreationAttributes<Message>> {
     declare id_message: number;
@@ -13,18 +15,6 @@ class Message extends Model<InferAttributes<Message>, InferCreationAttributes<Me
     declare likes: number;
     declare id_chat: number;
     declare username: string;
-
-    public getRepr(): object {
-        return {
-            id_message: this.id_message,
-            text: this.text,
-            date: this.date,
-            id_state: this.id_state,
-            likes: this.likes,
-            id_chat: this.id_chat,
-            username: this.username
-        }
-    }
 }
 
 Message.init({
@@ -71,5 +61,6 @@ Message.init({
 Message.belongsTo(State, { foreignKey: 'id_state' });
 Message.belongsTo(Chat, { foreignKey: 'id_chat' });
 Message.belongsTo(Account, { foreignKey: 'username' });
+
 
 export default Message;

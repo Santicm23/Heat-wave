@@ -1,15 +1,9 @@
 
-import PublicacionMusica from './musicPost';
+import { InferAttributes, InferCreationAttributes, Model } from "sequelize";
 
 
-class Daily extends PublicacionMusica {
-    constructor(sound: string, image: string = '', date: Date = new Date()) {
-        super(sound, image, date);
-    }
-
-    public upload() {
-        console.log('subiendo una daily :)');
-    }
+class Daily extends Model<InferAttributes<Daily>, InferCreationAttributes<Daily>> {
+    
 }
 
 
