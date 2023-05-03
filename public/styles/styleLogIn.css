@@ -40,6 +40,7 @@ body
 {
     left: 2%;
     top: -30%;
+    justify-content: center;
     width: 140vh;
     height: 140vh;
     display: flex;
@@ -75,6 +76,7 @@ body
     color: #fff;
     box-shadow: none;
     outline: none;
+    display: flex;
 }
 .container .login .inputBx input[type="submit"]
 {
@@ -82,10 +84,6 @@ body
     border: none;
     cursor: pointer;
     font-size: 1.2em;
-}
-.container .login .inputBx input::placeholder
-{
-    color: rgba(255, 255, 255, 0.75);
 }
 .container .login .links
 {
@@ -179,7 +177,7 @@ body
     transition: 0.5s;
     color: white;
 }
-
+.forms input:valid ~ span,
 .forms input:focus ~ span
 {
     transform: translateX(10%) translateY(-74%);
