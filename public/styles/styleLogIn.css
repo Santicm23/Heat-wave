@@ -20,7 +20,7 @@ body
 {
     position: absolute;
     height: 70%;
-    top: 5%;
+    top: 0%;
 }
 .container
 {
@@ -31,7 +31,7 @@ body
     min-height: 70%;
     max-width: 100%;
     max-height: 100%;
-    top: 5vh;
+    top: -5vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -190,5 +190,26 @@ body
     background: #ddbc68;
     letter-spacing: 0.2em;
     color: white;
+}
+.wrapper ul 
+{
+    list-style: none;
+    
+}
+.wrapper ul li
+{
+    
+}
+.wrapper ul li .fa
+{
+    color: #fff;
+    transition: all 0.5s ease;
+}
+
+.wrapper ul li:hover .fa-google
+{
+    color:  #dd4b39;
+    text-shadow: 0 0 15px #dd4b39;
+    transition: all 0.5s ease;
 }
 
