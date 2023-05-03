@@ -2,7 +2,7 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
 
-import Account from '../models/accounts';
+import Account from '../models/account';
 import { username_not_exists } from '../helpers/json-errors';
 
 
@@ -25,7 +25,7 @@ const validateJWT = async(req: Request, res: Response, next: NextFunction) => {
         if (!account || !account.active) 
             throw new Error(username_not_exists(username).msg);
         
-        req.body.account = account;
+        req.body.logged_account = account;
 
         next();
     } catch (error) {

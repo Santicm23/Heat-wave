@@ -1,8 +1,9 @@
 
 import { Request, Response } from 'express';
 
-import Account, { Role } from '../models/accounts';
+import Account from '../models/account';
 import { username_not_exists, something_went_wrong } from '../helpers/json-errors';
+import Role from '../models/role';
 
 
 
@@ -10,8 +11,7 @@ export const getAccounts = async(req: Request, res: Response) => {
 
     try {
         
-        const accounts = await Account.findAll({
-            attributes: ['username', 'name', 'email', 'password', 'image'],
+        const accounts: any = await Account.findAll({
             where: {
                 active: true
             },
@@ -24,7 +24,7 @@ export const getAccounts = async(req: Request, res: Response) => {
         if (accounts.length == 1) {
             res.json({
                 msg: `1 cuenta encontrada`,
-                accounts
+                accounts: accounts.map((account: any) => account.getRepr(account.Role.name))
             });
         } else {
             res.json({
@@ -92,9 +92,14 @@ export const postAccount = async(req: Request, res: Response) => {
 
 export const putAccount = async(req: Request, res: Response) => {
     const { username } = req.params;
-    const { name, password, image } = req.body;
+    const { name, password, image, logged_account } = req.body;
     
     try {
+
+        if (logged_account.id_role !== 1 && logged_account.username !== username)
+            return res.status(401).json({
+                msg: 'Un usuario solo puede modificar su propia cuenta'
+            });
         
         const account = await Account.findByPk(username);
 
@@ -121,8 +126,13 @@ export const putAccount = async(req: Request, res: Response) => {
 
 export const deleteAccount = async(req: Request, res: Response) => {
     const { username } = req.params;
+    const { logged_account } = req.body;
 
     try {
+        if (logged_account.id_role !== 1 && logged_account.username !== username)
+            return res.status(401).json({
+                msg: 'Un usuario solo puede eliminar su propia cuenta'
+            });
         
         const account = await Account.findByPk(username);
 
