@@ -26,9 +26,16 @@ class Account extends Model<InferAttributes<Account>, InferCreationAttributes<Ac
         }
     }
 
-    // public async getFullRepr(role = {name: undefined}): Promise<object> {
-    //     const { active,  } = this;
-    // }
+    public async getFullRepr(role?: string): Promise<object> {
+
+        const { active, id_role, ...rest } = this.dataValues;
+        
+        const repr: any = rest;
+
+        repr.role = role? role : (await Role.findByPk(id_role))?.name;
+
+        return repr;
+    }
 }
 
 Account.init({
