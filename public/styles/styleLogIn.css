@@ -20,14 +20,14 @@ body
 {
     position: absolute;
     height: 70%;
-    top: -20vh;
+    top: 5%;
 }
 .container
 {
     position: relative;
     width: 450px;
     height: 450px;
-    top: 17vh;
+    top: -10vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,7 +35,7 @@ body
 .container .waves
 {
     left: -35vh;
-    top: -38vh;
+    top: -12vh;
     width: 140vh;
     height: 140vh;
     display: flex;
@@ -51,6 +51,7 @@ body
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    top: 50%;
     gap: 20px;
 }
 .container .login h2
