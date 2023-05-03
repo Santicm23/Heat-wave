@@ -11,7 +11,7 @@ export const getAccounts = async(req: Request, res: Response) => {
 
     try {
         
-        const accounts: any = await Account.findAll({
+        let accounts = await Account.findAll({
             where: {
                 active: true
             },
@@ -21,10 +21,12 @@ export const getAccounts = async(req: Request, res: Response) => {
             }
         });
 
+        accounts = accounts.map((account: any) => account.getRepr(account.Role.name))
+
         if (accounts.length == 1) {
             res.json({
                 msg: `1 cuenta encontrada`,
-                accounts: accounts.map((account: any) => account.getRepr(account.Role.name))
+                accounts
             });
         } else {
             res.json({
@@ -55,7 +57,7 @@ export const getAccount = async(req: Request, res: Response) => {
 
         return res.json({
             msg: 'Cuenta encontrada exitosamente',
-            account
+            account: await account.getFullRepr()
         });
 
 
@@ -73,14 +75,14 @@ export const postAccount = async(req: Request, res: Response) => {
     try {
 
         if (body.role) {
-            body.role = (await Role.findOne({ where: { name: body.role } }))?.name;
+            body.id_role = (await Role.findOne({ where: { name: body.role } }))?.id_role;
         }
         
         const account = await Account.create(body);
 
         return res.json({
             msg: 'Cuenta creada exitosamente',
-            account
+            account: await account.getFullRepr()
         });
 
     } catch (error) {
@@ -114,7 +116,7 @@ export const putAccount = async(req: Request, res: Response) => {
     
         return res.json({
             msg: 'Cuenta actualizada exitosamente',
-            account
+            account: account.getRepr()
         });
 
     } catch (error) {
@@ -145,7 +147,7 @@ export const deleteAccount = async(req: Request, res: Response) => {
     
         return res.json({
             msg: 'Cuenta eliminada exitosamente',
-            account
+            account: account.getRepr()
         });
 
     } catch (error) {

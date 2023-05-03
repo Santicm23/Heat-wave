@@ -1,4 +1,6 @@
 
+-- TODO: tabla hashtags
+
 DROP TABLE feed_post_images;
 DROP TABLE accountXplaylist;
 DROP TABLE songXfeed_post;
@@ -98,11 +100,14 @@ CREATE TABLE dailys (
     `image` VARCHAR(255) DEFAULT NULL,
     `username` VARCHAR(255) NOT NULL,
     `id_song` BIGINT(20) UNSIGNED NOT NULL,
+    `id_visibility` BIGINT(20) UNSIGNED NOT NULL,
     `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (username) REFERENCES accounts(username)
         ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_song) REFERENCES songs(id_song)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_visibility) REFERENCES visibilities(id_visibility)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
