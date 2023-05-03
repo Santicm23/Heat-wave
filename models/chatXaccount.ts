@@ -1,7 +1,7 @@
 import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
 import db from '../db/connection';
-import Account from './accounts';
+import Account from './account';
 import Chat from './chat';
 
 

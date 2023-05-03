@@ -2,7 +2,7 @@
 import { Request, Response } from 'express';
 
 import { generateJWT } from '../helpers/jwt-config';
-import Account from '../models/accounts';
+import Account from '../models/account';
 import { isPassword } from '../helpers/encrypt';
 
 

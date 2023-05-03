@@ -16,14 +16,19 @@ class Account extends Model<InferAttributes<Account>, InferCreationAttributes<Ac
     declare image: CreationOptional<string | null>;
     declare id_role: number;
 
-    public getRepr(): object {
+    public getRepr(role?: string): object {
         return {
             username: this.username,
             name: this.name,
             email: this.email,
-            image: this.image
+            image: this.image,
+            role
         }
     }
+
+    // public async getFullRepr(role = {name: undefined}): Promise<object> {
+    //     const { active,  } = this;
+    // }
 }
 
 Account.init({

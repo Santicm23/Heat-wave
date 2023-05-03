@@ -1,5 +1,5 @@
 
-import Account, { Role } from '../models/accounts';
+import Account from '../models/account';
 
 
 export const uniqueUsername = async(username: string): Promise<void> => {
