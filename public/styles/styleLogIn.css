@@ -72,7 +72,7 @@ body
 }
 .container .login .inputBx input[type="submit"]
 {
-    background: linear-gradient(45deg,#ff357a,#fff172);
+    background: linear-gradient(45deg,#8d2c34,#ffc925);
     border: none;
     cursor: pointer;
     font-size: 1.2em;
@@ -164,22 +164,25 @@ body
 .forms span
 {
     position: absolute;
-    left: 0;
+    left: 6%;
+    top: 10%;
     padding: 10px;
     pointer-events: none;
     font-size: 1em;
     text-transform: uppercase;
     transition: 0.5s;
+    color: white;
 }
-.forms input:valid ~ span,
+
 .forms input:focus ~ span
 {
-    transform: translateX(10px) translateY(-7px);
+    transform: translateX(10%) translateY(-74%);
     font-size: 0.65em;
     padding: 0 10px;
     border-left: 1px solid white;
     border-right: 1px solid white;
-    background: radial-gradient( circle, #ddbc68 , #e5a70b );
+    background: #ddbc68;
     letter-spacing: 0.2em;
     color: white;
 }
+
