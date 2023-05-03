@@ -5,7 +5,7 @@ import db from '../db/connection';
 import { encrypt_pass } from '../helpers/encrypt';
 
 
-class Role extends Model<InferAttributes<Role>, InferCreationAttributes<Role>> {
+export class Role extends Model<InferAttributes<Role>, InferCreationAttributes<Role>> {
     declare id_role: number;
     declare name: string;
 }
@@ -13,7 +13,8 @@ class Role extends Model<InferAttributes<Role>, InferCreationAttributes<Role>> {
 Role.init({
     id_role: {
         type: DataTypes.BIGINT,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     name: {
         type: DataTypes.STRING,
@@ -33,7 +34,7 @@ class Account extends Model<InferAttributes<Account>, InferCreationAttributes<Ac
     declare active: CreationOptional<boolean>;
     declare google: CreationOptional<boolean>;
     declare image: CreationOptional<string | null>;
-    declare role: number;
+    declare id_role: number;
 
     public getRepr(): object {
         return {
@@ -76,18 +77,21 @@ Account.init({
         allowNull: true,
         defaultValue: null
     },
-    role: {
+    id_role: {
         type: DataTypes.BIGINT,
         references: {
             model: Role,
             key: 'id_role'
-        }
+        },
+        defaultValue: 2
     }
 },
 {
     tableName: 'accounts',
     sequelize: db
 });
+
+Account.belongsTo(Role, { foreignKey: 'id_role' });
 
 
 export default Account;

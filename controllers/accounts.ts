@@ -1,9 +1,8 @@
 
 import { Request, Response } from 'express';
 
-import Account from '../models/accounts';
+import Account, { Role } from '../models/accounts';
 import { username_not_exists, something_went_wrong } from '../helpers/json-errors';
-import { account_select } from '../helpers/data-repr';
 
 
 
@@ -11,7 +10,16 @@ export const getAccounts = async(req: Request, res: Response) => {
 
     try {
         
-        const accounts = await Account.findAll(account_select());
+        const accounts = await Account.findAll({
+            attributes: ['username', 'name', 'email', 'password', 'image'],
+            where: {
+                active: true
+            },
+            include: {
+                attributes: ['name'],
+                model: Role
+            }
+        });
 
         if (accounts.length == 1) {
             res.json({
@@ -63,6 +71,10 @@ export const postAccount = async(req: Request, res: Response) => {
     const { body } = req;
 
     try {
+
+        if (body.role) {
+            body.role = (await Role.findOne({ where: { name: body.role } }))?.name;
+        }
         
         const account = await Account.create(body);
 

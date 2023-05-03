@@ -1,9 +1,8 @@
 
-import Account from '../models/accounts';
+import Account, { Role } from '../models/accounts';
 
 
 export const uniqueUsername = async(username: string): Promise<void> => {
-
     if (!username) return;
 
     const existAccount = await Account.findByPk(username);
@@ -14,7 +13,6 @@ export const uniqueUsername = async(username: string): Promise<void> => {
 }
 
 export const uniqueEmail = async(email: string): Promise<void> => {
-
     if (!email) return;
 
     const existAccount = await Account.findOne({
