@@ -1,11 +1,12 @@
 
 import { Router } from 'express';
-import { check } from 'express-validator';
+import { check, oneOf } from 'express-validator';
 
 import { deleteAccount, getAccount, getAccounts, postAccount, putAccount } from '../controllers/accounts';
 import validateParams from '../middlewares/validate-params';
 import { uniqueEmail, uniqueUsername } from '../helpers/db-validators';
 import validateJWT from '../middlewares/validate-jwt';
+import { isAdminRole, isSameAccount } from '../middlewares/validate-roles';
 
 
 const router = Router();
