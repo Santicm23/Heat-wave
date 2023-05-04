@@ -1,13 +1,50 @@
-
 const url = `http://${window.location.host}/auth`;
-
-
 const btnLogin = document.querySelector('#btnLogin');
-
 const inputUser = document.querySelector('#un-email');
 const inputPass = document.querySelector('#pass');
+const signUp = document.querySelector('#signup');
+const login = document.querySelector('#login');
+const logo = document.querySelector('#logo');
+
+function animatelogin() {
+  setTimeout(function() {
+    login.classList.add('visible'),
+    logo.classList.add('visible');
+  }, 500);
+}
+animatelogin();
 
 
+
+/!--------------------------------------------signUp!------------------------------------------------/
+// Obtener el elemento padre
+const loginDiv = document.getElementById("login");
+
+signUp.addEventListener('click', function() {
+    loginDiv.querySelector('h2').insertAdjacentHTML('afterend', `
+      <div class="forms">
+        <div class="inputBx">
+          <input id="real-name" required="required" type="text">
+          <span>Real Name</span>
+        </div>
+      </div>
+      <div class="forms">
+        <div class="inputBx">
+          <input id="user-name" required="required" type="text">
+          <span>UserName</span>
+        </div>
+      </div>
+    `);
+    const mailSpan = document.querySelector('#spanUyM');
+    mailSpan.textContent = 'EMail';
+    const login = document.querySelector('#login');
+    desanimatelogin()
+    animatelogin();
+});
+
+
+
+/! --------------------------------------------Autentificacion Con google-------------------------------------------------------!/
 // Inicializa Google Identity Services al cargar la página.
 window.onload = () => {
     google.accounts.id.initialize({
@@ -57,7 +94,6 @@ btnLogin.addEventListener('click', event => {
   
 // Maneja la respuesta del inicio de sesión de Google.
 function handleCredentialResponse(response) {
-
 
     console.log('bbbbb');
     // Google token
