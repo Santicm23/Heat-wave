@@ -172,5 +172,5 @@ body {
 .wrapper ul li:hover .fa-google {
 	color: #dd4b39;
 	text-shadow: 0 0 15px #dd4b39;
-	transition: all .5s ease;
+	transition: all .5s ease ;
 }
