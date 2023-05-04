@@ -5,8 +5,10 @@
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<link href="styles/styleLogIn.css" rel="stylesheet">
-	<script src="javaScript/logIn.ts" type="module">
-	</script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<title>animated login page</title>
 </head>
@@ -40,5 +42,15 @@
 			</div>
 		</div>
 	</div>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+        <script>
+            function handleCredentialResponse(response) {
+
+                console.log(`Token: ${response.credential}`);
+
+            }
+        </script>
+	<script src="javaScript/logIn.js" type="module"></script>
 </body>
 </html>
