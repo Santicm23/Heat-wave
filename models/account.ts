@@ -11,8 +11,8 @@ class Account extends Model<InferAttributes<Account>, InferCreationAttributes<Ac
     declare name: string;
     declare email: string;
     declare password: string;
-    declare active: CreationOptional<boolean>;
     declare google: CreationOptional<boolean>;
+    declare active: CreationOptional<boolean>;
     declare image: CreationOptional<string | null>;
     declare id_role: number;
 
