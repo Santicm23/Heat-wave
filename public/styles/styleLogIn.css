@@ -17,6 +17,12 @@ body {
 	position: absolute;
 	height: 70%;
 	top: 0;
+	opacity: 0;
+	transition: opacity 0.8s ease-in-out;
+}
+#logo.visible
+{
+	opacity: 1;
 }
 .container {
 	position: absolute;
@@ -55,6 +61,11 @@ body {
 	flex-direction: column;
 	top: 50%;
 	gap: 20px;  
+	opacity: 0;
+	transition: opacity 0.8s ease-in-out;
+}
+.login.visible {
+	opacity: 1;
 }
 .container .login h2 {
 	font-size: 2em;
@@ -135,6 +146,7 @@ body {
 .forms {
 	position: relative;
 	width: 250px;
+	
 }
 .forms input {
 	width: 100%;
@@ -197,6 +209,9 @@ body {
 
 
 
+  
+
+  
 
 
 
