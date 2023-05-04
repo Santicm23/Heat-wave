@@ -87,10 +87,12 @@ body {
 	align-items: center;
 	padding: 0 20px;
 }
+
 .container .login .links a {
 	color: #FFF;
 	text-decoration: none;
 }
+
 .container i {
 	position: absolute;
 	inset: 0;
@@ -99,15 +101,15 @@ body {
 }
 .container i:nth-child(1) {
 	border-radius: 82% 18% 70% 30% / 22% 77% 23% 78%;
-	animation: animate 18s linear infinite;
+	animation: animate 36s linear infinite;
 }
 .container i:nth-child(2) {
 	border-radius: 49% 51% 39% 61% / 20% 42% 58% 80%;
-	animation: animate 13s linear infinite;
+	animation: animate 26s linear infinite;
 }
 .container i:nth-child(3) {
 	border-radius: 49% 51% 39% 61% / 20% 21% 79% 80%;
-	animation: animate2 10s linear infinite;
+	animation: animate2 20s linear infinite;
 }
 @keyframes animate {
 	0% {
@@ -125,10 +127,11 @@ body {
 		transform: rotate(0deg);
 	}
 }
+/*
 .container:hover i {
 	border: 6px solid var(--clr);
 	filter: drop-shadow(0 0 20px var(--clr));
-}
+} */
 .forms {
 	position: relative;
 	width: 250px;
@@ -174,3 +177,26 @@ body {
 	text-shadow: 0 0 15px #dd4b39;
 	transition: all .5s ease ;
 }
+
+.container .login .links .link:hover {
+	transition: all .5s ease ;
+}
+
+.container .login .links #signup:hover {
+	color:#380b22;
+	text-shadow: 0 0 15px #380b22;
+
+}
+
+.container .login .links #forgot:hover {
+	color:#2009b8;
+	text-shadow: 0 0 15px #2009b8;
+
+}
+
+
+
+
+
+
+
