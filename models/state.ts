@@ -12,7 +12,8 @@ class State extends Model<InferAttributes<State>, InferCreationAttributes<State>
 State.init({
     id_state: {
         type: DataTypes.BIGINT,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     state: {
         type: DataTypes.STRING,

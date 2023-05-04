@@ -1,48 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styleLogIn.css">
-    <script type="module" src="javaScript/logIn.ts"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-     
-    <title>animated login page</title>
+	<meta charset="UTF-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<link href="styles/styleLogIn.css" rel="stylesheet">
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<title>animated login page</title>
 </head>
 <body>
-    <div class="container">
-        <i style="--clr:#83000B;" class="waves"></i>
-        <i style="--clr:#6e046e;" class="waves"></i>
-        <i style="--clr:#FFE968;" class="waves"></i>
-        <img src="assets/imgs/logo.png" id="logo">
-        <div class="login">
-            <h2>HEAT-WAVE</h2>
-            <div class="forms">
-                <div class="inputBx">
-                    <input type="text" required="required">
-                    <span>Username</span>
-                </div>
-            </div>
-            <div class="forms">
-                <div class="inputBx">
-                    <input type="password" required="required">
-                    <span>Password</span>
-                </div>
-            </div>
-            <div class="inputBx">
-                <input type="submit" value="login">
-            </div>
-            <div class="links">
-                <a href="#">Forgot Password</a>
-                <a href="#">SignUp</a>
-                <div class="wrapper">
-                    <ul>
-                        <li class="google"><a href="#" class="fa fa-google fa-2x" aria-hidden="true"></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<i class="waves" style="--clr:#83000B;"></i> <i class="waves" style="--clr:#6e046e;"></i> <i class="waves" style="--clr:#FFE968;"></i> <img id="logo" src="assets/imgs/logo.png">
+		<div class="login">
+			<h2>HEAT-WAVE</h2>
+			<div class="forms">
+				<div class="inputBx">
+					<input id="un-email" required="required" type="text"> <span>Username or Email</span>
+				</div>
+			</div>
+			<div class="forms">
+				<div class="inputBx">
+					<input id="pass" required="required" type="password"> <span>Password</span>
+				</div>
+			</div>
+			<div class="inputBx">
+				<input id="btnLogin" type="submit" value="login">
+			</div>
+			
+			<div class="links">
+				<a href="#" id="forgot" class="link">Forgot Password?</a> <a href="#" id="signup" class="link">SignUp</a>
+				<div class="wrapper">
+					<ul>
+						<li class="google">
+							<a aria-hidden="true" class="fa fa-google fa-2x" href="#"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+	<script src="javaScript/logIn.js" type="module"></script>
 </body>
 </html>
+<!-- <ul>
+                        <li class="google">
+                            <div class="g_id_signin"
+                                data-type="icon"
+                                data-shape="circle"
+                                data-theme="outline"
+                                data-text="signin_with"
+                                data-size="big">
+                            </div>
+
+                            <div id="g_id_onload"
+                                data-client_id="683330713919-4uncacmbb91tdm0c142e2esscrsbhfb2.apps.googleusercontent.com"
+                                data-context="signin"
+                                data-ux_mode="popup"
+                                data-auto_prompt="false"
+                                data-callback="handleCredentialResponse">
+                            </div>
+                        </li>
+                    </ul> -->

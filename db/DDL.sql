@@ -1,5 +1,5 @@
 
--- TODO: tabla hashtags
+-- TODO: Arreglar muchos a muchos entre feed_posts y hashtags
 
 DROP TABLE feed_post_images;
 DROP TABLE accountXplaylist;
@@ -16,6 +16,7 @@ DROP TABLE chats;
 DROP TABLE songs;
 DROP TABLE accounts;
 DROP TABLE roles;
+DROP TABLE hashtags;
 
 
 CREATE TABLE roles (
@@ -133,9 +134,12 @@ CREATE TABLE feed_posts (
     `description` TEXT NOT NULL,
     `location` VARCHAR(255) DEFAULT NULL,
     `id_playlist` BIGINT(20) UNSIGNED NOT NULL,
+    'id_hashtag' BIGINT(20) UNSIGNED NOT NULL,
     `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (id_playlist) REFERENCES playlists(id_playlist)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_hashtag) REFERENCES hashtags(id_hashtag)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -189,6 +193,14 @@ CREATE TABLE feed_post_images (
     PRIMARY KEY (`id_feed_post`, `image`),
     FOREIGN KEY (id_feed_post) REFERENCES feed_posts(id_feed_post)
         ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE hashtags (
+    `id_hashtag` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `hashtag` VARCHAR(255) NOT NULL,
+    `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE (`hashtag`)
 );
 
 

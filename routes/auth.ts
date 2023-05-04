@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { check, oneOf } from 'express-validator';
 
 import validateParams from '../middlewares/validate-params';
-import { login, renewToken } from '../controllers/auth';
+import { googleSignIn, login, renewToken } from '../controllers/auth';
 import validateJWT from '../middlewares/validate-jwt';
 
 
@@ -18,6 +18,11 @@ router.post('/login', [
     check('password', 'La contraseña debe ser una cadena de caracteres de mínimo 6').isString().isLength({min: 6}),
     validateParams
 ], login);
+
+router.post('/google', [
+    check('id_token', 'El token de google es obligatorio').notEmpty(),
+    validateParams
+], googleSignIn);
 
 router.get('/', validateJWT, renewToken);
 

@@ -17,7 +17,8 @@ class Song extends Model<InferAttributes<Song>, InferCreationAttributes<Song>> {
 Song.init({
     id_song: {
         type: DataTypes.BIGINT,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     name: {
         type: DataTypes.STRING

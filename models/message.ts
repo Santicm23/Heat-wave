@@ -21,6 +21,7 @@ Message.init({
     id_message: {
         type: DataTypes.BIGINT,
         primaryKey: true,
+        autoIncrement: true
     },
     text: {
         type: DataTypes.STRING

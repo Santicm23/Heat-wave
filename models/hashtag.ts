@@ -2,25 +2,25 @@ import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequ
 
 import db from '../db/connection';
 
-class Visibility extends Model<InferAttributes<Visibility>, InferCreationAttributes<Visibility>> {
-    declare id_visibility: number;
-    declare visibility: string;
+class Hashtag extends Model<InferAttributes<Hashtag>, InferCreationAttributes<Hashtag>> {
+    declare id_hashtag: number;
+    declare hashtag: string;
 }
 
-Visibility.init({
-    id_visibility: {
+Hashtag.init({
+    id_hashtag: {
         type: DataTypes.BIGINT,
         primaryKey: true,
         autoIncrement: true    
     },
-    visibility: {
+    hashtag: {
         type: DataTypes.STRING,
         unique: true
     }
 },
 {
-    tableName: 'visibilities',
+    tableName: 'hashtags',
     sequelize: db
 });
 
-export default Visibility;
+export default Hashtag;
