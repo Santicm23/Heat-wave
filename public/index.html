@@ -19,16 +19,16 @@
 			<h2>HEAT-WAVE</h2>
 			<div class="forms">
 				<div class="inputBx">
-					<input required="required" type="text"> <span>Username</span>
+					<input id="un-email" required="required" type="text"> <span>Username or Email</span>
 				</div>
 			</div>
 			<div class="forms">
 				<div class="inputBx">
-					<input required="required" type="password"> <span>Password</span>
+					<input id="pass" required="required" type="password"> <span>Password</span>
 				</div>
 			</div>
 			<div class="inputBx">
-				<input type="submit" value="login">
+				<input id="btnLogin" type="submit" value="login">
 			</div>
 			
 			<div class="links">
@@ -44,14 +44,6 @@
 		</div>
 	</div>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-
-        <script>
-            function handleCredentialResponse(response) {
-
-                console.log(`Token: ${response.credential}`);
-
-            }
-        </script>
 	<script src="javaScript/logIn.js" type="module"></script>
 </body>
 </html>

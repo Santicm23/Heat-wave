@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 import { generateJWT } from '../helpers/jwt-config';
 import Account from '../models/account';
 import { isPassword } from '../helpers/encrypt';
+import { googleVerify } from '../helpers/google-verify';
 
 
 export const login = async(req: Request, res: Response) => {
@@ -44,6 +45,51 @@ export const login = async(req: Request, res: Response) => {
             msg: error
         });
     }
+}
+
+export const googleSignIn = async(req: Request, res: Response) => {
+
+    const { id_token } = req.body;
+
+    try {
+        const { username, mail, image } = await googleVerify(id_token);
+
+        let account = await Account.findOne({
+            where: {
+                email: mail
+            }
+        });
+
+        if (!account) {
+            account = await Account.create({
+                username: username as string,
+                name: username as string,
+                email: mail as string,
+                password: ':P',
+                image: image as string,
+                google: true
+            });
+
+        } else if (!account.active) {
+            return res.status(401).json({
+                msg: 'El usuario no se encuentra activo'
+            });
+        }
+        
+        const token = await generateJWT(account.username);
+
+        res.json({
+            account,
+            token
+        });
+        
+    } catch (error) {
+        res.status(400).json({
+            msg: 'El token no se pudo verificar',
+            error
+        });
+    }
+
 }
 
 export const renewToken = async(req: Request, res: Response) => {
