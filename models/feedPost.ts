@@ -3,6 +3,7 @@ import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, 
 
 import db from '../db/connection';
 import Playlist from './playlist';
+import Hashtag from './hashtag';
 
 class FeedPost extends Model<InferAttributes<FeedPost>, InferCreationAttributes<FeedPost>> {
     declare id_feed_post: number;
@@ -12,6 +13,7 @@ class FeedPost extends Model<InferAttributes<FeedPost>, InferCreationAttributes<
     declare creation_date: Date;
     declare likes: number;
     declare id_playlist: number;
+    declare id_hashtag: number;
 }
 
 FeedPost.init({
@@ -44,6 +46,13 @@ FeedPost.init({
         references: {
             model: Playlist,
             key: 'id_playlist'
+        }
+    },
+    id_hashtag: {
+        type: DataTypes.BIGINT,
+        references: {
+            model: Hashtag,
+            key: 'id_hashtag'
         }
     }
 },
