@@ -18,7 +18,8 @@ class Comment extends Model<InferAttributes<Comment>, InferCreationAttributes<Co
 Comment.init({
     id_comment: {
         type: DataTypes.BIGINT,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     text: {
         type: DataTypes.STRING

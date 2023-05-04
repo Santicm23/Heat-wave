@@ -17,7 +17,8 @@ class FeedPost extends Model<InferAttributes<FeedPost>, InferCreationAttributes<
 FeedPost.init({
     id_feed_post: {
         type: DataTypes.BIGINT,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     name: {
         type: DataTypes.STRING

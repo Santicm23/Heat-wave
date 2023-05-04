@@ -17,7 +17,8 @@ class Playlist extends Model<InferAttributes<Playlist>, InferCreationAttributes<
 Playlist.init({
     id_playlist: {
         type: DataTypes.BIGINT,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     name: {
         type: DataTypes.STRING

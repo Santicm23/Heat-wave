@@ -10,7 +10,8 @@ class Visibility extends Model<InferAttributes<Visibility>, InferCreationAttribu
 Visibility.init({
     id_visibility: {
         type: DataTypes.BIGINT,
-        primaryKey: true        
+        primaryKey: true,
+        autoIncrement: true    
     },
     visibility: {
         type: DataTypes.STRING,

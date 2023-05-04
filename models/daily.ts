@@ -19,7 +19,8 @@ class Daily extends Model<InferAttributes<Daily>, InferCreationAttributes<Daily>
 Daily.init({
     id_daily: {
         type: DataTypes.BIGINT,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     creation_date: {
         type: DataTypes.DATE

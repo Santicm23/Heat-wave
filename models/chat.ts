@@ -14,7 +14,8 @@ class Chat extends Model<InferAttributes<Chat>, InferCreationAttributes<Chat>> {
 Chat.init({
     id_chat: {
         type: DataTypes.BIGINT,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     name: {
         type: DataTypes.STRING
