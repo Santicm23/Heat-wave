@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styleLogIn.css">
-    <script type="module" src="javaScript/logIn.ts"></script>
+    <!-- <script type="module" src="javaScript/logIn.ts"></script> -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
      
     <title>animated login page</title>
@@ -38,11 +38,38 @@
                 <a href="#">SignUp</a>
                 <div class="wrapper">
                     <ul>
-                        <li class="google"><a href="#" class="fa fa-google fa-2x" aria-hidden="true"></a></li>
+                        <li class="google">
+                            <div class="g_id_signin"
+                                data-type="icon"
+                                data-shape="circle"
+                                data-theme="outline"
+                                data-text="signin_with"
+                                data-size="big">
+                            </div>
+
+                            <div id="g_id_onload"
+                                data-client_id="683330713919-4uncacmbb91tdm0c142e2esscrsbhfb2.apps.googleusercontent.com"
+                                data-context="signin"
+                                data-ux_mode="popup"
+                                data-auto_prompt="false"
+                                data-callback="handleCredentialResponse">
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <script>
+        function handleCredentialResponse(response) {
+
+            console.log(`Token: ${response.credential}`);
+
+        }
+    </script>
+
 </body>
 </html>
