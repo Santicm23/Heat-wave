@@ -95,6 +95,7 @@ body {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	padding: 0 20px;
 }
 
@@ -188,10 +189,10 @@ body {
 	text-shadow: 0 0 15px #dd4b39;
 	transition: all .5s ease ;
 }
+
 .container .login .links .link:hover {
 	transition: all .5s ease ;
 }
-
 
 .container .login .links #signup:hover {
 	color:#380b22;
@@ -204,23 +205,13 @@ body {
 	text-shadow: 0 0 15px #2009b8;
 
 }
-.links {
-	display: flex;
-}
-.sign
-{
-	position: relative;
-	width: 100%;
-	display: flex;
-	padding: 0 20px;
-	justify-content: center;
-}
-
-
-
-
+.container .login .inputBx #loGin {
+	transition: .5s ease;
+	color: #FFF;
+	text-decoration: none;
+  }
+.container .login .inputBx #loGin:hover {
+	color: #380b22;
+	text-shadow: 0 0 15px #380b22;
+  }
   
-
-  
-
-
