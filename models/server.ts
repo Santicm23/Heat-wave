@@ -2,12 +2,12 @@
 import cors from 'cors';
 import express, { Application } from 'express';
 import favicon from 'serve-favicon';
-
+import fileUpload from 'express-fileupload';
 
 import accountsRouter from '../routes/accounts';
 import db from '../db/connection';
-import postsRouter from '../routes/posts';
 import authRouter from '../routes/auth';
+import postsFeedRouter from '../routes/posts-feed';
 
 
 class Server {
@@ -16,7 +16,8 @@ class Server {
     private paths = {
         auth: '/auth',
         accounts: '/accounts',
-        posts: '/publicaciones'
+        posts: '/posts',
+        posts_feed: '/posts/feed'
     }
 
     constructor() {
@@ -31,19 +32,29 @@ class Server {
     }
 
     public middlewares() : void {
-        this.app.use(cors());                   // para seguridad y compatibilidad con el navegador
+        // para seguridad y compatibilidad con el navegador
+        this.app.use(cors());                   
 
-        this.app.use(express.json());           // para el uso de json (rest API)
+        // para el uso de json (rest API)
+        this.app.use(express.json());           
 
-        this.app.use(express.static('public')); // para el despliegue del front end en la carpeta 'public'
+        // para el despliegue del front end en la carpeta 'public'
+        this.app.use(express.static('public'));
 
+        // para el icono de la pestaña en la página web
         this.app.use(favicon('./public/favicon.ico'));
+
+        // para permitir archivos
+        this.app.use(fileUpload({
+            useTempFiles : true,
+            tempFileDir : '/tmp/'
+        }));
     }
 
     public routes() : void {
         this.app.use(this.paths.accounts, accountsRouter);              // ruta cuentas
-        this.app.use(this.paths.posts, postsRouter);                    // ruta hashtags
         this.app.use(this.paths.auth, authRouter);                      // ruta autentificación
+        this.app.use(this.paths.posts_feed, postsFeedRouter);           // ruta posts de feed
     }
 
     public listen() : void {

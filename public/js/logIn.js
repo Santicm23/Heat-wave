@@ -14,10 +14,6 @@ function animatelogin() {
 }
 animatelogin();
 
-signUp.addEventListener('click', () => {
-    window.location.href = 'signUp.html';
-});
-
 /! --------------------------------------------Autentificacion Con google-------------------------------------------------------!/
 // Inicializa Google Identity Services al cargar la página.
 window.onload = () => {
@@ -63,7 +59,7 @@ btnLogin.addEventListener('click', event => {
             return console.error(errors);
         }
         localStorage.setItem('token', token);
-        window.location = 'feed.html'; // TODO: redireccionar a la pantalla de inicio
+        window.location = 'feed.html';
     })
     .catch(err => console.error(err));
 
@@ -83,7 +79,7 @@ function handleCredentialResponse(response) {
     .then(resp => resp.json())
     .then(({ token }) => {
         localStorage.setItem('token', token);
-        window.location = 'feed.html'; // TODO: redireccionar a la pantalla de inicio
+        window.location = 'feed.html';
     })
     .catch(console.warn);
 }
