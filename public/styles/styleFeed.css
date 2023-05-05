@@ -18,7 +18,9 @@
 
 .sidebar .logo-details {
     height: 60px;
-    width: 100%;
+    padding-top: 150px;
+    padding-left: 30px;
+    /*width: 100%;*/
     display: flex;
     align-items: center;
 }
@@ -36,4 +38,37 @@
     font-size: 22px;
     color: black;
     font-weight: 600;
+}
+
+.sidebar .nav-links{
+    /*background: red;*/
+    height: 100%;
+    padding-top: 150px;
+}
+
+/*Le cambia el color a todos los iconos*/
+.sidebar .nav-links li i{
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+    color: black;
+}
+
+.sidebar .nav-links li a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.sidebar .nav-links li a .link_name{
+    color: black;
+    font-size: 18px;
+
+}
+
+.sidebar .nav-links li a .link_nameHome {
+    color: white;
+    font-size: 20px;
 }
