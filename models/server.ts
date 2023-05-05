@@ -7,7 +7,7 @@ import fileUpload from 'express-fileupload';
 import accountsRouter from '../routes/accounts';
 import db from '../db/connection';
 import authRouter from '../routes/auth';
-import postsFeedRouter from '../routes/posts-feed';
+import feedPostsRouter from '../routes/feed-posts';
 
 
 class Server {
@@ -54,7 +54,7 @@ class Server {
     public routes() : void {
         this.app.use(this.paths.accounts, accountsRouter);              // ruta cuentas
         this.app.use(this.paths.auth, authRouter);                      // ruta autentificación
-        this.app.use(this.paths.posts_feed, postsFeedRouter);           // ruta posts de feed
+        this.app.use(this.paths.posts_feed, feedPostsRouter);           // ruta posts de feed
     }
 
     public listen() : void {
