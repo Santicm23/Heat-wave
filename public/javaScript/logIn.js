@@ -14,35 +14,9 @@ function animatelogin() {
 }
 animatelogin();
 
-
-
-/!--------------------------------------------signUp!------------------------------------------------/
-// Obtener el elemento padre
-const loginDiv = document.getElementById("login");
-
-signUp.addEventListener('click', function() {
-    loginDiv.querySelector('h2').insertAdjacentHTML('afterend', `
-      <div class="forms">
-        <div class="inputBx">
-          <input id="real-name" required="required" type="text">
-          <span>Real Name</span>
-        </div>
-      </div>
-      <div class="forms">
-        <div class="inputBx">
-          <input id="user-name" required="required" type="text">
-          <span>UserName</span>
-        </div>
-      </div>
-    `);
-    const mailSpan = document.querySelector('#spanUyM');
-    mailSpan.textContent = 'EMail';
-    const login = document.querySelector('#login');
-    desanimatelogin()
-    animatelogin();
-});
-
-
+signUp.addEventListener('click', () => {
+    window.location.href = 'signUp.html';
+  });
 
 /! --------------------------------------------Autentificacion Con google-------------------------------------------------------!/
 // Inicializa Google Identity Services al cargar la página.
