@@ -1,6 +1,8 @@
 
 import cors from 'cors';
 import express, { Application } from 'express';
+import favicon from 'serve-favicon';
+
 
 import accountsRouter from '../routes/accounts';
 import db from '../db/connection';
@@ -34,6 +36,8 @@ class Server {
         this.app.use(express.json());           // para el uso de json (rest API)
 
         this.app.use(express.static('public')); // para el despliegue del front end en la carpeta 'public'
+
+        this.app.use(favicon('./public/favicon.ico'));
     }
 
     public routes() : void {
