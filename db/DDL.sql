@@ -1,5 +1,4 @@
 
--- TODO: Arreglar muchos a muchos entre feed_posts y hashtags
 
 DROP TABLE feed_post_images;
 DROP TABLE accountXplaylist;
@@ -130,16 +129,13 @@ CREATE TABLE messages (
 CREATE TABLE feed_posts (
     `id_feed_post` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
-    `likes` INT(11) NOT NULL DEFAULT 0,
     `description` TEXT NOT NULL,
     `location` VARCHAR(255) DEFAULT NULL,
     `id_playlist` BIGINT(20) UNSIGNED NOT NULL,
-    'id_hashtag' BIGINT(20) UNSIGNED NOT NULL,
+    `likes` INT(11) NOT NULL DEFAULT 0,
     `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (id_playlist) REFERENCES playlists(id_playlist)
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (id_hashtag) REFERENCES hashtags(id_hashtag)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -203,8 +199,27 @@ CREATE TABLE hashtags (
     UNIQUE (`hashtag`)
 );
 
+CREATE TABLE feed_postXhashtags (
+    `id_feed_post` BIGINT(20) UNSIGNED,
+    `id_hashtag` BIGINT(20) UNSIGNED,
+    PRIMARY KEY (`id_feed_post`, `id_hashtag`),
+    FOREIGN KEY (id_feed_post) REFERENCES feed_posts(id_feed_post)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_hashtag) REFERENCES hashtags(id_hashtag)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 
 -- inserts:
-
+--Roles Cuenta
 INSERT INTO roles(`name`) values('ADMIN');
 INSERT INTO roles(`name`) values('USER');
+
+--Estado mensajes
+INSERT INTO states('state') values ('SENT');
+INSERT INTO states('state') values ('RECIEVED');
+INSERT INTO states('state') values ('SEEN');
+
+--Visibilidad dailys
+INSERT INTO visibilities('visibility') values ('ALL');
+INSERT INTO visibilities('visibility') values ('BEST_FRIENDS');
