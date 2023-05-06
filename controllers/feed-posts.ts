@@ -1,7 +1,6 @@
 
 import { Request, Response } from 'express';
 import { uploadFile } from '../helpers/upload-file';
-import { UploadedFile } from 'express-fileupload';
 
 
 export const getFeedPosts = (req: Request, res: Response) => {
@@ -18,15 +17,12 @@ export const getFeedPost = (req: Request, res: Response) => {
 
 export const postFeedPost = async(req: Request, res: Response) => {
 
-    const soundFile = req.files?.sound as UploadedFile;
-    const imageFile = req.files?.image;
-
     try {
-        await uploadFile(soundFile, ['wav', 'mp3', 'flac'], 'sounds');
+        // await uploadFile(soundFile, ['wav', 'mp3', 'flac'], 'sounds');
 
-        if (imageFile) {
-            await uploadFile(imageFile as UploadedFile, ['png', 'jpg', 'jpeg', 'gif'], 'images');
-        }
+        // if (imageFile) {
+        //     await uploadFile(imageFile as UploadedFile, ['png', 'jpg', 'jpeg', 'gif'], 'images');
+        // }
     
         res.json({
             msg: 'Publicacion creada correctamente',
