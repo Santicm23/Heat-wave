@@ -22,10 +22,10 @@ export const postFeedPost = async(req: Request, res: Response) => {
     const imageFile = req.files?.image;
 
     try {
-        await uploadFile(soundFile, ['wav', 'mp3', 'flac']);
+        await uploadFile(soundFile, ['wav', 'mp3', 'flac'], 'sounds');
 
         if (imageFile) {
-            await uploadFile(imageFile as UploadedFile, ['png', 'jpg', 'jpeg', 'gif']);
+            await uploadFile(imageFile as UploadedFile, ['png', 'jpg', 'jpeg', 'gif'], 'images');
         }
     
         res.json({

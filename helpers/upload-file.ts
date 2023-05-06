@@ -2,7 +2,7 @@
 import path from 'path';
 
 import { UploadedFile } from 'express-fileupload';
-import { UUIDV4 } from 'sequelize';
+import { v4 as uuid } from 'uuid';
 
 
 export const uploadFile = (file: UploadedFile, validExtensions: Array<string>, directory: string = '')
@@ -16,9 +16,9 @@ export const uploadFile = (file: UploadedFile, validExtensions: Array<string>, d
         if (!validExtensions.includes(extension))
             return reject(`La extension ${extension} no es válida (${validExtensions})`);
 
-        const newFileName = `${UUIDV4()}.${extension}`;
+        const newFileName = `${uuid()}.${extension}`;
     
-        const uploadPath = path.join(__dirname, '../uploads/', directory, newFileName);
+        const uploadPath = path.join('./uploads/', directory, newFileName);
     
         file.mv(uploadPath, (err: any) => {
             if (err)
