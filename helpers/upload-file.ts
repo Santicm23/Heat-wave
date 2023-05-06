@@ -1,11 +1,10 @@
 
 import path from 'path';
 
-import { UploadedFile } from 'express-fileupload';
 import { v4 as uuid } from 'uuid';
 
 
-export const uploadFile = (file: UploadedFile, validExtensions: Array<string>, directory: string = '')
+export const uploadFile = (file: any, validExtensions: Array<string>, directory: string = '')
     : Promise<string> => {
 
     return new Promise((resolve, reject) => {

@@ -94,14 +94,9 @@ export const postAccount = async(req: Request, res: Response) => {
 
 export const putAccount = async(req: Request, res: Response) => {
     const { username } = req.params;
-    const { name, password, image, logged_account } = req.body;
+    const { name, password, image } = req.body;
     
     try {
-
-        if (logged_account.id_role !== 1 && logged_account.username !== username)
-            return res.status(401).json({
-                msg: 'Un usuario solo puede modificar su propia cuenta'
-            });
         
         const account = await Account.findByPk(username);
 
@@ -128,13 +123,8 @@ export const putAccount = async(req: Request, res: Response) => {
 
 export const deleteAccount = async(req: Request, res: Response) => {
     const { username } = req.params;
-    const { logged_account } = req.body;
 
     try {
-        if (logged_account.id_role !== 1 && logged_account.username !== username)
-            return res.status(401).json({
-                msg: 'Un usuario solo puede eliminar su propia cuenta'
-            });
         
         const account = await Account.findByPk(username);
 

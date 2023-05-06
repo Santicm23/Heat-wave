@@ -2,7 +2,6 @@
 import cors from 'cors';
 import express, { Application } from 'express';
 import favicon from 'serve-favicon';
-import fileUpload from 'express-fileupload';
 
 import accountsRouter from '../routes/accounts';
 import db from '../db/connection';
@@ -17,7 +16,8 @@ class Server {
         auth: '/auth',
         accounts: '/accounts',
         posts: '/posts',
-        posts_feed: '/posts/feed'
+        posts_feed: '/posts/feed',
+        songs: '/songs'
     }
 
     constructor() {
@@ -33,27 +33,22 @@ class Server {
 
     public middlewares() : void {
         // para seguridad y compatibilidad con el navegador
-        this.app.use(cors());                   
+        this.app.use(cors());
 
         // para el uso de json (rest API)
-        this.app.use(express.json());           
+        this.app.use(express.json());
 
         // para el despliegue del front end en la carpeta 'public'
         this.app.use(express.static('public'));
 
         // para el icono de la pestaña en la página web
         this.app.use(favicon('./public/favicon.ico'));
-
-        // para permitir archivos
-        this.app.use(fileUpload({
-            useTempFiles : true,
-            tempFileDir : '/tmp/'
-        }));
     }
 
     public routes() : void {
         this.app.use(this.paths.accounts, accountsRouter);              // ruta cuentas
         this.app.use(this.paths.auth, authRouter);                      // ruta autentificación
+        this.app.use(this.paths.songs, feedPostsRouter);           // ruta posts de feed
         this.app.use(this.paths.posts_feed, feedPostsRouter);           // ruta posts de feed
     }
 
