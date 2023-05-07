@@ -9,7 +9,6 @@ import authRouter from '../routes/auth';
 import feedPostsRouter from '../routes/feed-posts';
 import songsRouter from '../routes/songs';
 import mongo from '../db/mongo';
-import bodyParser from 'body-parser';
 
 
 class Server {
@@ -33,7 +32,7 @@ class Server {
 
         this.dbConnection();
     }
-
+    
     public middlewares() : void {
         // para seguridad y compatibilidad con el navegador
         this.app.use(cors());
@@ -51,7 +50,7 @@ class Server {
     public routes() : void {
         this.app.use(this.paths.accounts, accountsRouter);              // ruta cuentas
         this.app.use(this.paths.auth, authRouter);                      // ruta autentificación
-        this.app.use(this.paths.songs, songsRouter);                // ruta posts de feed
+        this.app.use(this.paths.songs, songsRouter);                    // ruta posts de feed
         this.app.use(this.paths.posts_feed, feedPostsRouter);           // ruta posts de feed
     }
 

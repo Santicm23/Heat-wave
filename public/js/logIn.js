@@ -1,4 +1,6 @@
+
 const url = `http://${window.location.host}/auth`;
+
 const btnLogin = document.querySelector('#btnLogin');
 const inputUser = document.querySelector('#un-email');
 const inputPass = document.querySelector('#pass');
@@ -52,9 +54,11 @@ btnLogin.addEventListener('click', event => {
         body: JSON.stringify(formData)
     })
         .then(resp => resp.json())
-        .then(({ msg, token }) => {
+        .then(({ msg, errors, token }) => {
             if (msg) {
                 return console.error(msg);
+            } else if (errors) {
+                return console.error(errors.map(v => v.msg));
             }
             localStorage.setItem('token', token);
             window.location = 'profile.html'; // TODO: redireccionar a la pantalla de inicio
