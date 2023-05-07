@@ -1,6 +1,6 @@
 import { DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequelize";
 
-import db from '../db/connection';
+import db from '../db/mysql';
 import Account from "./account";
 
 class Playlist extends Model<InferAttributes<Playlist>, InferCreationAttributes<Playlist>> {

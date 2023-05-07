@@ -4,9 +4,12 @@ import express, { Application } from 'express';
 import favicon from 'serve-favicon';
 
 import accountsRouter from '../routes/accounts';
-import db from '../db/connection';
+import mysql from '../db/mysql';
 import authRouter from '../routes/auth';
 import feedPostsRouter from '../routes/feed-posts';
+import songsRouter from '../routes/songs';
+import mongo from '../db/mongo';
+import bodyParser from 'body-parser';
 
 
 class Server {
@@ -37,7 +40,7 @@ class Server {
 
         // para el uso de json (rest API)
         this.app.use(express.json());
-
+        
         // para el despliegue del front end en la carpeta 'public'
         this.app.use(express.static('public'));
 
@@ -48,7 +51,7 @@ class Server {
     public routes() : void {
         this.app.use(this.paths.accounts, accountsRouter);              // ruta cuentas
         this.app.use(this.paths.auth, authRouter);                      // ruta autentificación
-        this.app.use(this.paths.songs, feedPostsRouter);           // ruta posts de feed
+        this.app.use(this.paths.songs, songsRouter);                // ruta posts de feed
         this.app.use(this.paths.posts_feed, feedPostsRouter);           // ruta posts de feed
     }
 
@@ -61,12 +64,14 @@ class Server {
     async dbConnection() : Promise<void> {
         try {
             
-            await db.authenticate();
-            console.log('Base de Datos conectados');
+            await mysql.authenticate();
+            console.log('Base de Datos MySQL conectada');
+            await mongo.authenticate();
+            console.log('Base de datos MongoDB conectada');
             
         } catch (error: string | any) {
             console.error(
-                `Error conectandose a la base de datos:\n
+                `Error conectandose a la base de datos de MySQL:\n
                     '${error}'`
             );
         }
