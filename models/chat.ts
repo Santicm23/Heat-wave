@@ -1,6 +1,6 @@
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
-import db from '../db/connection';
+import db from '../db/mysql';
 
 class Chat extends Model<InferAttributes<Chat>, InferCreationAttributes<Chat>> {
     declare id_chat: number;

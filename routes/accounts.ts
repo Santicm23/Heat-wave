@@ -6,6 +6,7 @@ import { deleteAccount, getAccount, getAccounts, postAccount, putAccount } from 
 import validateParams from '../middlewares/validate-params';
 import { uniqueEmail, uniqueUsername } from '../helpers/db-validators';
 import validateJWT from '../middlewares/validate-jwt';
+import { validateUser } from '../middlewares/validate-permissions';
 
 
 const router = Router();
@@ -27,13 +28,18 @@ router.post('/', [
 
 router.put('/:username', [
     validateJWT,
+    validateUser,
     check('name', 'El nombre completo no es válido').optional({checkFalsy: true}).trim().matches(/^[ a-zA-ZÀ-ÿ]+$/),
     check('password', 'La contraseña debe ser una cadena de caracteres').optional({checkFalsy: true}).trim().isString(),
     check('password', 'La contraseña debe tener 6 letras o más').optional({checkFalsy: true}).isLength({min: 6}),
     validateParams
 ], putAccount);
 
-router.delete('/:username', validateJWT, deleteAccount);
+router.delete('/:username', [
+    validateJWT,
+    validateUser,
+    validateParams
+], deleteAccount);
 
 
 export default router;

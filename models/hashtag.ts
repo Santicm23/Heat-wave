@@ -1,6 +1,6 @@
 import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
-import db from '../db/connection';
+import db from '../db/mysql';
 
 class Hashtag extends Model<InferAttributes<Hashtag>, InferCreationAttributes<Hashtag>> {
     declare id_hashtag: number;

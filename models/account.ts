@@ -1,7 +1,7 @@
 
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
-import db from '../db/connection';
+import db from '../db/mysql';
 import { encrypt_pass } from '../helpers/encrypt';
 import Role from './role';
 

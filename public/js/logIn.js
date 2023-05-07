@@ -7,16 +7,12 @@ const login = document.querySelector('#login');
 const logo = document.querySelector('#logo');
 
 function animatelogin() {
-  setTimeout(function() {
-    login.classList.add('visible'),
-    logo.classList.add('visible');
-  }, 500);
+    setTimeout(function() {
+        login.classList.add('visible'),
+        logo.classList.add('visible');
+    }, 500);
 }
 animatelogin();
-
-signUp.addEventListener('click', () => {
-    window.location.href = 'signUp.html';
-  });
 
 /! --------------------------------------------Autentificacion Con google-------------------------------------------------------!/
 // Inicializa Google Identity Services al cargar la página.
@@ -30,6 +26,7 @@ window.onload = () => {
   
 // Inicia el flujo de inicio de sesión de Google al hacer clic en tu icono.
 $('.fa-google').click(function () {
+    document.cookie = 'g_state =;'; // eliminando la cookie que evita cancelar la autentificación con google
     google.accounts.id.prompt();
 });
 
@@ -68,8 +65,6 @@ btnLogin.addEventListener('click', event => {
   
 // Maneja la respuesta del inicio de sesión de Google.
 function handleCredentialResponse(response) {
-
-    console.log('bbbbb');
     // Google token
     // console.log('ID TOKEN: ',response.credential);
     fetch(`${url}/google`, {

@@ -3,11 +3,13 @@ import cors from 'cors';
 import express, { Application } from 'express';
 import favicon from 'serve-favicon';
 
-
 import accountsRouter from '../routes/accounts';
-import db from '../db/connection';
-import postsRouter from '../routes/posts';
+import mysql from '../db/mysql';
 import authRouter from '../routes/auth';
+import feedPostsRouter from '../routes/feed-posts';
+import songsRouter from '../routes/songs';
+import mongo from '../db/mongo';
+import bodyParser from 'body-parser';
 
 
 class Server {
@@ -16,7 +18,9 @@ class Server {
     private paths = {
         auth: '/auth',
         accounts: '/accounts',
-        posts: '/publicaciones'
+        posts: '/posts',
+        posts_feed: '/posts/feed',
+        songs: '/songs'
     }
 
     constructor() {
@@ -31,19 +35,24 @@ class Server {
     }
 
     public middlewares() : void {
-        this.app.use(cors());                   // para seguridad y compatibilidad con el navegador
+        // para seguridad y compatibilidad con el navegador
+        this.app.use(cors());
 
-        this.app.use(express.json());           // para el uso de json (rest API)
+        // para el uso de json (rest API)
+        this.app.use(express.json());
+        
+        // para el despliegue del front end en la carpeta 'public'
+        this.app.use(express.static('public'));
 
-        this.app.use(express.static('public')); // para el despliegue del front end en la carpeta 'public'
-
+        // para el icono de la pestaña en la página web
         this.app.use(favicon('./public/favicon.ico'));
     }
 
     public routes() : void {
         this.app.use(this.paths.accounts, accountsRouter);              // ruta cuentas
-        this.app.use(this.paths.posts, postsRouter);                    // ruta hashtags
         this.app.use(this.paths.auth, authRouter);                      // ruta autentificación
+        this.app.use(this.paths.songs, songsRouter);                // ruta posts de feed
+        this.app.use(this.paths.posts_feed, feedPostsRouter);           // ruta posts de feed
     }
 
     public listen() : void {
@@ -55,12 +64,14 @@ class Server {
     async dbConnection() : Promise<void> {
         try {
             
-            await db.authenticate();
-            console.log('Base de Datos conectados');
+            await mysql.authenticate();
+            console.log('Base de Datos MySQL conectada');
+            await mongo.authenticate();
+            console.log('Base de datos MongoDB conectada');
             
         } catch (error: string | any) {
             console.error(
-                `Error conectandose a la base de datos:\n
+                `Error conectandose a la base de datos de MySQL:\n
                     '${error}'`
             );
         }

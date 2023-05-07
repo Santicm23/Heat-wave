@@ -1,7 +1,7 @@
 
 import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
-import db from '../db/connection';
+import db from '../db/mysql';
 
 
 class State extends Model<InferAttributes<State>, InferCreationAttributes<State>> {
