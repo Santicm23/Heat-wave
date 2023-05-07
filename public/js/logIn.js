@@ -51,17 +51,15 @@ btnLogin.addEventListener('click', event => {
         },
         body: JSON.stringify(formData)
     })
-    .then(resp => resp.json())
-    .then(({ msg, token, errors }) => {
-        if (msg) {
-            return console.error(msg);
-        } else if (errors) {
-            return console.error(errors);
-        }
-        localStorage.setItem('token', token);
-        window.location = 'feed.html';
-    })
-    .catch(err => console.error(err));
+        .then(resp => resp.json())
+        .then(({ msg, token }) => {
+            if (msg) {
+                return console.error(msg);
+            }
+            localStorage.setItem('token', token);
+            window.location = 'profile.html'; // TODO: redireccionar a la pantalla de inicio
+        })
+        .catch(err => console.error(err));
 
 });
   
@@ -79,7 +77,7 @@ function handleCredentialResponse(response) {
     .then(resp => resp.json())
     .then(({ token }) => {
         localStorage.setItem('token', token);
-        window.location = 'feed.html';
+        window.location = 'profile.html'; // TODO: redireccionar a la pantalla de inicio
     })
     .catch(console.warn);
 }
