@@ -17,7 +17,7 @@ router.get('/:id', [
     validateParams
 ],);
 
-router.get('track/:id',[
+router.get('/track/:id',[
     check('id', 'El id no es válido').isMongoId(),
     validateParams
 ], getTrack);

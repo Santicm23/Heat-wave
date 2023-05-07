@@ -18,7 +18,7 @@ export const getTrack = (req: Request, res: Response) => {
     res.set('accept-ranges', 'bytes');
 
     const bucket = new GridFSBucket(mongo.db, {
-        bucketName: 'tracks'
+        bucketName: 'sounds'
     });
 
     const downloadStream = bucket.openDownloadStream(id);
@@ -39,6 +39,9 @@ export const getTrack = (req: Request, res: Response) => {
 }
 
 export const uploadTrack = async(req: Request, res: Response) => {
+
+    const { name, author } = req.query;
+
     const storage = multer.memoryStorage();
 
     const upload = multer({storage, limits: {
@@ -64,14 +67,16 @@ export const uploadTrack = async(req: Request, res: Response) => {
             bucketName: 'sounds'
         });
 
-        const uploadStream = bucket.openUploadStream(req.body.name);
+        const uploadStream = bucket.openUploadStream(name as string);
         const id = uploadStream.id;
         readableTrackStream.pipe(uploadStream);
 
-        req.body.sound = id.toString();
-        req.body.duration = 0;
-
-        const song = await Song.create(req.body);
+        const song = await Song.create({
+            name: name as string,
+            author: author as string,
+            sound: id.toString(),
+            duration: 0
+        });
 
         uploadStream.on('error', () => {
             return res.status(500).json({
