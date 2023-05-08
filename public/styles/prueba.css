@@ -114,29 +114,29 @@ a
   }
   .header__wrapper .cols__container .right__col nav ul {
     display: flex;
-    justify-content: center;
     list-style-type: none; 
     margin: 0;
     padding: 0;
     display: flex; 
-    align-items: center;
 }
 
 .header__wrapper .cols__container .right__col nav ul button {
-    text-transform: uppercase;
-    font-size: 1.1rem;
-    color: #818181;
-    background-color: transparent;
-    transition: all .5s ease;
-    flex-grow: 1;
-    text-align: center;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  color: #818181;
+  background-color: transparent;
+  transition: all .5s ease;
+  flex-grow: 1;
+  text-align: center;
+  border-bottom: 2px solid transparent; /* borde inferior transparente */
+  border-radius: 0%;
+  margin: 15px;
 }
 
 .header__wrapper .cols__container .right__col nav ul button:hover {
-    color: black;
-    font-weight: bold;
+  color: black;
+  border-bottom-color: black; /* borde inferior negro al hacer hover */
 }
-
 .header__wrapper .cols__container .right__col nav button {
     background: #0091ff;
     color: #fff;
