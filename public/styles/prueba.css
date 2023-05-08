@@ -178,7 +178,7 @@ a
   
   @media (min-width: 868px) {
     .header__wrapper .cols__container {
-      max-width: 1100px;
+      max-width: 1000px;
       width: 100%;
       justify-content: space-between;
       grid-template-columns: 1fr 2fr;
