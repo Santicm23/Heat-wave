@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
-
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Open Sans',sans-serif;
+}
 body
 {
      width: 100%;
@@ -217,13 +223,7 @@ a
   
 /* ----------------------------------------------Menu--------------------------------------------- */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
-*
-{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family:'Open Sans',sans-serif;
-}
+
 
 .sidebar{
     position: fixed;

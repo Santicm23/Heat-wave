@@ -61,7 +61,7 @@ btnLogin.addEventListener('click', event => {
                 return console.error(errors.map(v => v.msg));
             }
             localStorage.setItem('token', token);
-            window.location = 'profile.html'; // TODO: redireccionar a la pantalla de inicio
+            window.location = 'feed.html'; // TODO: redireccionar a la pantalla de inicio
         })
         .catch(err => console.error(err));
 
@@ -81,7 +81,7 @@ function handleCredentialResponse(response) {
     .then(resp => resp.json())
     .then(({ token }) => {
         localStorage.setItem('token', token);
-        window.location = 'profile.html'; // TODO: redireccionar a la pantalla de inicio
+        window.location = 'feed.html'; // TODO: redireccionar a la pantalla de inicio
     })
     .catch(console.warn);
 }
