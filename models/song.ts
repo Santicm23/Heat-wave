@@ -1,11 +1,11 @@
 
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
-import db from '../db/connection';
+import db from '../db/mysql';
 
 
 class Song extends Model<InferAttributes<Song>, InferCreationAttributes<Song>> {
-    declare id_song: number;
+    declare id_song: CreationOptional<number>;
     declare name: string;
     declare author: string;
     declare album: CreationOptional<string | null>;

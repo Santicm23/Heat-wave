@@ -1,6 +1,6 @@
 import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
-import db from '../db/connection';
+import db from '../db/mysql';
 
 class Visibility extends Model<InferAttributes<Visibility>, InferCreationAttributes<Visibility>> {
     declare id_visibility: number;

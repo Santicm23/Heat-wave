@@ -1,7 +1,7 @@
 
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
-import db from '../db/connection';
+import db from '../db/mysql';
 import Playlist from './playlist';
 
 class FeedPost extends Model<InferAttributes<FeedPost>, InferCreationAttributes<FeedPost>> {

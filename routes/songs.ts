@@ -1,7 +1,9 @@
 
 import { Router } from 'express';
 
-import { validateFileToUpload } from '../middlewares/validate-files';
+import { validateAdmin } from '../middlewares/validate-permissions';
+import { check } from 'express-validator';
+import { getTrack, uploadTrack } from '../controllers/songs';
 import validateJWT from '../middlewares/validate-jwt';
 import validateParams from '../middlewares/validate-params';
 
@@ -10,17 +12,23 @@ const router = Router();
 
 router.get('/',);
 
-router.get('/:id',);
-
-router.post('/', [
-    validateJWT,
-    validateFileToUpload,
+router.get('/:id', [
+    check('id', 'El id no es válido').isMongoId(),
     validateParams
 ],);
 
-router.put('/:id',);
+router.get('/track/:id',[
+    check('id', 'El id no es válido').isMongoId(),
+    validateParams
+], getTrack);
 
-router.delete('/:id',);
+router.post('/', [
+    validateJWT,
+    validateAdmin,
+    check('name', 'El nombre de la canción es obligatorio').notEmpty(),
+    check('author', 'El autor es oblicatorio').notEmpty(),
+    validateParams
+], uploadTrack);
 
 
 export default router;
