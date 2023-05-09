@@ -8,19 +8,16 @@ import Playlist from '../models/playlist';
 
 export const getFeedPosts = async (req: Request, res: Response) => {
     
-//TODO: Arreglar esta parte con el controlador playlists
+/*TODO: Arreglar esta parte con el controlador playlists
     const { username } = req.params;
 
-    const feedposts = await Playlist.findAll({
+    const feedposts = await FeedPost.findAll({
         where: {
-            username: username
-        },
-        include: {
-            attributes: ['name'],
-            
+            id_playlist: await
         }
     });
     
+*/
     res.json({
         msg:'Pedir Publicaciones'
     });
