@@ -4,6 +4,9 @@
         <meta charset="UTF-8">
         <title>Feed</title>
         <link rel="stylesheet" href="styles/styleFeed.css">
+    
+
+        <!--Fuentes-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Raleway:wght@600&display=swap" rel="stylesheet">
@@ -11,67 +14,182 @@
         <!-- Boxicons CDN Link -->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--ICONSCOUT LINK-->
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">    </head>
     </head>
     <body>
-        <!--Barra lateral-->
-        <div class="sidebar">
-            <!--Logo-->
-            <div class="sidebar__logoDetails">
-                <img id="sidebar__logoDetails-logoImg" src="assets/imgs/logo.png" height="180px">
+        <!-------------------- Barra de navegación -------------------->
+        <nav>
+            <div class="container">
+                <h2 class="log">
+                    Heat-Wave
+                </h2>
+                <div class="search-bar">
+                    <i class="uil uil-search"></i>
+                    <input type="Search" placeholder="Search for new music">
+                </div>
+                <div class="create">
+                    <label class="btn btn-primary" for="create-post">Create</label>
+                </div>
             </div>
-            <!--Link de la barra lateral en una lista-->
-            <ul class="sidebar__nav-links">
-                <li class="sidebar__nav-links-home">
-                    <!--Enlace-->
-                    <a href="#">
-                        <i class='bx bx-home-alt'></i>
-                        <span class="link_name-home">Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-hash' ></i>
-                        <span class="link_name">Explore</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-bell'></i>
-                        <span class="link_name">Notifications</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-envelope' ></i>
-                        <span class="link_name">Messages</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-play-circle' ></i>
-                        <span class="link_name">Playlists</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-user' ></i>
-                        <span class="link_name">Profile</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class='bx bx-plus' ></i>
-                        <span class="link_name">Create</span>
-                    </a>
-                </li>
-                <li class="sidebar__nav-links-more">
-                    <a href="#">
-                        <i class='bx bx-dots-horizontal-rounded' ></i>
-                        <span class="link_name">More</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </body>
+        </nav>
 
+        <!-------------------- MAIN -------------------->
+        <main>
+            <div class="container">
+                <!-------------------- Left (Sidebar) -------------------->
+                <div class="left">
+                    <a class="profile">
+                        <div class="profile-photo">
+                            <img src="./styles/images/profile-1.jpg">
+                        </div>
+                        <div class="handle">
+                            <h4>Laura Ovalle</h4>
+                            <p class="text-muted">
+                                @LauOvalle
+                            </p>
+                        </div>
+                    </a>
+                    <!-------------------- Sidebar -------------------->
+                    <div class="sidebar">
+                        <a class="menu-item active">
+                            <span><i class="uil uil-estate"></i></span><h3>Home</h3>
+                        </a>
+                        <a class="menu-item">
+                            <span><i class="uil uil-compass"></i></span><h3>Explore</h3>
+                        </a>
+                        <a class="menu-item" id="notifications">
+                            <span><i class='bx bx-bell'><small class="notification-count">9+</small></i></span><h3>Notifications</h3>
+                            <!-- ------------------ NOTIFICATION POPUP ----------------->
+                            <div class="notifications-popup">
+                                <div>
+                                    <div class="profile-photo">
+                                        <img src="./styles/images/profile-2.jpg">
+                                    </div>
+                                    <div class="notification-body">
+                                        <b>Josefino Ardilla</b> start following you
+                                        <small class="text-muted">2 DAYS AGO</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="profile-photo">
+                                        <img src="./styles/images/profile-3.jpg">
+                                    </div>
+                                    <div class="notification-body">
+                                        <b>Santi Castro</b> commented on your post
+                                        <small class="text-muted">1 HOUR AGO</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="profile-photo">
+                                        <img src="./styles/images/profile-4.jpg">
+                                    </div>
+                                    <div class="notification-body">
+                                        <b>Michaki</b> start following you
+                                        <small class="text-muted">3 DAYS AGO</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="profile-photo">
+                                        <img src="./styles/images/profile-5.jpg">
+                                    </div>
+                                    <div class="notification-body">
+                                        <b>Bad Bunny</b> start following you
+                                        <small class="text-muted">3 DAYS AGO</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="profile-photo">
+                                        <img src="./styles/images/profile-6.jpg">
+                                    </div>
+                                    <div class="notification-body">
+                                        <b>Bad Bunny</b> start following you
+                                        <small class="text-muted">3 DAYS AGO</small>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="profile-photo">
+                                        <img src="./styles/images/profile-7.jpg">
+                                    </div>
+                                    <div class="notification-body">
+                                        <b>Bad Bunny</b> start following you
+                                        <small class="text-muted">3 DAYS AGO</small>
+                                    </div>
+                                </div>
+                                <!---------------- END NOTIFICATION POPUP --------------------->
+                            </div>
+                        </a>
+                        <a class="menu-item" id="messages-notifications">
+                            <span><i class='bx bx-envelope'><small class="notification-count">6</small></i></span><h3>Messages</h3>
+                        </a>
+                        <a class="menu-item">
+                            <span><i class='bx bx-play-circle'></i></span><h3>Playlists</h3>
+                        </a>
+                        <a class="menu-item">
+                            <span><i class='bx bx-user' ></i></span><h3>Profile</h3>
+                        </a>
+                        <a class="menu-item">
+                            <span><i class='bx bx-plus' ></i></span><h3>Create</h3>
+                        </a>
+                    </div>
+                    <!--------------------- END OF SIDE BAR - MORE ------------------->
+                    <label for="settings" class="btn btn-primary">More</label>
+                </div>
+                <!------------------- End of LEFT ----------------------->
+                <!-------------------- Middle (feed) -------------------->
+                <div class="middle">
+                    <div class="stories">
+                        <div class="story">
+                            <div class="profile-photo">
+                                <img src="./styles/images/profile-1.jpg">
+                            </div>
+                            <p class="name">Your Story</p>
+                        </div>
+                        <div class="story">
+                            <div class="profile-photo">
+                                <img src="./styles/images/profile-9.jpg">
+                            </div>
+                            <p class="name">Lilla James</p>
+                        </div>
+                        <div class="story">
+                            <div class="profile-photo">
+                                <img src="./styles/images/profile-10.jpg">
+                            </div>
+                            <p class="name">Winnie Hale</p>
+                        </div>
+                        <div class="story">
+                            <div class="profile-photo">
+                                <img src="./styles/images/profile-11.jpg">
+                            </div>
+                            <p class="name">Daniel Bael</p>
+                        </div>
+                        <div class="story">
+                            <div class="profile-photo">
+                                <img src="./styles/images/profile-12.jpg">
+                            </div>
+                            <p class="name">Jane Doel</p>
+                        </div>
+                        <div class="story">
+                            <div class="profile-photo">
+                                <img src="./styles/images/profile-13.jpg">
+                            </div>
+                            <p class="name">Tina White</p>
+                        </div>
+                    </div>
+                    <!-------------------- end of stories -------------------->
+                    <form class="create-post">
+                        <div class="profile-photo">
+                            <img src="./styles/images/profile-1.jpg">
+                        </div>
+                        <input type="text" placeholder="What are you listening, Laura?" id="create-post">
+                        <input type="submit" value="Post" class="btn btn-primary">
+                    </form>
+                </div>
+                <!-------------------- Right (historias o mnsajes) -------------------->
+                <div class="right">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. At numquam voluptatum, tempore blanditiis, officia animi expedita sit obcaecati culpa voluptatem veritatis quos eum, non eaque. Unde exercitationem pariatur voluptate! Consectetur?
+                </div>
+            </div>
+        </main>
+    </body>
 </html>
