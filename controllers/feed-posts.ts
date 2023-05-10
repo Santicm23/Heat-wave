@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { uploadFile } from '../helpers/upload-file';
 
 import FeedPost from '../models/feedPost';
-import Playlist from '../models/playlist';
+import Account from '../models/account';
 
 
 export const getFeedPosts = async (req: Request, res: Response) => {
