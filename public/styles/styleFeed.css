@@ -5,7 +5,7 @@
     --color-light: hsl(40, 100%, 97%);
     --color-gray: hsl(240, 3%, 71%);
     --color-primary: #e5a70b;
-    --color-secondary: #ddbc68;
+    --color-secondary: #ffd56b;
     --color-terciary:  hsl(0, 100%, 44%);
     --color-dark: hsl(252, 30%, 17%);
     --color-black: hsl(252, 30%, 10%);
@@ -424,6 +424,12 @@ main .container .left .profile{
     border: 3px solid var(--color-primary);
 }
 
+.middle .create-post .btn-secondary{
+    font-family: "Poppins", sans-serif;
+    background: var(--color-secondary);
+    font-size: small;
+}
+
 /*----------------------------- CREATE POST ----------------------*/
 .middle .create-post{
     width: 100%;
@@ -434,4 +440,14 @@ main .container .left .profile{
     background: var(--color-white);
     padding: 0.4rem var(--card-padding);
     border-radius: var(--border-radius);
+}
+
+.middle .create-post input[type="text"]{
+    justify-self: start;
+    width: 100%;
+    padding-left: 1rem;
+    background: transparent;
+    color: var(--color-dark);
+    margin-right: 1rem;
+    font-family: "Poppins", sans-serif;
 }
