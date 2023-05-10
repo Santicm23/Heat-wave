@@ -9,9 +9,9 @@ import validateParams from '../middlewares/validate-params';
 
 const router = Router();
 
-router.get('/', getFeedPosts);
+router.get('/:username', getFeedPosts);
 
-router.get('/:id', getFeedPost);
+router.get('/:username/:id', getFeedPost);
 
 router.post('/', [
     validateJWT,

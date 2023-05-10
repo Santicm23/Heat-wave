@@ -21,6 +21,7 @@
     --sticky-top-right: -18rem;
 }
 
+
 *,
 *::before,
 *::after
@@ -255,6 +256,7 @@ main .container .left .profile{
     cursor: pointer;
     transition: all 300ms ease;
     position: relative;
+    color: black;
 }
 
 .left .sidebar .menu-item:hover{

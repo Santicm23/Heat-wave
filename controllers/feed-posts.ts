@@ -2,14 +2,28 @@
 import { Request, Response } from 'express';
 import { uploadFile } from '../helpers/upload-file';
 
+import FeedPost from '../models/feedPost';
+import Playlist from '../models/playlist';
 
-export const getFeedPosts = (req: Request, res: Response) => {
+
+export const getFeedPosts = async (req: Request, res: Response) => {
+    
+/*TODO: Arreglar esta parte con el controlador playlists
+    const { username } = req.params;
+
+    const feedposts = await FeedPost.findAll({
+        where: {
+            id_playlist: await
+        }
+    });
+    
+*/
     res.json({
         msg:'Pedir Publicaciones'
     });
 }
 
-export const getFeedPost = (req: Request, res: Response) => {
+export const getFeedPost = async (req: Request, res: Response) => {
     res.json({
         msg:'Pedir Publicacion'
     });

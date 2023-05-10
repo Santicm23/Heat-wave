@@ -8,73 +8,77 @@
   font-family:'Open Sans',sans-serif;
 }
 
-/*MENU*/
+/*menu*/
 .sidebar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 260px;
-    background: radial-gradient( circle, #ddbc68 , #e5a70b );
+  margin-top: 1rem;
+  background: radial-gradient( circle, #ddbc68 , #e5a70b);
+  border-radius: var(--card-border-radius);
 }
 
-.sidebar .logo-details {
-    height: 60px;
-    padding-top: 150px;
-    padding-left: 30px;
-    /*width: 100%;*/
-    display: flex;
-    align-items: center;
+.sidebar .menu-item{
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  cursor: pointer;
+  transition: all 300ms ease;
+  position: relative;
+  color: black;
 }
 
-.sidebar .logo-details i {
-    font-size: 30px;
-    color: black;
-    height: 50px;
-    min-width: 78px;
-    text-align:center;
-    line-height: 50px;
+.sidebar .menu-item:hover{
+  background: var(--color-light);
 }
 
-.sidebar .logo-details .logo-name {
-    font-size: 22px;
-    color: black;
-    font-weight: 600;
+.sidebar i{
+  font-size: 1.4rem;
+  margin-left: 2rem;
+  position: relative;
 }
 
-.sidebar .nav-links{
-    /*background: red;*/
-    height: 100%;
-    padding-top: 150px;
+.sidebar i .notification-count{
+  background: var(--color-terciary);
+  color: white;
+  font-size: 0.7rem;
+  width: fit-content;
+  border-radius: 0.8rem;
+  padding: 0.1rem 0.4rem;
+  position: absolute;
+  top: -0.2rem;
+  right: -0.3rem;
 }
 
-/*Le cambia el color a todos los iconos*/
-.sidebar .nav-links li i{
-    height: 50px;
-    min-width: 78px;
-    text-align: center;
-    line-height: 50px;
-    color: black;
+.sidebar h3{
+  margin-left: 1.5rem;
+  font-size: 1rem;
 }
 
-.sidebar .nav-links li a{
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
+.sidebar .active{
+  background: var(--color-white);
 }
 
-.sidebar .nav-links li a .link_name{
-    color: black;
-    font-size: 18px;
-
+.sidebar .active i,
+.sidebar .active h3{
+  color: var(--color-primary);
 }
 
-.sidebar .nav-links li a .link_nameHome {
-    color: white;
-    font-size: 20px;
+.sidebar .active::before{
+  content: "";
+  display: block;
+  width: 0.5rem;
+  height: 100%;
+  position: absolute;
+  background: var(--color-primary);
 }
 
+.sidebar .menu-item:first-child.active{
+  border-top-left-radius: var(--card-border-radius);
+  overflow: hidden;
+}
+
+.sidebar .menu-item:last-child.active{
+  border-bottom-left-radius: var(--card-border-radius);
+  overflow: hidden;
+}
 
 body
 {
