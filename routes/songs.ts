@@ -1,8 +1,8 @@
 
 import { Router } from 'express';
+import { check } from 'express-validator';
 
 import { validateAdmin } from '../middlewares/validate-permissions';
-import { check } from 'express-validator';
 import { getTrack, uploadTrack } from '../controllers/songs';
 import validateJWT from '../middlewares/validate-jwt';
 import validateParams from '../middlewares/validate-params';
