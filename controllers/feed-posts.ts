@@ -90,8 +90,33 @@ export const putFeedPost = (req: Request, res: Response) => {
     });
 }
 
-export const deleteFeedPost = (req: Request, res: Response) => {
-    res.json({
-        msg:'Eliminar Publicacion'
-    });
+export const deleteFeedPost = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    try {
+
+        const feedpost = await FeedPost.findByPk(id);
+
+        if(!feedpost){
+            return res.status(404).json({msg: 'Post no encontrado'});
+        }
+
+        await feedpost.update({
+            active: false
+        })
+
+        return res.json({
+            msg:'Post elminado exitosamente',
+            feedpost
+        });
+
+
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json(something_went_wrong(error));
+    }
+    
+    
+    
 }

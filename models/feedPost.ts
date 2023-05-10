@@ -12,6 +12,7 @@ class FeedPost extends Model<InferAttributes<FeedPost>, InferCreationAttributes<
     declare creation_date: Date;
     declare likes: number;
     declare username: string;
+    declare active: CreationOptional<boolean>;
 }
 
 FeedPost.init({
@@ -46,6 +47,10 @@ FeedPost.init({
             key: 'username'
         }
     },
+    active: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+    }
 },
 {
     tableName: 'feed_posts',
