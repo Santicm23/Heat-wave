@@ -52,7 +52,7 @@ export const googleSignIn = async(req: Request, res: Response) => {
     const { id_token } = req.body;
 
     try {
-        const { username, mail, image } = await googleVerify(id_token);
+        const { username, mail } = await googleVerify(id_token);
 
         let account = await Account.findOne({
             where: {
@@ -66,7 +66,6 @@ export const googleSignIn = async(req: Request, res: Response) => {
                 name: username as string,
                 email: mail as string,
                 password: ':P',
-                image: image as string,
                 google: true
             });
 

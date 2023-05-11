@@ -2,11 +2,13 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 
-import { deleteAccount, getAccount, getAccounts, postAccount, putAccount } from '../controllers/accounts';
+import { deleteAccount, getAccount, getAccounts, getImageAccount, postAccount, putAccount } from '../controllers/accounts';
 import validateParams from '../middlewares/validate-params';
 import { uniqueEmail, uniqueUsername } from '../helpers/db-validators';
 import validateJWT from '../middlewares/validate-jwt';
 import { validateUser } from '../middlewares/validate-permissions';
+import { addImageAccount } from '../controllers/accounts';
+import { validateFileToUpload } from '../middlewares/validate-files';
 
 
 const router = Router();
@@ -14,6 +16,8 @@ const router = Router();
 router.get('/', getAccounts);
 
 router.get('/:username', getAccount);
+
+router.get('/image/:username', getImageAccount);
 
 router.post('/', [
     check('username', 'El nombre de usuario no es válido').notEmpty().trim().matches(/[\w_]+/),
@@ -34,6 +38,12 @@ router.put('/:username', [
     check('password', 'La contraseña debe tener 6 letras o más').optional({checkFalsy: true}).isLength({min: 6}),
     validateParams
 ], putAccount);
+
+router.put('/image/:username', [
+    validateJWT,
+    validateUser,
+    validateParams
+], addImageAccount)
 
 router.delete('/:username', [
     validateJWT,

@@ -86,15 +86,19 @@ export const uploadTrack = async(req: Request, res: Response) => {
     }});
 
     upload.single('track')(req, res, async(err) => {
-        
         if (err) 
             return res.status(400).json({
                 msg: err.message
             });
 
+        if (!req.file)
+            return res.status(400).json({
+                msg: 'No se mando ningún archivo \'track\''
+            });
+        
         // convert buffer to readable stream
         const readableTrackStream = new Readable();
-        readableTrackStream.push(req.file?.buffer);
+        readableTrackStream.push(req.file.buffer);
         readableTrackStream.push(null);
 
         const bucket = new GridFSBucket(mongo.db, {

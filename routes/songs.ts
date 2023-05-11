@@ -6,6 +6,7 @@ import { validateAdmin } from '../middlewares/validate-permissions';
 import { getSong, getSongs, getTrack, uploadTrack } from '../controllers/songs';
 import validateJWT from '../middlewares/validate-jwt';
 import validateParams from '../middlewares/validate-params';
+import { validateFileToUpload } from '../middlewares/validate-files';
 
 
 const router = Router();
