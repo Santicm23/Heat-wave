@@ -12,15 +12,9 @@ const router = Router();
 
 router.get('/', getSongs);
 
-router.get('/:id', [
-    check('id', 'El id no es válido').isMongoId(),
-    validateParams
-],);
+router.get('/:id',);
 
-router.get('/track/:id',[
-    check('id', 'El id no es válido').isMongoId(),
-    validateParams
-], getTrack);
+router.get('/track/:id', getTrack);
 
 router.post('/', [
     validateJWT,

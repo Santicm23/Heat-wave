@@ -2,12 +2,18 @@
 
 const url = `http://${window.location.host}/songs/track`;
 
-fetch(`${url}/645bad760a6f567046ce6142`)
-    .then(resp => resp.blob())
+fetch(`${url}/19`)
+    .then(resp => {
+        if (resp.ok) {
+            return resp.blob();
+        } else {
+            throw new Error('Error al descargar el sonido de la publicación');
+        }
+    })
     .then(blob => {
         console.log('playing...');
         const audioUrl = URL.createObjectURL(blob);
         const audioPlayer = new Audio(audioUrl);
         audioPlayer.play();
     })
-    .catch(err => console.error(err));
+    .catch(console.error);

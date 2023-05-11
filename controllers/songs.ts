@@ -19,12 +19,33 @@ export const getSongs = async(req: Request, res: Response) => {
 }
 
 export const getSong = async(req: Request, res: Response) => {
-    
+    const { id } = req.params;
+
+    const song = await Song.findByPk(id);
+
+    if (!song)
+        return res.status(404).json({
+            msg: `La canción con id '${id}' no existe`
+        });
+
+    res.json({
+        msg: 'Canción encontrada exitosamente',
+        song
+    });
 }
 
-export const getTrack = (req: Request, res: Response) => {
+export const getTrack = async(req: Request, res: Response) => {
 
-    const id = new ObjectId(req.params.id);
+    const { id } = req.params;
+
+    const song = await Song.findByPk(id);
+
+    if (!song)
+        return res.status(404).json({
+            msg: `La cancion con id '${id}' no existe`
+        });
+
+    const id_track = new ObjectId(song.sound);
 
     res.set('content-type', 'audio/mp3');
     res.set('accept-ranges', 'bytes');
@@ -33,7 +54,7 @@ export const getTrack = (req: Request, res: Response) => {
         bucketName: 'sounds'
     });
 
-    const downloadStream = bucket.openDownloadStream(id);
+    const downloadStream = bucket.openDownloadStream(id_track);
 
     downloadStream.on('data', (chunk: any) => {
         res.write(chunk);
