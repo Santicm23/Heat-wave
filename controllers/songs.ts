@@ -40,10 +40,11 @@ export const getTrack = async(req: Request, res: Response) => {
 
     const song = await Song.findByPk(id);
 
-    if (!song)
+    if (!song) {
         return res.status(404).json({
             msg: `La cancion con id '${id}' no existe`
         });
+    }
 
     const id_track = new ObjectId(song.sound);
 
