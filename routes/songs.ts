@@ -1,26 +1,21 @@
 
 import { Router } from 'express';
+import { check } from 'express-validator';
 
 import { validateAdmin } from '../middlewares/validate-permissions';
-import { check } from 'express-validator';
-import { getTrack, uploadTrack } from '../controllers/songs';
+import { getSong, getSongs, getTrack, uploadTrack } from '../controllers/songs';
 import validateJWT from '../middlewares/validate-jwt';
 import validateParams from '../middlewares/validate-params';
+import { validateFileToUpload } from '../middlewares/validate-files';
 
 
 const router = Router();
 
-router.get('/',);
+router.get('/', getSongs);
 
-router.get('/:id', [
-    check('id', 'El id no es válido').isMongoId(),
-    validateParams
-],);
+router.get('/:id', getSong);
 
-router.get('/track/:id',[
-    check('id', 'El id no es válido').isMongoId(),
-    validateParams
-], getTrack);
+router.get('/track/:id', getTrack);
 
 router.post('/', [
     validateJWT,

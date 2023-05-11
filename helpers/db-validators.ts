@@ -7,6 +7,8 @@ export const uniqueUsername = async(username: string): Promise<void> => {
 
     const existAccount = await Account.findByPk(username);
 
+    console.log(username);
+
     if (existAccount) {
         throw new Error(`El nombre de usuario '${username}' ya se encuentra en uso`);
     }
@@ -14,6 +16,8 @@ export const uniqueUsername = async(username: string): Promise<void> => {
 
 export const uniqueEmail = async(email: string): Promise<void> => {
     if (!email) return;
+
+    console.log(email);
 
     const existAccount = await Account.findOne({
         where: {

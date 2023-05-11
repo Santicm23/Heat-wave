@@ -9,10 +9,44 @@ import mongo from '../db/mongo';
 import Song from '../models/song';
 
 
+export const getSongs = async(req: Request, res: Response) => {
+    const songs = await Song.findAll();
 
-export const getTrack = (req: Request, res: Response) => {
+    res.json({
+        msg: `${songs.length} canciones encontradas`,
+        songs
+    });
+}
 
-    const id = new ObjectId(req.params.id);
+export const getSong = async(req: Request, res: Response) => {
+    const { id } = req.params;
+
+    const song = await Song.findByPk(id);
+
+    if (!song)
+        return res.status(404).json({
+            msg: `La canción con id '${id}' no existe`
+        });
+
+    res.json({
+        msg: 'Canción encontrada exitosamente',
+        song
+    });
+}
+
+export const getTrack = async(req: Request, res: Response) => {
+
+    const { id } = req.params;
+
+    const song = await Song.findByPk(id);
+
+    if (!song) {
+        return res.status(404).json({
+            msg: `La cancion con id '${id}' no existe`
+        });
+    }
+
+    const id_track = new ObjectId(song.sound);
 
     res.set('content-type', 'audio/mp3');
     res.set('accept-ranges', 'bytes');
@@ -21,7 +55,7 @@ export const getTrack = (req: Request, res: Response) => {
         bucketName: 'sounds'
     });
 
-    const downloadStream = bucket.openDownloadStream(id);
+    const downloadStream = bucket.openDownloadStream(id_track);
 
     downloadStream.on('data', (chunk: any) => {
         res.write(chunk);
@@ -40,7 +74,7 @@ export const getTrack = (req: Request, res: Response) => {
 
 export const uploadTrack = async(req: Request, res: Response) => {
 
-    const { name, author } = req.query;
+    const { name, author, album } = req.query;
 
     const storage = multer.memoryStorage();
 
@@ -52,15 +86,19 @@ export const uploadTrack = async(req: Request, res: Response) => {
     }});
 
     upload.single('track')(req, res, async(err) => {
-        
         if (err) 
             return res.status(400).json({
                 msg: err.message
             });
 
+        if (!req.file)
+            return res.status(400).json({
+                msg: 'No se mando ningún archivo \'track\''
+            });
+        
         // convert buffer to readable stream
         const readableTrackStream = new Readable();
-        readableTrackStream.push(req.file?.buffer);
+        readableTrackStream.push(req.file.buffer);
         readableTrackStream.push(null);
 
         const bucket = new GridFSBucket(mongo.db, {
@@ -75,6 +113,7 @@ export const uploadTrack = async(req: Request, res: Response) => {
             name: name as string,
             author: author as string,
             sound: id.toString(),
+            album: album as string | undefined,
             duration: 0
         });
 

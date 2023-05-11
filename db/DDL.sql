@@ -80,20 +80,6 @@ CREATE TABLE states (
     UNIQUE (`name`)
 );
 
-CREATE TABLE playlists (
-    `id_playlist` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(255) NOT NULL,
-    `num_songs` INT(11) NOT NULL DEFAULT 0,
-    `duration` TIME NOT NULL DEFAULT 0,
-    `path` VARCHAR(255) NOT NULL DEFAULT '/',
-    `likes` INT(11) NOT NULL DEFAULT 0,
-    `username` VARCHAR(255) NOT NULL,
-    `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (username) REFERENCES accounts(username)
-        ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 CREATE TABLE dailys (
     `id_daily` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     `likes` INT(11) NOT NULL DEFAULT 0,
@@ -129,14 +115,15 @@ CREATE TABLE messages (
 CREATE TABLE feed_posts (
     `id_feed_post` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
-    `description` TEXT NOT NULL,
+    `description` TEXT,
     `location` VARCHAR(255) DEFAULT NULL,
-    `id_playlist` BIGINT(20) UNSIGNED NOT NULL,
+    `username` VARCHAR(255) NOT NULL,
     `likes` INT(11) NOT NULL DEFAULT 0,
+    `active` TINYINT NOT NULL DEFAULT 1,
     `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_playlist) REFERENCES playlists(id_playlist)
-        ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (username) REFERENCES accounts(username)
+        ON DELETE CASCADE ON UPDATE CASCADE    
 );
 
 CREATE TABLE comments (
@@ -158,16 +145,6 @@ CREATE TABLE chatXaccount (
     `username` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id_chat`, `username`),
     FOREIGN KEY (id_chat) REFERENCES chats(id_chat)
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (username) REFERENCES accounts(username)
-        ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE accountXplaylist (
-    `username` VARCHAR(255) NOT NULL,
-    `id_playlist` BIGINT(20) UNSIGNED,
-    PRIMARY KEY (`username`, `id_playlist`),
-    FOREIGN KEY (id_playlist) REFERENCES playlists(id_playlist)
         ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (username) REFERENCES accounts(username)
         ON DELETE CASCADE ON UPDATE CASCADE

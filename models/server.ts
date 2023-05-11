@@ -70,7 +70,7 @@ class Server {
             
         } catch (error: string | any) {
             console.error(
-                `Error conectandose a la base de datos de MySQL:\n
+                `Error conectandose a las bases de datos:\n
                     '${error}'`
             );
         }

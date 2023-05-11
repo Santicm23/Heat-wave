@@ -1,4 +1,5 @@
 
+/*
 import { Request, Response } from 'express';
 
 import Playlist from '../models/playlist';
@@ -72,3 +73,4 @@ export const deletePlaylist = (req: Request, res: Response) => {
         msg:'Eliminar Playlist'
     });
 }
+*/

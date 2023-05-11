@@ -53,17 +53,18 @@ btnLogin.addEventListener('click', event => {
         },
         body: JSON.stringify(formData)
     })
-        .then(resp => resp.json())
-        .then(({ msg, errors, token }) => {
-            if (msg) {
-                return console.error(msg);
-            } else if (errors) {
-                return console.error(errors.map(v => v.msg));
-            }
-            localStorage.setItem('token', token);
-            window.location = 'feed.html'; // TODO: redireccionar a la pantalla de inicio
-        })
-        .catch(err => console.error(err));
+    .then(resp => {
+        if (resp.ok) {
+            return resp.json();
+        } else {
+            throw new Error('El nombre de usuario o la contraseña no son correctos');
+        }
+    })
+    .then(({ token }) => {
+        localStorage.setItem('token', token);
+        window.location = 'feed.html'; // TODO: redireccionar a la pantalla de inicio
+    })
+    .catch(console.error);
 
 });
   
@@ -78,10 +79,16 @@ function handleCredentialResponse(response) {
         },
         body: JSON.stringify({id_token: response.credential})
     })
-    .then(resp => resp.json())
+    .then(resp => {
+        if (resp.ok) {
+            return resp.json();
+        } else {
+            throw new Error('El nombre de usuario o la contraseña no son correctos');
+        }
+    })
     .then(({ token }) => {
         localStorage.setItem('token', token);
         window.location = 'feed.html'; // TODO: redireccionar a la pantalla de inicio
     })
-    .catch(console.warn);
+    .catch(console.error);
 }
