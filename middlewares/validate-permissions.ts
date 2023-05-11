@@ -1,5 +1,5 @@
 
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express';
 
 
 export const validateUser = async(req: Request, res: Response, next: NextFunction) => {

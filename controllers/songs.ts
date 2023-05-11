@@ -9,6 +9,18 @@ import mongo from '../db/mongo';
 import Song from '../models/song';
 
 
+export const getSongs = async(req: Request, res: Response) => {
+    const songs = await Song.findAll();
+
+    res.json({
+        msg: `${songs.length} canciones encontradas`,
+        songs
+    });
+}
+
+export const getSong = async(req: Request, res: Response) => {
+    
+}
 
 export const getTrack = (req: Request, res: Response) => {
 
@@ -40,7 +52,7 @@ export const getTrack = (req: Request, res: Response) => {
 
 export const uploadTrack = async(req: Request, res: Response) => {
 
-    const { name, author } = req.query;
+    const { name, author, album } = req.query;
 
     const storage = multer.memoryStorage();
 
@@ -75,6 +87,7 @@ export const uploadTrack = async(req: Request, res: Response) => {
             name: name as string,
             author: author as string,
             sound: id.toString(),
+            album: album as string | undefined,
             duration: 0
         });
 

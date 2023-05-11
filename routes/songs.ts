@@ -3,14 +3,14 @@ import { Router } from 'express';
 import { check } from 'express-validator';
 
 import { validateAdmin } from '../middlewares/validate-permissions';
-import { getTrack, uploadTrack } from '../controllers/songs';
+import { getSongs, getTrack, uploadTrack } from '../controllers/songs';
 import validateJWT from '../middlewares/validate-jwt';
 import validateParams from '../middlewares/validate-params';
 
 
 const router = Router();
 
-router.get('/',);
+router.get('/', getSongs);
 
 router.get('/:id', [
     check('id', 'El id no es válido').isMongoId(),
