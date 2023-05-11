@@ -1,6 +1,5 @@
 
 import { Request, Response } from 'express';
-import { uploadFile } from '../helpers/upload-file';
 
 import FeedPost from '../models/feedPost';
 import { something_went_wrong } from '../helpers/json-errors';
