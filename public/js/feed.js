@@ -1,18 +1,34 @@
 
 const url = `http://${window.location.host}`;
 
-const name = document.getElementById('name');
 const username = document.getElementById('username');
+const name = document.getElementById('name');
 
-let cuenta;
+let sesionToken = localStorage.getItem('token');
 
-const token = localStorage.getItem('token');
+console.log(sesionToken);
 
-const options = {
+fetch(`${url}/auth/`, {
     headers: {
-        'x-token': token
+        'x-token': sesionToken
     }
-}
+})
+.then(resp => {
+    if (resp.ok) {
+        return resp.json();
+    } else {
+        throw new Error('Error con el token');
+    }
+})
+.then(data => {
+    sesionToken = data.token;
+    username.textContent = `@${data.account.username}`;
+    name.textContent = data.account.name;
+})
+.catch(err => {
+    console.error(err);
+    window.location = 'index.html';
+});
 
 fetch(`${url}/accounts/`, options)
 .then(resp => {

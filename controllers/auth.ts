@@ -92,12 +92,12 @@ export const googleSignIn = async(req: Request, res: Response) => {
 }
 
 export const renewToken = async(req: Request, res: Response) => {
-    const { account } = req.body;
+    const { logged_account } = req.body;
 
-    const token = await generateJWT(account.id);
+    const token = await generateJWT(logged_account.username);
 
     res.json({
-        account: account.getRepr(),
+        account: logged_account.getRepr(),
         token
     })
 }
