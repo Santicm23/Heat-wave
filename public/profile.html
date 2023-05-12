@@ -1,124 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link href="styles/prueba.css" rel="stylesheet">
-  
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="styles/styleFeed.css" rel="stylesheet">
+    <link href="styles/prueba.css" rel="stylesheet">
+    
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!--Fuentes-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Raleway:wght@600&display=swap" rel="stylesheet">
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--ICONSCOUT LINK-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="/your-path-to-uicons/css/uicons-[your-style].css" rel="stylesheet">
 </head>
 <body>
-    <!-- Empieza menu -->
-    <div class="sidebar">
-        <div class="logo-details">
-            <img id="logo" src="assets/imgs/logo.png" height="200px">
+    <!-------------------- Barra de navegación -------------------->
+    <nav>
+        <div class="container">
+            <h2 class="log">
+                Heat-Wave
+            </h2>
+            <div class="search-bar">
+                <i class="uil uil-search"></i>
+                <input type="Search" placeholder="Search for new music">
+            </div>
+            <div class="create">
+                <label class="btn btn-primary" for="create-post">Create</label>
+            </div>
         </div>
-        <ul class="nav-links">
-            <li>
-                <a href="#">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_nameHome">Inicio</span>
+    </nav>
+
+    <!-------------------- MAIN -------------------->
+    <main>
+        <div class="container">
+            <!-------------------- Left (Sidebar) -------------------->
+            <div class="left">
+                <a class="profile">
+                    <div class="profile-photo">
+                        <img src="./styles/images/profile-1.jpg">
+                    </div>
+                    <div class="handle">
+                        <h4 id="name"></h4>
+                        <p id="username" class="text-muted"></p>
+                    </div>
                 </a>
-            </li>
-            <li>
-                <div class="iocn-link">
-                    <a href="#">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="link_name">Explorar</span>
+                <!-------------------- Sidebar -------------------->
+                <div class="sidebar">
+                    <a class="menu-item active">
+                        <span><i class="uil uil-estate"></i></span><h3>Home</h3>
+                    </a>
+                    <a class="menu-item">
+                        <span><i class="uil uil-compass"></i></span><h3>Explore</h3>
+                    </a>
+                    <a class="menu-item" id="notifications">
+                        <span><i class='bx bx-bell'><small class="notification-count">5+</small></i></span><h3>Notifications</h3>
+                        <!-- ------------------ NOTIFICATION POPUP ----------------->
+                        <div class="notifications-popup">
+                            <div>
+                                <div class="profile-photo">
+                                    <img src="./styles/images/profile-2.jpg">
+                                </div>
+                                <div class="notification-body">
+                                    <b>Josefino Ardilla</b> start following you
+                                    <small class="text-muted">2 DAYS AGO</small>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="profile-photo">
+                                    <img src="./styles/images/profile-3.jpg">
+                                </div>
+                                <div class="notification-body">
+                                    <b>Santi Castro</b> commented on your post
+                                    <small class="text-muted">1 HOUR AGO</small>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="profile-photo">
+                                    <img src="./styles/images/profile-4.jpg">
+                                </div>
+                                <div class="notification-body">
+                                    <b>Michaki</b> start following you
+                                    <small class="text-muted">3 DAYS AGO</small>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="profile-photo">
+                                    <img src="./styles/images/profile-5.jpg">
+                                </div>
+                                <div class="notification-body">
+                                    <b>Bad Bunny</b> start following you
+                                    <small class="text-muted">3 DAYS AGO</small>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="profile-photo">
+                                    <img src="./styles/images/profile-6.jpg">
+                                </div>
+                                <div class="notification-body">
+                                    <b>Bad Bunny</b> start following you
+                                    <small class="text-muted">3 DAYS AGO</small>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="profile-photo">
+                                    <img src="./styles/images/profile-7.jpg">
+                                </div>
+                                <div class="notification-body">
+                                    <b>Bad Bunny</b> start following you
+                                    <small class="text-muted">3 DAYS AGO</small>
+                                </div>
+                            </div>
+                            <!---------------- END NOTIFICATION POPUP --------------------->
+                        </div>
+                    </a>
+                    <a class="menu-item" id="messages-notifications">
+                        <span><i class='bx bx-envelope'><small class="notification-count">6</small></i></span><h3>Messages</h3>
+                    </a>
+                    <a class="menu-item">
+                        <span><i class='bx bx-play-circle'></i></span><h3>Playlists</h3>
+                    </a>
+                    <a class="menu-item" href="profile.html">
+                        <span><i class='bx bx-user' ></i></span><h3>Profile</h3>
+                    </a>
+                    <a class="menu-item">
+                        <span><i class='bx bx-plus' ></i></span><h3>Create</h3>
                     </a>
                 </div>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Notificaciones</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Mensajes</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Playlists</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Profile</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Crear</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- ---------------------------------------------ACABA MENU ------------------------------------------------->
-  <div class="header__wrapper">
-    <div class="cols__container">
-        <div class="top">
-            <div class="img__container">
-                <img src="assets/imgs/nico.jpeg" alt="Nico Tremendo">
+                <!--------------------- END OF SIDE BAR - MORE ------------------->
+                <label for="settings" class="btn btn-primary">More</label>
             </div>
-            <div class="left__col">
-                <h2>Nico Tremendo</h2>
-                <p>Ingeniero de sistemas/PlayBoy</p>
-                <p>papasote@javeriana.edu.co</p>
-    
-                <ul class="about">
-                    <li><span>4</span>Publicaciones</li>
-                    <li><span>5,024</span>Seguidores</li>
-                    <li><span>400</span>Seguidos</li>
-                </ul>
-                <div class="content">
+            <!------------------- End of LEFT ----------------------->
+            <!-------------------- Middle (feed) -------------------->
+            <div class="middle">
+                <div class="header__wrapper">
+                    <!-- <div class="cols__container"> -->
+                        <div class="top">
+                            <div class="img__container">
+                                <img src="assets/imgs/nico.jpeg" alt="Nico Tremendo">
+                            </div>
+                            <div class="left__col">
+                                <h2>Nico Tremendo</h2>
+                                <p>Ingeniero de sistemas/PlayBoy</p>
+                                <p>papasote@javeriana.edu.co</p>
                     
+                                <ul class="about">
+                                    <li><span>4</span>Publicaciones</li>
+                                    <li><span>5,024</span>Seguidores</li>
+                                    <li><span>400</span>Seguidos</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure sint similique autem, fuga fugiat possimus dignissimos ipsum voluptatum hic velit ea placeat at sit, eius saepe. Quis dignissimos ducimus ullam.
+                        </p> -->
+                        <div class="right__col">
+                            <div class="nav-profile">
+                                <ul>
+                                    <button id="post-btn">Post</button>
+                                    <button id="playlist-btn">Playlists</button>
+                                    <button id="favorities-btn">Favoritos</button>
+                                </ul>
+                                <button class="btn btn-primary">Editar Pefil</button>
+                            </div>
+                            <div class="profile-sections">
+                                <div class="post section-content active" id="post">
+                                    <div class="grid">
+                                        <img src="assets/imgs/logo.png" alt="">
+                                        <img src="assets/imgs/logo.png" alt="">
+                                        <img src="assets/imgs/logo.png" alt="">
+                                        
+                                    </div>
+                                </div>
+                                <div class="playlist section-content" id="playlist">
+                                    <div class="grid">
+                                
+                                    </div>
+                                </div>
+                                <div class="favorities section-content" id="favorities">
+                                    <div class="grid">
+                                        <img src="assets/imgs/dolor.jpg" alt="">            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                </div>
+                <!-------------------- END OF FEEDS -------------------->
+            </div>
+            <!-------------------- END OF MIDDLE -------------------->
+
+            <!-------------------- Right (historias o mnsajes) -------------------->
+            <div class="right">
+                <div class="messages">
+                    <div class="heading">
+                        <h4>Messages</h4><i class="uil uil-edit"></i>
+                    </div>
+                    <!-------------------- SEARCH BAR -------------------->
+                    <div class="search-bar">
+                        <i class="uil uil-search"></i>
+                        <input type="search" placeholder="Search messages" id="message-search">
+                    </div>
+                    <!-------------------- MESSAGES CATEGORY -------------------->
+                    <div class="category">
+                        <h6 class="active">Primary</h6>
+                        <h6>General</h6>
+                        <h6 class="message-requests">Requests(7)</h6>
+                    </div>
+                    <!-------------------- MESSAGES -------------------->
+                    <div class="message">
+                        <div class="profile-photo">
+                            <img src="./styles/images/profile-2.jpg">
+                            <div class="active"></div>
+                        </div>
+                        <div class="message-body">
+                            <h5>Edam Quist</h5>
+                            <p class="text-muted">How are U?</p>
+                        </div>
+                    </div>
+                    <div class="message">
+                        <div class="profile-photo">
+                            <img src="./styles/images/profile-3.jpg">
+                        </div>
+                        <div class="message-body">
+                            <h5>Mary Poppins</h5>
+                            <p class="text-muted">LOL</p>
+                            <p class="text-bold">2 new messages</p>
+                        </div>
+                    </div>
+                    <div class="message">
+                        <div class="profile-photo">
+                            <img src="./styles/images/profile-4.jpg">
+                            <div class="active"></div>
+                        </div>
+                        <div class="message-body">
+                            <h5>Luna Bloom</h5>
+                            <p class="text-muted">I love that song too</p>
+                        </div>
+                    </div>
+                    <div class="message">
+                        <div class="profile-photo">
+                            <img src="./styles/images/profile-5.jpg">
+                            <div class="active"></div>
+                        </div>
+                        <div class="message-body">
+                            <h5>Flora Parks</h5>
+                            <p class="text-muted">You inspired me</p>
+                        </div>
+                    </div>
+                    <div class="message">
+                        <div class="profile-photo">
+                            <img src="./styles/images/profile-6.jpg">
+                        </div>
+                        <div class="message-body">
+                            <h5>Marilyn Monroe</h5>
+                            <p class="text-muted">Seriously?</p>
+                        </div>
+                    </div>
+                </div>
+                <!-------------------- END OF MESSAGES -------------------->
+
+                <!-------------------- FRIEND REQUESTS -------------------->
+                <div class="friend-requests">
+                    <h4>Requests</h4>
+                    <div class="request">
+                        <div class="info">
+                            <div class="profile-photo">
+                                <img src="./styles/images/profile-3.jpg" alt="">
+                            </div>
+                            <div>
+                                <h5>Hajia Bintu</h5>
+                                <p class="text-muted">
+                                    8 mutual friends
+                                </p>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-secondary">
+                                Accept
+                            </button>
+                            <button class="btn">
+                                Decline
+                            </button>
+                        </div>
+                    </div>
+                    <div class="request">
+                        <div class="info">
+                            <div class="profile-photo">
+                                <img src="./styles/images/profile-12.jpg">
+                            </div>
+                            <div>
+                                <h5>Mira Mora</h5>
+                                <p class="text-muted">
+                                    8 mutual friends
+                                </p>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-secondary">
+                                Accept
+                            </button>
+                            <button class="btn">
+                                Decline
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure sint similique autem, fuga fugiat possimus dignissimos ipsum voluptatum hic velit ea placeat at sit, eius saepe. Quis dignissimos ducimus ullam.
-        </p>
-        <div class="right__col">
-            <nav>
-                <ul>
-                    <button id="post-btn">Post</button>
-                    <button id="playlist-btn">Playlists</button>
-                    <button id="favorities-btn">Favoritos</button>
-                </ul>
-                <button>Editar Pefil</button>
-            </nav>
-            <div class="profile-sections">
-                <div class="post section-content active" id="post">
-                    <div class="grid">
-                        <img src="assets/imgs/logo.png" alt="">
-                        <img src="assets/imgs/logo.png" alt="">
-                        <img src="assets/imgs/logo.png" alt="">
-                        
-                    </div>
-                </div>
-                <div class="playlist section-content" id="playlist">
-                    <div class="grid">
-                
-                    </div>
-                </div>
-                <div class="favorities section-content" id="favorities">
-                    <div class="grid">
-                        <img src="assets/imgs/dolor.jpg" alt="">            
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
-  <script src="./js/profile.js"></script>
+    </main>
+    <script src="./js/profile.js"></script>
+    <script src="./js/feed.js"></script>
 </body>
 </html>
 
