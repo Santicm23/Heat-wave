@@ -9,7 +9,7 @@
     --color-terciary:  hsl(0, 100%, 44%);
     --color-dark: hsl(252, 30%, 17%);
     --color-black: hsl(252, 30%, 10%);
-
+    --color-success: hsl(120, 95%, 65%);
 
     --border-radius: 2rem;
     --card-border-radius: 1rem;
@@ -79,92 +79,14 @@ img{
 }
 
 .text-bold{
-    font-weight: 500;
+    font-weight: 800;
+
 }
 
 .text-muted{
     color: var(--color-gray);
     font-size: small;
 }
-
-
-/* ----------------------------------- DISEÑO SIDEBAR
-.sidebar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 260px;
-    background: radial-gradient( circle, #ddbc68 , #e5a70b );
-}
-
-.sidebar__logoDetails {
-    height: 30px;
-    padding-top: 150px;
-    padding-left: 40px;
-    padding-bottom: 130px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-
-.sidebar__nav-links {
-    height: 100%;
-    padding-top: 10px;
-}
-
-/*Le cambia el color a todos los iconos*/
-/*.sidebar__nav-links li i{
-    height: 50px;
-    min-width: 78px;
-    text-align: center;
-    line-height: 50px;
-    color: black;
-}
-
-.sidebar__nav-links li a{
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-
-.sidebar__nav-links-home li a{
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-
-.sidebar__nav-links li a .link_name{
-    color: black;
-    font-size: 18px;
-}
-
-.sidebar__nav-links-home a i{
-    color: white;
-    font-size: 20px;
-}
-
-.sidebar__nav-links-home a i{
-    color: white;
-    font-size: 20px;
-}
-
-.link_name-home{
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color:white;
-    font-size: 20px;
-}
-
-.sidebar__nav-links-more
-{
-    padding-top: 250px ;
-}
-*/
 
 /* ----------------------------------- NAVBAR */
 
@@ -183,13 +105,13 @@ nav .container{
     justify-content: space-between;
 }
 
-nav .search-bar{
+.search-bar{
     background: var(--color-white);
     border-radius: var(--border-radius);
     padding: var(--search-padding);
 }
 
-nav .search-bar input[type="search"]{
+.search-bar input[type="search"]{
     background: transparent;
     width: 30vw;
     font-family: 'Poppins', sans-serif;
@@ -426,7 +348,7 @@ main .container .left .profile{
     border: 3px solid var(--color-primary);
 }
 
-.middle .create-post .btn-secondary{
+.btn-secondary{
     font-family: "Poppins", sans-serif;
     background: var(--color-secondary);
     font-size: small;
@@ -525,3 +447,156 @@ main .container .left .profile{
 .middle .liked-by p{
     margin-left: 0.5rem;
 }
+
+/*----------------------------- RIGHT ----------------------*/
+main .container .right{
+    height: max-content;
+    position: sticky;
+    top: var(--sticky-top-right);
+    bottom: 0;
+}
+
+.right .messages{
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+}
+
+.right .messages .heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.right .messages i{
+    font-size: 1.4rem;
+}
+
+.right .messages .search-bar{
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.right .messages .category{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.right .messages .category h6{
+    width: 100%;
+    text-align: center;
+    border-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.right .messages .category .active{
+    border-color: var(--color-dark);
+}
+
+.right .messages .message-requests{
+    color: var(--color-primary);
+}
+
+.right .messages .message{
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: start;
+}
+
+.right .message .profile-photo{
+    position: relative;
+    overflow: visible;
+}
+
+.right .profile-photo img{
+    border-radius: 50%;
+}
+
+.right ,.messages .message:last-child{
+    margin: 0;
+}
+
+.right .messages .message p{
+    font-size: 0.8rem;
+}
+
+.right .messages .message .profile-photo .active{
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    border: 3px solid var(--color-white);
+    background: var(--color-success);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+/*----------------------------- FRIEND REQUEST ----------------------*/
+.right .friend-requests{
+    margin-top: 1rem;
+}
+
+.right .friend-requests h4{
+    color: var(--color-gray);
+    margin: 1rem 0;
+}
+
+.right .request{
+    background: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-bottom: 0.7rem;
+}
+
+.right .request .info{
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.right .friend-requests .request .action .btn{
+    font-family: "Poppins", sans-serif;
+    font-size: small;
+    color: var(--color-dark);
+}
+
+.right .request .action{
+    display: flex;
+    gap: 1rem;
+}
+
+/* =======================================================
+            MEDIA QUERIES FOR SMALL LAPTOPS AND BIG TABLETS
+==========================================================
+*/ 
+
+@media screen and (max-width: 1200px){
+    .container{
+        width: 96%;
+    }
+
+    main .container{
+        grid-template-columns: 5rem auto 30vw;
+        gap: 1rem
+    }
+
+    .left{
+        width: 5rem;
+        z-index: 5;
+    }
+
+    main .container .left .profile{
+        display: none;
+    }
+
+    .sidebar h3{
+        display: none;
+    }
+
+    .left .btn{
+        display: none;
+    }
+} 
