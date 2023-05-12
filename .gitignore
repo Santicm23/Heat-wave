@@ -2,5 +2,3 @@ node_modules/
 dist/
 .env
 .vscode/
-uploads/sounds/
-uploads/images/
