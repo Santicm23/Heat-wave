@@ -114,16 +114,18 @@ CREATE TABLE messages (
 
 CREATE TABLE feed_posts (
     `id_feed_post` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(255) NOT NULL,
     `description` TEXT,
     `location` VARCHAR(255) DEFAULT NULL,
     `username` VARCHAR(255) NOT NULL,
     `likes` INT(11) NOT NULL DEFAULT 0,
     `active` TINYINT NOT NULL DEFAULT 1,
+    'id_song' BIGINT(20) UNSIGNED NOT NULL,
     `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (username) REFERENCES accounts(username)
-        ON DELETE CASCADE ON UPDATE CASCADE    
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_song) REFERENCES songs(id_song)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE comments (
@@ -147,24 +149,6 @@ CREATE TABLE chatXaccount (
     FOREIGN KEY (id_chat) REFERENCES chats(id_chat)
         ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (username) REFERENCES accounts(username)
-        ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE songXfeed_post (
-    `id_song` BIGINT(20) UNSIGNED,
-    `id_feed_post` BIGINT(20) UNSIGNED,
-    PRIMARY KEY (`id_song`, `id_feed_post`),
-    FOREIGN KEY (id_song) REFERENCES songs(id_song)
-        ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (id_feed_post) REFERENCES feed_posts(id_feed_post)
-        ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE feed_post_images (
-    `id_feed_post` BIGINT(20) UNSIGNED,
-    `image` VARCHAR(255),
-    PRIMARY KEY (`id_feed_post`, `image`),
-    FOREIGN KEY (id_feed_post) REFERENCES feed_posts(id_feed_post)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
