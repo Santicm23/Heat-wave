@@ -2,8 +2,9 @@
 import { Request, Response } from 'express';
 
 import FeedPost from '../models/feedPost';
-import { something_went_wrong } from '../helpers/json-errors';
+import { something_went_wrong, username_not_exists } from '../helpers/json-errors';
 import Song from '../models/song';
+import Account from '../models/account';
 
 
 export const getFeedPosts = async (req: Request, res: Response) => {
@@ -66,21 +67,19 @@ export const getFeedPost = async (req: Request, res: Response) => {
 
 export const postFeedPost = async(req: Request, res: Response) => {
 
-    const { body } = req;
+    const { username } = req.params
 
     try {
 
-        if (!body.id_song){
-            return res.status(404).json({msg: 'Porfavor seleccione una cancion'})
-        }
+        const account = await Account.findByPk(username);
+        
+        if (!account || !account.active)
+            return res.status(404).json(username_not_exists(username));
 
-        const song = (await Song.findByPk(body.id_song))
+        req.body.username = username;
+        
+        const feedPost = await FeedPost.create(req.body);
 
-        if (!song){
-            return res.status(404).json({msg: `No se encontro la cuenta con id ${body.id_song}`})
-        }
-
-            
         res.json({
             msg: 'Publicacion creada correctamente'
         });

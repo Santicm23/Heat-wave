@@ -148,7 +148,7 @@ export const putAccount = async(req: Request, res: Response) => {
         const account = await Account.findByPk(username);
         
         if (!account || !account.active)
-        return res.status(404).json(username_not_exists(username));
+            return res.status(404).json(username_not_exists(username));
         
         await account.update({
             name,

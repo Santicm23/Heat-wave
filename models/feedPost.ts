@@ -3,16 +3,16 @@ import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, 
 
 import db from '../db/mysql';
 import Account from './account';
+import Song from './song';
 
 class FeedPost extends Model<InferAttributes<FeedPost>, InferCreationAttributes<FeedPost>> {
-    declare id_feed_post: number;
-    declare name: string;
+    declare id_feed_post: CreationOptional<number>;
     declare description: CreationOptional<string | null>;
     declare location: CreationOptional<string | null>;
-    declare creation_date: Date;
-    declare likes: number;
+    declare likes: CreationOptional<number>;
     declare username: string;
     declare active: CreationOptional<boolean>;
+    declare id_song: number;
 }
 
 FeedPost.init({
@@ -20,9 +20,6 @@ FeedPost.init({
         type: DataTypes.BIGINT,
         primaryKey: true,
         autoIncrement: true
-    },
-    name: {
-        type: DataTypes.STRING
     },
     description: {
         type: DataTypes.STRING,
@@ -34,11 +31,9 @@ FeedPost.init({
         allowNull: true,
         defaultValue: null
     },
-    creation_date: {
-        type: DataTypes.DATE
-    },
     likes: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        defaultValue: 0
     },
     username: {
         type: DataTypes.STRING,
@@ -50,6 +45,13 @@ FeedPost.init({
     active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
+    },
+    id_song: {
+        type: DataTypes.BIGINT,
+        references: {
+            model: Song,
+            key: 'id_song'
+        }
     }
 },
 {
