@@ -14,9 +14,9 @@ router.get('/:username', getFeedPosts);
 router.get('/:username/:id', getFeedPost);
 
 router.post('/', [
-    validateJWT,
-    validateFileToUpload,
-    validateParams
+    // validateJWT,
+    // validateFileToUpload,
+    // validateParams
 ], postFeedPost);
 
 router.put('/:id', putFeedPost);

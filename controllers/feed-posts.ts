@@ -66,15 +66,12 @@ export const getFeedPost = async (req: Request, res: Response) => {
 export const postFeedPost = async(req: Request, res: Response) => {
 
     try {
-        // await uploadFile(soundFile, ['wav', 'mp3', 'flac'], 'sounds');
-
-        // if (imageFile) {
-        //     await uploadFile(imageFile as UploadedFile, ['png', 'jpg', 'jpeg', 'gif'], 'images');
-        // }
-    
+            
         res.json({
-            msg: 'Publicacion creada correctamente',
+            msg: 'Publicacion creada correctamente'
         });
+
+        console.log(req);
 
     } catch (error) {
         res.status(400).json({

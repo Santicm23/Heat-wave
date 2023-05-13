@@ -43,7 +43,7 @@ router.put('/image/:username', [
     validateJWT,
     validateUser,
     validateParams
-], addImageAccount)
+], addImageAccount);
 
 router.delete('/:username', [
     validateJWT,
