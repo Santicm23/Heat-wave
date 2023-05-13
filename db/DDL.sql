@@ -152,14 +152,6 @@ CREATE TABLE chatXaccount (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE feed_post_images (
-    `id_feed_post` BIGINT(20) UNSIGNED,
-    `image` VARCHAR(255),
-    PRIMARY KEY (`id_feed_post`, `image`),
-    FOREIGN KEY (id_feed_post) REFERENCES feed_posts(id_feed_post)
-        ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 CREATE TABLE hashtags (
     `id_hashtag` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     `hashtag` VARCHAR(255) NOT NULL,
