@@ -1,7 +1,7 @@
 
 import { Router } from 'express';
 
-import { deleteFeedPost, getFeedPost, getFeedPosts, postFeedPost, putFeedPost } from '../controllers/feed-posts';
+import { deleteFeedPost, getFeedPost, getFeedPosts, getImageFeedPost, postFeedPost, putFeedPost } from '../controllers/feed-posts';
 import { validateFileToUpload } from '../middlewares/validate-files';
 import validateJWT from '../middlewares/validate-jwt';
 import validateParams from '../middlewares/validate-params';
@@ -13,11 +13,13 @@ const router = Router();
 
 router.get('/:username', getFeedPosts);
 
-router.get('/:username/:id', getFeedPost);
+router.get('/image/:id_feed_post', getImageFeedPost);
 
-router.post('/:username', [
+router.get('/:username/:id_feed_post', getFeedPost); //ToDo corregir validacion id existente 
+
+router.post('/:username/:id_song', [
     validateJWT,
-    validateFileToUpload,
+    // validateFileToUpload,
     check('id_song', 'Se debe añadir una canción (id numérico)').notEmpty().isNumeric(),
     check('id_song').custom(songExists),
     validateParams

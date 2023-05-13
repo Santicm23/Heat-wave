@@ -1,14 +1,11 @@
 
 
 DROP TABLE feed_post_images;
-DROP TABLE accountXplaylist;
-DROP TABLE songXfeed_post;
 DROP TABLE chatXaccount;
 DROP TABLE comments;
 DROP TABLE feed_posts;
 DROP TABLE messages;
 DROP TABLE dailys;
-DROP TABLE playlists;
 DROP TABLE states;
 DROP TABLE visibilities;
 DROP TABLE chats;
@@ -119,7 +116,7 @@ CREATE TABLE feed_posts (
     `username` VARCHAR(255) NOT NULL,
     `likes` INT(11) NOT NULL DEFAULT 0,
     `active` TINYINT NOT NULL DEFAULT 1,
-    'id_song' BIGINT(20) UNSIGNED NOT NULL,
+    `id_song` BIGINT(20) UNSIGNED NOT NULL,
     `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (username) REFERENCES accounts(username)
@@ -173,14 +170,14 @@ CREATE TABLE feed_postXhashtags (
 
 -- inserts:
 --Roles Cuenta
-INSERT INTO roles(`name`) values('ADMIN');
-INSERT INTO roles(`name`) values('USER');
+INSERT INTO roles(`name`) values ('ADMIN');
+INSERT INTO roles(`name`) values ('USER');
 
 --Estado mensajes
-INSERT INTO states('state') values ('SENT');
-INSERT INTO states('state') values ('RECIEVED');
-INSERT INTO states('state') values ('SEEN');
+INSERT INTO states(`name`) values ('SENT');
+INSERT INTO states(`name`) values ('RECIEVED');
+INSERT INTO states(`name`) values ('SEEN');
 
 --Visibilidad dailys
-INSERT INTO visibilities('visibility') values ('ALL');
-INSERT INTO visibilities('visibility') values ('BEST_FRIENDS');
+INSERT INTO visibilities(`name`) values ('ALL');
+INSERT INTO visibilities(`name`) values ('BEST_FRIENDS');

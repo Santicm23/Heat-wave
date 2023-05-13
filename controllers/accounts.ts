@@ -173,7 +173,7 @@ export const addImageAccount = async(req: Request, res: Response) => {
 
     const account = await Account.findByPk(username);
 
-    if (!account)
+    if (!account || !account.active)
         return res.status(404).json({
             msg: `La cuenta con nombre de usuario '${username}' no existe`
         });

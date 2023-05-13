@@ -13,6 +13,7 @@ class FeedPost extends Model<InferAttributes<FeedPost>, InferCreationAttributes<
     declare username: string;
     declare active: CreationOptional<boolean>;
     declare id_song: number;
+    declare image: CreationOptional<string | null>;
 }
 
 FeedPost.init({
@@ -52,6 +53,10 @@ FeedPost.init({
             model: Song,
             key: 'id_song'
         }
+    },
+    image: {
+        type: DataTypes.STRING,
+        defaultValue: null
     }
 },
 {
