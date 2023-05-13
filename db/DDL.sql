@@ -114,7 +114,6 @@ CREATE TABLE messages (
 
 CREATE TABLE feed_posts (
     `id_feed_post` BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(255) NOT NULL,
     `description` TEXT,
     `location` VARCHAR(255) DEFAULT NULL,
     `username` VARCHAR(255) NOT NULL,
