@@ -28,21 +28,21 @@ fetch(`${url}/auth/`, {
     window.location = 'index.html';
 });
 
-fetch(`${url}/songs/track/27`)
-    .then(resp => {
-        if (resp.ok) {
-            return resp.blob();
-        } else {
-            throw new Error('Error al descargar el sonido de la publicación');
-        }
-    })
-    .then(blob => {
-        console.log('playing...');
-        const audioUrl = URL.createObjectURL(blob);
-        const audioPlayer = new Audio(audioUrl);
-        audioPlayer.play();
-    })
-    .catch(console.error);
+// fetch(`${url}/songs/track/27`)
+//     .then(resp => {
+//         if (resp.ok) {
+//             return resp.blob();
+//         } else {
+//             throw new Error('Error al descargar el sonido de la publicación');
+//         }
+//     })
+//     .then(blob => {
+//         console.log('playing...');
+//         const audioUrl = URL.createObjectURL(blob);
+//         const audioPlayer = new Audio(audioUrl);
+//         audioPlayer.play();
+//     })
+//     .catch(console.error);
 
 
 // Código para que funcionen cositas solo de front
