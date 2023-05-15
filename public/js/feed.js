@@ -6,6 +6,10 @@ const name = document.getElementById('name');
 
 let sesionToken = localStorage.getItem('token');
 
+const profilePictures = document.querySelectorAll('.foto-perfil');
+
+let account;
+
 fetch(`${url}/auth/`, {
     headers: {
         'x-token': sesionToken
@@ -20,13 +24,32 @@ fetch(`${url}/auth/`, {
 })
 .then(data => {
     sesionToken = data.token;
+    account = data.account;
     username.textContent = `@${data.account.username}`;
     name.textContent = data.account.name;
+
+    fetch(`${url}/accounts/image/${account.username}`)
+    .then(resp => {
+        if (resp.ok) {
+            return resp.blob();
+        } else {
+            throw new Error('Error en el servidor');
+        }
+    })
+    .then(blob => {
+        const imgUrl = URL.createObjectURL(blob);
+        console.log(profilePictures);
+        profilePictures.forEach(img => img.src = imgUrl);
+    })
+    .catch(err => {
+        console.error(err);
+    });
 })
 .catch(err => {
     console.error(err);
     window.location = 'index.html';
 });
+
 
 // fetch(`${url}/songs/track/27`)
 //     .then(resp => {
