@@ -37,6 +37,7 @@ body
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
     overflow: scroll;
+    overflow-x: hidden;
 }
 a
 {
@@ -70,8 +71,8 @@ a
 {
     
     /*background-color: blue; */
-    min-width: 20vh;
-    max-width: 30vh;
+    min-width: 30vh;
+    max-width: 40vh;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -149,12 +150,12 @@ a
     flex-direction: column; 
     /* background-color: aqua;  */
   }
-
-.header__wrapper .right__col .nav-profile ul {
+  
+  .header__wrapper .right__col .nav-profile ul {
     display: flex;
+    margin: 0 20px;
+    padding: 0 30px;
     list-style-type: none; 
-    margin: 0;
-    padding: 0;
 } 
 
 .header__wrapper .right__col .nav-profile ul button {
@@ -252,3 +253,15 @@ a
   }
   
   
+
+  main .container{
+    display: grid;
+    grid-template-columns: 18vw auto ;
+    column-gap: 5rem;
+    position: relative;
+}
+main .container .right{
+  display: none;
+}
+
+

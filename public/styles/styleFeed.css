@@ -43,7 +43,7 @@ body{
 
 /*----------------------------------- GENERAL STYLE */
 .container{
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -143,7 +143,7 @@ main{
 main .container{
     display: grid;
     grid-template-columns: 18vw auto 20vw;
-    column-gap: 2rem;
+    column-gap: 3rem;
     position: relative;
 }
 
@@ -152,6 +152,8 @@ main .container .left{
     height: max-content;
     position: sticky;
     top:var(--sticky-top-left);
+    
+    
 }
 
 main .container .left .profile{
@@ -600,3 +602,148 @@ main .container .right{
         display: none;
     }
 } 
+
+
+.popup {
+    position: fixed;
+    top:50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    top:-200%;
+    
+  }
+  .popup.active{
+    opacity: 1;
+    top: 50%;
+    transform:translate(-50%,-50%) scale(1);
+    
+}
+
+.btn-cerrar-popup{
+    position: fixed;
+    font-size: 24px;
+    color: #838389;
+    top: 0vh;
+    left: 66vh;
+}
+
+.btn-cerrar-popup:hover{
+    color:black;
+}
+  
+  .wrapper {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 70vh;
+    
+    background: #fff;
+    border-radius: 5px;
+    padding: 30px;
+    transition:500ms ease-in-out;
+    box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.05);
+    transform:translate(-50%,-50%) scale(0.1);
+  }
+  .wrapper.active{
+    top: 50%;
+    transform:translate(-50%,-50%) scale(1);
+    transition: transform 300ms cubic-bezier(0.30,0.89,0.43,1.19);
+}
+  
+  .wrapper header{
+    color: var(--color-primary);
+    font-size: 27px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .wrapper form{
+    height: 167px;
+    display: flex;
+    cursor: pointer;
+    margin: 30px 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 2px dashed var(--color-secondary);
+  }
+  form :where(i, p){
+    color: var(--color-secondary);
+  }
+  form i{
+    font-size: 50px;
+  }
+  form p{
+    margin-top: 15px;
+    font-size: 16px;
+  }
+  section .row{
+    margin-bottom: 10px;
+    background: #E9F0FF;
+    list-style: none;
+    padding: 15px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  section .row i{
+    color: var(--color-secondary);
+    font-size: 30px;
+  }
+  section .details span{
+    font-size: 14px;
+  }
+  .progress-area .row .content{
+    width: 100%;
+    margin-left: 15px;
+  }
+  .progress-area .details{
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+    justify-content: space-between;
+  }
+  .progress-area .content .progress-bar{
+    height: 6px;
+    width: 100%;
+    margin-bottom: 4px;
+    background: #fff;
+    border-radius: 30px;
+  }
+  .content .progress-bar .progress{
+    height: 100%;
+    width: 0%;
+    background: var(--color-secondary);
+    border-radius: inherit;
+  } 
+    
+  .uploaded-area{
+    max-height: 232px;
+    overflow-y: scroll;
+  }
+  .uploaded-area.onprogress{
+    max-height: 150px;
+  }
+  .uploaded-area::-webkit-scrollbar{
+    width: 0px;
+  }
+  .uploaded-area .row .content{
+    display: flex;
+    align-items: center;
+  }
+  .uploaded-area .row .details{
+    display: flex;
+    margin-left: 15px;
+    flex-direction: column;
+  }
+  .uploaded-area .row .details .size{
+    color: #404040;
+    font-size: 11px;
+  }
+  .uploaded-area i.fa-check{
+    font-size: 16px;
+  }

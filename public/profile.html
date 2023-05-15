@@ -131,16 +131,21 @@
                     <a class="menu-item" href="profile.html">
                         <span><i class='bx bx-user' ></i></span><h3>Profile</h3>
                     </a>
-                    <a class="menu-item">
-                        <span><i class='bx bx-plus' ></i></span><h3>Create</h3>
-                    </a>
+                    <a class="menu-item" onclick="togglePopup()">
+                        <span><i class='bx bx-plus'></i></span>
+                        <h3>Create</h3>
+                      </a>
+                      
+                      
                 </div>
+                
                 <!--------------------- END OF SIDE BAR - MORE ------------------->
                 <label for="settings" class="btn btn-primary">More</label>
             </div>
             <!------------------- End of LEFT ----------------------->
             <!-------------------- Middle (feed) -------------------->
             <div class="middle">
+                
                 <div class="header__wrapper">
                     <!-- <div class="cols__container"> -->
                         <div class="top">
@@ -269,51 +274,21 @@
                 <!-------------------- END OF MESSAGES -------------------->
 
                 <!-------------------- FRIEND REQUESTS -------------------->
-                <div class="friend-requests">
-                    <h4>Requests</h4>
-                    <div class="request">
-                        <div class="info">
-                            <div class="profile-photo">
-                                <img src="./styles/images/profile-3.jpg" alt="">
-                            </div>
-                            <div>
-                                <h5>Hajia Bintu</h5>
-                                <p class="text-muted">
-                                    8 mutual friends
-                                </p>
-                            </div>
-                        </div>
-                        <div class="action">
-                            <button class="btn btn-secondary">
-                                Accept
-                            </button>
-                            <button class="btn">
-                                Decline
-                            </button>
-                        </div>
-                    </div>
-                    <div class="request">
-                        <div class="info">
-                            <div class="profile-photo">
-                                <img src="./styles/images/profile-12.jpg">
-                            </div>
-                            <div>
-                                <h5>Mira Mora</h5>
-                                <p class="text-muted">
-                                    8 mutual friends
-                                </p>
-                            </div>
-                        </div>
-                        <div class="action">
-                            <button class="btn btn-secondary">
-                                Accept
-                            </button>
-                            <button class="btn">
-                                Decline
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                
+            </div>
+        </div>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        <div class="popup" id="popup">
+            <div class="wrapper">
+                <header>File Uploader JavaScript</header>
+                <a href="#" class="btn-cerrar-popup"><i class="fas fa-times" onclick="cerrarPopup()"></i></a>
+                <form action="#">
+                    <input class="file-input" type="file" name="file" hidden>
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Browse File to Upload</p>
+                </form>
+                <section class="progress-area"></section>
+                <section class="uploaded-area"></section>
             </div>
         </div>
     </main>
