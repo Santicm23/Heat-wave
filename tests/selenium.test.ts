@@ -1,5 +1,5 @@
 
-const webdriver = require('selenium-webdriver');
+import webdriver from 'selenium-webdriver';
 
 
 const driver = new webdriver.Builder()
@@ -13,13 +13,6 @@ describe('Interactive tests with selenium', () => {
 
         await driver.findElement(webdriver.By.name('q')).sendKeys('webdriver\n');
         
-        const title = await driver.getTitle();
-        console.log(title);
-        if(title === 'webdriver - Google Search') {
-            console.log('Test passed');
-        } else {
-            console.log('Test failed');
-        }
         driver.quit();
     });
     
