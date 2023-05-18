@@ -27,7 +27,7 @@ describe('Interactive tests with selenium', () => {
         
         expect(await driver.getCurrentUrl()).not.toBe(first_window);
 
-        await driver.sleep(1000);
+        await driver.sleep(2000);
         
         await driver.quit();
     });
