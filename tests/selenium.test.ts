@@ -23,11 +23,9 @@ describe('Interactive tests with selenium', () => {
         const btnLogin = await driver.findElement(webdriver.By.id('btnLogin'));
         await btnLogin.click();
 
-        await driver.sleep(1000);
+        await driver.sleep(2000);
         
         expect(await driver.getCurrentUrl()).not.toBe(first_window);
-
-        await driver.sleep(2000);
         
         await driver.quit();
     });
