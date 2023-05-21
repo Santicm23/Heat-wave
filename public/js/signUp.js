@@ -11,6 +11,22 @@ const email = document.getElementById('email');
 const username = document.getElementById('username');
 const password = document.getElementById('pass');
 
+/! --------------------------------------------Alertas-------------------------------------------------------!/
+
+const alerta1=(text)=>{ 
+    
+    Swal.fire({
+        title:'¡Ups!',
+        text,
+        icon:'error',
+        backdrop:true,
+        background:'#ffefd8',
+        showCloseButton:true
+    })
+}
+
+/! -------------------------------------------------------------------------------------------------------------!/
+
 
 function animatelogin() {
     setTimeout(function() {
@@ -21,7 +37,7 @@ function animatelogin() {
 
 animatelogin();
 
-btnSignUp.addEventListener('click', () => {
+btnSignUp.addEventListener('click', async() => {
     const formData = {
         name: name.value,
         email: email.value,
@@ -36,16 +52,34 @@ btnSignUp.addEventListener('click', () => {
         },
         body: JSON.stringify(formData)
     })
-    .then(resp => {
+    .then(async(resp) => {
         if (resp.ok) {
             return resp.json();
         } else {
-            throw new Error(resp.json());
+            const { errors } = await resp.json();
+            throw errors[0].msg;
         }
     })
     .then(({ msg }) => {
         console.log(msg);
         window.location = 'index.html'; // TODO: redireccionar a la pantalla de inicio
     })
-    .catch((obj) => console.error(obj));
+    .catch(alerta1);
 });
+
+
+function prenderAros() {
+    const aros = document.querySelectorAll('.waves');
+
+    aros.forEach(element => {
+        element.classList.add('active');
+    });
+    setTimeout(() => {
+        aros.forEach(element => {
+            element.classList.remove('active');
+        });
+    }, 2000);
+}
+
+
+setInterval(prenderAros,15000);

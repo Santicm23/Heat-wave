@@ -12,6 +12,26 @@ import FeedPost from '../models/feedPost';
 import { something_went_wrong, username_not_exists } from '../helpers/json-errors';
 
 
+export const getAllFeedPosts = async (req: Request, res: Response) => {
+
+    try {
+
+        const feedposts = await FeedPost.findAll();
+
+        return res.json({
+            msg: `${feedposts.length} posts encontrados`,
+            feedposts
+        });
+
+
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json(something_went_wrong(error));
+    }
+
+}
+
 export const getFeedPosts = async (req: Request, res: Response) => {
     const { username } = req.params;
 

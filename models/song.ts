@@ -12,6 +12,8 @@ class Song extends Model<InferAttributes<Song>, InferCreationAttributes<Song>> {
     declare duration: number; //Revisar esto (Duration)
     declare sound: string;
     declare image: CreationOptional<string | null>;
+
+    
 }
 
 Song.init({

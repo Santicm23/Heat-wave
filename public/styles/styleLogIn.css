@@ -137,11 +137,11 @@ body {
 		transform: rotate(0deg);
 	}
 }
-/*
-.container:hover i {
-	border: 6px solid var(--clr);
-	filter: drop-shadow(0 0 20px var(--clr));
-} */
+
+.waves.active {
+	border: 4px solid var(--clr);
+}
+
 .forms {
 	position: relative;
 	width: 250px;
