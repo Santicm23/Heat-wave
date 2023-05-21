@@ -8,7 +8,6 @@ import { uniqueEmail, uniqueUsername } from '../helpers/db-validators';
 import validateJWT from '../middlewares/validate-jwt';
 import { validateUser } from '../middlewares/validate-permissions';
 import { addImageAccount } from '../controllers/accounts';
-import { validateFileToUpload } from '../middlewares/validate-files';
 
 
 const router = Router();
@@ -20,12 +19,12 @@ router.get('/:username', getAccount);
 router.get('/image/:username', getImageAccount);
 
 router.post('/', [
-    check('username', 'El nombre de usuario no es válido').notEmpty().trim().matches(/[\w_]+/),
-    check('email', 'El correo no es válido').notEmpty().trim().isEmail(),
-    check('password', 'La contraseña debe ser una cadena de caracteres').notEmpty().trim().isString(),
     check('name', 'El nombre completo no es válido').notEmpty().trim().matches(/^[ a-zA-ZÀ-ÿ]+$/),
-    check('username').custom(uniqueUsername),
+    check('email', 'El correo no es válido').notEmpty().trim().isEmail(),
+    check('username', 'El nombre de usuario no es válido').notEmpty().trim().matches(/[\w_]+/),
+    check('password', 'La contraseña debe ser una cadena de caracteres').notEmpty().trim().isString(),
     check('email').custom(uniqueEmail),
+    check('username').custom(uniqueUsername),
     check('password', 'La contraseña debe tener 6 letras o más').isLength({min: 6}), // .isStrongPassword(),
     validateParams 
 ], postAccount);
