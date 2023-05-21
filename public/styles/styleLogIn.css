@@ -139,7 +139,7 @@ body {
 }
 
 .waves.active {
-	border: 6px solid var(--clr);
+	border: 4px solid var(--clr);
 }
 
 .forms {

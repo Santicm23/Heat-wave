@@ -66,3 +66,20 @@ btnSignUp.addEventListener('click', async() => {
     })
     .catch(alerta1);
 });
+
+
+function prenderaros() {
+    const aros = document.querySelectorAll('.waves');
+
+    aros.forEach(element => {
+        element.classList.add('active');
+    });
+    setTimeout(() => {
+        aros.forEach(element => {
+            element.classList.remove('active');
+        });
+    }, 2000);
+}
+
+
+setInterval(prenderaros,15000);
