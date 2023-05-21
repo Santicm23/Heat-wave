@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 
 :root{
+    --color-prueba: #ffefd8;
     --color-white: hsl(252, 30%, 100%);
     --color-light: hsl(40, 100%, 97%);
     --color-gray: hsl(240, 3%, 71%);
