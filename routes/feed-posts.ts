@@ -1,7 +1,7 @@
 
 import { Router } from 'express';
 
-import { deleteFeedPost, getFeedPost, getFeedPosts, getImageFeedPost, postFeedPost, putFeedPost } from '../controllers/feed-posts';
+import { deleteFeedPost, getFeedPost, getFeedPosts, getImageFeedPost, postFeedPost, putFeedPost, getAllFeedPosts } from '../controllers/feed-posts';
 import { validateFileToUpload } from '../middlewares/validate-files';
 import validateJWT from '../middlewares/validate-jwt';
 import validateParams from '../middlewares/validate-params';
@@ -10,6 +10,8 @@ import { songExists } from '../helpers/db-validators';
 
 
 const router = Router();
+
+router.get('/', getAllFeedPosts);
 
 router.get('/:username', getFeedPosts);
 
