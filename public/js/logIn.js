@@ -108,4 +108,21 @@ function handleCredentialResponse(response) {
     .catch((error)=>alerta1(error.message));
 }
 
+function prenderaros(){
+    const aros=document.querySelectorAll(".waves");
+
+    aros.forEach(element => {
+        element.classList.add("active");
+    });
+    setTimeout(() => {
+        aros.forEach(element => {
+            element.classList.remove("active");
+        });
+    }, 2000);
+}
+
+
+setInterval(prenderaros,10000);
+
+
 
