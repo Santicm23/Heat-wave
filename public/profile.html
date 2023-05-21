@@ -134,7 +134,7 @@
                     <a class="menu-item" onclick="togglePopup()">
                         <span><i class='bx bx-plus'></i></span>
                         <h3>Create</h3>
-                      </a>
+                    </a>
                       
                       
                 </div>
@@ -277,20 +277,36 @@
                 
             </div>
         </div>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <a href="#" class="btn-cerrar-popup" onclick="cerrarPopup()"><i class="fas fa-times"></i></a>
         <div class="popup" id="popup">
             <div class="wrapper">
-                <header>File Uploader JavaScript</header>
-                <a href="#" class="btn-cerrar-popup"><i class="fas fa-times" onclick="cerrarPopup()"></i></a>
-                <form action="#">
-                    <input class="file-input" type="file" name="file" hidden>
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <p>Browse File to Upload</p>
-                </form>
-                <section class="progress-area"></section>
-                <section class="uploaded-area"></section>
+                <div class="header-area">
+                    <header>File Uploader JavaScript</header>
+                </div>
+                <div class="middle-area">
+                    <form action="#" id="uploadForm">
+                        <div id="form-content">
+                            <input id="fileUpload" class="file-input" type="file" name="file" accept=".png,.jpg,.jpeg" hidden>
+                            <label for="fileUpload"><i class="fas fa-cloud-upload-alt"></i>
+                            <p>Browse File to Upload</p></label>
+                        </div>
+                    </form>
+                </div>
+                <div class="footer-area">
+                    <select name="select">
+                        <option value="value1">Value 1</option>
+                        <option value="value2" selected>Value 2</option>
+                        <option value="value3">Value 3</option>
+                    </select>
+                    <button>Publicar</button>
+                </div>
             </div>
         </div>
+
+
+        
+        
     </main>
     <script src="./js/profile.js"></script>
     <script src="./js/feed.js"></script>

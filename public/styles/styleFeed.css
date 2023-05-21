@@ -606,144 +606,119 @@ main .container .right{
 
 .popup {
     position: fixed;
-    top:50%;
+    top: 50%;
     left: 50%;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    top:-200%;
-    
-  }
-  .popup.active{
-    opacity: 1;
-    top: 50%;
-    transform:translate(-50%,-50%) scale(1);
-    
-}
-
-.btn-cerrar-popup{
-    position: fixed;
-    font-size: 24px;
-    color: #838389;
-    top: 0vh;
-    left: 66vh;
-}
-
-.btn-cerrar-popup:hover{
-    color:black;
+    transform: translateY(-200%);
 }
   
-  .wrapper {
+.popup.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+  
+.btn-cerrar-popup {
+    font-size: 24px;
+    color: #cfcfd6;
     position: absolute;
-    transform: translate(-50%, -50%);
+    top: 10px;
+    right: 30px;
+    cursor: pointer;
+    z-index: 10;
+    display: none;
+    transition: 300ms ease-in-out;
+    opacity: 0;
+}
+  
+.btn-cerrar-popup:hover {
+    color: black;
+}
+
+.btn-cerrar-popup.active
+{
+    opacity: 1;
+    display: block;
+}
+
+.wrapper {
+    position: absolute;
     top: 50%;
     left: 50%;
     width: 70vh;
-    
     background: #fff;
     border-radius: 5px;
-    padding: 30px;
-    transition:500ms ease-in-out;
+    transition: 500ms ease-in-out;
     box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.05);
-    transform:translate(-50%,-50%) scale(0.1);
-  }
-  .wrapper.active{
-    top: 50%;
-    transform:translate(-50%,-50%) scale(1);
-    transition: transform 300ms cubic-bezier(0.30,0.89,0.43,1.19);
+    transform: translate(-50%, -50%) scale(0.1);
+}
+
+.wrapper.active {
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 300ms cubic-bezier(0.30, 0.89, 0.43, 1.19);
 }
   
-  .wrapper header{
+.header-area {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: center;
+}
+
+.wrapper header {
     color: var(--color-primary);
     font-size: 27px;
     font-weight: 600;
     text-align: center;
-  }
-  .wrapper form{
-    height: 167px;
+}
+
+.wrapper form {
+    height: 45vh;
     display: flex;
     cursor: pointer;
-    margin: 30px 0;
+    margin: 30px 0 0 0;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    border-radius: 5px;
-    border: 2px dashed var(--color-secondary);
-  }
-  form :where(i, p){
+    
+}
+#form-content.active {
+    display: none;
+}
+  
+form :where(i, p) {
     color: var(--color-secondary);
-  }
-  form i{
+}
+
+form i {
     font-size: 50px;
-  }
-  form p{
+    display: block;
+    text-align: center;
+} 
+form p {
     margin-top: 15px;
     font-size: 16px;
-  }
-  section .row{
-    margin-bottom: 10px;
-    background: #E9F0FF;
-    list-style: none;
-    padding: 15px 20px;
-    border-radius: 5px;
+}
+  
+.hidden {
+    display: none;
+}
+
+.footer-area {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  section .row i{
-    color: var(--color-secondary);
-    font-size: 30px;
-  }
-  section .details span{
-    font-size: 14px;
-  }
-  .progress-area .row .content{
-    width: 100%;
-    margin-left: 15px;
-  }
-  .progress-area .details{
-    display: flex;
-    align-items: center;
-    margin-bottom: 7px;
-    justify-content: space-between;
-  }
-  .progress-area .content .progress-bar{
-    height: 6px;
-    width: 100%;
-    margin-bottom: 4px;
-    background: #fff;
-    border-radius: 30px;
-  }
-  .content .progress-bar .progress{
-    height: 100%;
-    width: 0%;
-    background: var(--color-secondary);
-    border-radius: inherit;
-  } 
+    justify-content: space-between;  
+    padding: 10px;  
+    height: 7vh;
+}
+
+ .middle-area {
     
-  .uploaded-area{
-    max-height: 232px;
-    overflow-y: scroll;
-  }
-  .uploaded-area.onprogress{
-    max-height: 150px;
-  }
-  .uploaded-area::-webkit-scrollbar{
-    width: 0px;
-  }
-  .uploaded-area .row .content{
-    display: flex;
-    align-items: center;
-  }
-  .uploaded-area .row .details{
-    display: flex;
-    margin-left: 15px;
-    flex-direction: column;
-  }
-  .uploaded-area .row .details .size{
-    color: #404040;
-    font-size: 11px;
-  }
-  .uploaded-area i.fa-check{
-    font-size: 16px;
-  }
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; 
+    
+} 
+
+  
+  
+  

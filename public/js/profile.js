@@ -44,15 +44,8 @@ function checkEmptyGrid() {
 checkEmptyGrid();
 
 
-
-const form = document.querySelector("form"),
-fileInput = document.querySelector(".file-input"),
-progressArea = document.querySelector(".progress-area"),
-uploadedArea = document.querySelector(".uploaded-area");
-
-form.addEventListener("click", () =>{
-  fileInput.click();
-});
+const formContent = document.querySelector("#form-content"),
+      fileInput = document.querySelector(".file-input");
 
 fileInput.onchange = ({target})=>{
   let file = target.files[0];
@@ -62,64 +55,55 @@ fileInput.onchange = ({target})=>{
       let splitName = fileName.split('.');
       fileName = splitName[0].substring(0, 13) + "... ." + splitName[1];
     }
-    uploadFile(fileName);
+    //uploadFile(file);
+
+    // Vista previa de la imagen seleccionada
+    let reader = new FileReader();
+    reader.onload = function (e) {
+      // Modifica el CSS de tu pop-up para incluir la imagen seleccionada como fondo
+      let middleArea = document.querySelector('.middle-area');
+      middleArea.style.backgroundImage = 'url(' + e.target.result + ')';
+    }
+    // Lee el archivo de imagen
+    reader.readAsDataURL(file);
+
+    // Desactiva el input del archivo
+    fileInput.disabled = true;
+
+    // Oculta el contenido del formulario
+    formContent.classList.add('active');
   }
 }
 
-function uploadFile(name){
-  let xhr = new XMLHttpRequest();
-  //ACA SE PONE EL FETCH
-  xhr.open("POST", "");
-  xhr.upload.addEventListener("progress", ({loaded, total}) =>{
-    let fileLoaded = Math.floor((loaded / total) * 100);
-    let fileTotal = Math.floor(total / 1000);
-    let fileSize;
-    (fileTotal < 1024) ? fileSize = fileTotal + " KB" : fileSize = (loaded / (1024*1024)).toFixed(2) + " MB";
-    let progressHTML = `<li class="row">
-                          <i class="fas fa-file-alt"></i>
-                          <div class="content">
-                            <div class="details">
-                              <span class="name">${name} • Uploading</span>
-                              <span class="percent">${fileLoaded}%</span>
-                            </div>
-                            <div class="progress-bar">
-                              <div class="progress" style="width: ${fileLoaded}%"></div>
-                            </div>
-                          </div>
-                        </li>`;
-    uploadedArea.classList.add("onprogress");
-    progressArea.innerHTML = progressHTML;
-    if(loaded == total){
-      progressArea.innerHTML = "";
-      let uploadedHTML = `<li class="row">
-                            <div class="content upload">
-                              <i class="fas fa-file-alt"></i>
-                              <div class="details">
-                                <span class="name">${name} • Uploaded</span>
-                                <span class="size">${fileSize}</span>
-                              </div>
-                            </div>
-                            <i class="fas fa-check"></i>
-                          </li>`;
-      uploadedArea.classList.remove("onprogress");
-      uploadedArea.insertAdjacentHTML("afterbegin", uploadedHTML);
-    }
-  });
-  let data = new FormData(form);
-  xhr.send(data);
+function cerrarPopup(){
+  // Reinicia el input del archivo al cerrar el popup
+  fileInput.value = "";
+  fileInput.disabled = false;
+
+  // Limpia la imagen de fondo
+  let middleArea = document.querySelector('.middle-area');
+  middleArea.style.backgroundImage = '';
+  let popup = document.getElementById('popup');
+  let wrapper = document.querySelector('.wrapper');
+  popup.classList.remove('active');
+  wrapper.classList.remove('active');
+  let btnclose=document.querySelector('.btn-cerrar-popup');
+  btnclose.classList.remove('active');
+
+  // Muestra el contenido del formulario
+  formContent.classList.remove('active');
 }
 
 function togglePopup() {
   let popup = document.querySelector('.popup');
-  let wrapper=document.querySelector('.wrapper');
-    popup.classList.add('active');
-    wrapper.classList.add('active');
-    
+  let wrapper = document.querySelector('.wrapper');
+  popup.classList.add('active');
+  wrapper.classList.add('active');
+  let btnclose=document.querySelector('.btn-cerrar-popup');
+  btnclose.classList.add('active');
 }
-function cerrarPopup() {
-  let popup = document.getElementById('popup');
-  popup.classList.remove('active');
-  let wrapper=document.querySelector('.wrapper');
-  wrapper.classList.remove('active');
-}
+
+
+
+
 
