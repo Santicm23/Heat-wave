@@ -21,11 +21,11 @@ router.get('/image/:username', getImageAccount);
 
 router.post('/', [
     check('username', 'El nombre de usuario no es válido').notEmpty().trim().matches(/[\w_]+/),
-    check('username').custom(uniqueUsername),
-    check('name', 'El nombre completo no es válido').notEmpty().trim().matches(/^[ a-zA-ZÀ-ÿ]+$/),
     check('email', 'El correo no es válido').notEmpty().trim().isEmail(),
-    check('email').custom(uniqueEmail),
     check('password', 'La contraseña debe ser una cadena de caracteres').notEmpty().trim().isString(),
+    check('name', 'El nombre completo no es válido').notEmpty().trim().matches(/^[ a-zA-ZÀ-ÿ]+$/),
+    check('username').custom(uniqueUsername),
+    check('email').custom(uniqueEmail),
     check('password', 'La contraseña debe tener 6 letras o más').isLength({min: 6}), // .isStrongPassword(),
     validateParams 
 ], postAccount);

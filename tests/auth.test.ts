@@ -8,12 +8,14 @@ const driver = new webdriver.Builder()
 
 jest.setTimeout(10000);
 
-describe('Interactive tests with selenium', () => {
+describe('Authentication tests', () => {
     
-    test('Selenium should be able to login', async() => {
-        await driver.get('http://localhost:8080');
+    test('Users should be able to login and be redirected to the feed page. (frontend)', async() => {
+        const url = 'http://localhost:8080';
 
-        const first_window = await driver.getCurrentUrl();
+        await driver.get(url);
+
+        // const first_window = await driver.getCurrentUrl();
 
         const name = await driver.findElement(webdriver.By.id('un-email'));
         name.sendKeys('username');
@@ -23,9 +25,9 @@ describe('Interactive tests with selenium', () => {
         const btnLogin = await driver.findElement(webdriver.By.id('btnLogin'));
         await btnLogin.click();
 
-        await driver.sleep(2000);
+        await driver.sleep(3000);
         
-        expect(await driver.getCurrentUrl()).not.toBe(first_window);
+        expect(await driver.getCurrentUrl()).toBe(`${url}/feed.html`);
         
         await driver.quit();
     });
