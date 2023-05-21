@@ -16,6 +16,21 @@ function animatelogin() {
 }
 animatelogin();
 
+/! --------------------------------------------Alertas-------------------------------------------------------!/
+
+const alerta1=(text)=>{ 
+    
+    Swal.fire({
+        title:'¡Ups!',
+        text,
+        icon:'error',
+        backdrop:true,
+        background:'#ffefd8',
+        showCloseButton:true
+    })
+}
+
+
 /! --------------------------------------------Autentificacion Con google-------------------------------------------------------!/
 // Inicializa Google Identity Services al cargar la página.
 window.onload = () => {
@@ -64,7 +79,7 @@ btnLogin.addEventListener('click', event => {
         localStorage.setItem('token', token);
         window.location = 'feed.html'; // TODO: redireccionar a la pantalla de inicio
     })
-    .catch(console.error);
+    .catch((error)=>alerta1(error.message));
 
 });
   
@@ -90,5 +105,7 @@ function handleCredentialResponse(response) {
         localStorage.setItem('token', token);
         window.location = 'feed.html'; // TODO: redireccionar a la pantalla de inicio
     })
-    .catch(console.error);
+    .catch((error)=>alerta1(error.message));
 }
+
+
