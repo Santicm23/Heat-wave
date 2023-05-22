@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
       
       if (usernameElement) {
-        usernameElement.textContent = data.account.username;
+        usernameElement.textContent = `@${data.account.username}`;
       }
       
       if (h2Element) {
