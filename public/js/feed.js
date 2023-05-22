@@ -1,4 +1,4 @@
-const url = `http://${window.location.host}`;
+let url = `http://${window.location.host}`;
 
 const feeds = document.querySelector('.feeds');
 
@@ -25,18 +25,20 @@ document.addEventListener("DOMContentLoaded", function() {
           throw new Error('Error con el token');
         }
       })
-      .then(data => {
+      .then(async data => {
   
-        let fotoUrl = data.account.image;
+        let fotoUrl;
         
         if (fotoUrl === null) {
-          fotoUrl = "assets/imgs/babyYoda.jpg";
+            fotoUrl = "assets/imgs/babyYoda.jpg";
+        } else {
+            fotoUrl = await setImage(data.account.username);
         }
         
         // Cambiamos la imagen de cada foto de perfil
         fotosPerfil.forEach(fotoPerfil => {
-          fotoPerfil.src = fotoUrl;
-          fotoPerfil.alt = data.account.name;
+            fotoPerfil.src = fotoUrl;
+            fotoPerfil.alt = data.account.name;
         });
   
         // Asegúrate de que los elementos de nombre y correo electrónico existan antes de asignarles un valor
@@ -47,8 +49,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if (usernameElement) {
           usernameElement.textContent = `@${data.account.username}`;
         }
-  
-        console.log(fotoPerfil.src);
       })
       .catch(error => {
         console.error(error);
@@ -56,6 +56,14 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 
+const setImage = async(username) => {
+    const resp = await fetch(`${url}/accounts/image/${username}`);
+
+    const blob = await resp.blob();
+    
+    const imgUrl = URL.createObjectURL(blob);
+    return imgUrl;
+}
 // Código para que funcionen cositas solo de front
 
 // SIDEBAR
@@ -158,7 +166,7 @@ async function llenarFeedPublicaciones() {
                 </span>
             </div>
             <div class="song-post">
-                <audio src="./assets/imgs/BAD BUNNY - OTRA NOCHE EN MIAMI - X100PRE [Visualizer].mp4"></audio>
+                <audio src=""></audio>
                 <div class="progressBar" id="progressBar">
                     <div class="progress"></div>
                     <div class="duracion">
