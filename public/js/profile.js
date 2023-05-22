@@ -230,10 +230,12 @@ fetch(`${url}/auth/`, {
 	}
 })
 .then(async data => {
-	let fotoUrl = await setImage(data.account.username);
+	let fotoUrl;
 	
-	if (fotoUrl === null) {
-		fotoUrl = "assets/imgs/babyYoda.jpg";
+	if (data.account.image) {
+		fotoUrl = await setImage(data.account.username);
+	} else {
+		fotoUrl = 'assets/imgs/babyYoda.jpg';
 	}
 	
 	fotosPerfil.forEach(fotoPerfil => {
@@ -241,17 +243,19 @@ fetch(`${url}/auth/`, {
 		fotoPerfil.alt = data.account.name;
 	});
 
-	if (nameElement) {
-		nameElement.textContent = data.account.name;
-	}
-	
-	if (usernameElement) {
-		usernameElement.textContent = data.account.username;
-	}
-	
-	if (h2Element) {
-		h2Element.textContent = data.account.name;
-	}
+
+  if (nameElement) {
+    nameElement.textContent = data.account.name;
+  }
+  
+  if (usernameElement) {
+    usernameElement.textContent = `@${data.account.username}`;
+  }
+  
+  if (h2Element) {
+    h2Element.textContent = data.account.name;
+  }
+
 
 })
 .catch(error => {

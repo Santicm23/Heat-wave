@@ -13,47 +13,47 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-    fetch(`${url}/auth/`, {
-        headers: {
-        'x-token': sesionToken
-      }
-    })
-      .then(resp => {
-        if (resp.ok) {
-          return resp.json();
-        } else {
-          throw new Error('Error con el token');
+        fetch(`${url}/auth/`, {
+            headers: {
+            'x-token': sesionToken
         }
-      })
-      .then(async data => {
+        })
+        .then(resp => {
+            if (resp.ok) {
+                return resp.json();
+            } else {
+                throw new Error('Error con el token');
+            }
+        })
+        .then(async data => {
   
-        let fotoUrl;
+            let fotoUrl;
+            
+            if (data.account.image) {
+                fotoUrl = await setImage(data.account.username);
+            } else {
+                fotoUrl = 'assets/imgs/babyYoda.jpg';
+            }
+            
+            // Cambiamos la imagen de cada foto de perfil
+            fotosPerfil.forEach(fotoPerfil => {
+                fotoPerfil.src = fotoUrl;
+                fotoPerfil.alt = data.account.name;
+            });
+  
+            // Asegúrate de que los elementos de nombre y correo electrónico existan antes de asignarles un valor
+            if (nameElement) {
+            nameElement.textContent = data.account.name;
+            }
         
-        if (fotoUrl === null) {
-            fotoUrl = "assets/imgs/babyYoda.jpg";
-        } else {
-            fotoUrl = await setImage(data.account.username);
-        }
-        
-        // Cambiamos la imagen de cada foto de perfil
-        fotosPerfil.forEach(fotoPerfil => {
-            fotoPerfil.src = fotoUrl;
-            fotoPerfil.alt = data.account.name;
+            if (usernameElement) {
+            usernameElement.textContent = `@${data.account.username}`;
+            }
+        })
+        .catch(error => {
+            console.error(error);
         });
-  
-        // Asegúrate de que los elementos de nombre y correo electrónico existan antes de asignarles un valor
-        if (nameElement) {
-          nameElement.textContent = data.account.name;
-        }
-        
-        if (usernameElement) {
-          usernameElement.textContent = `@${data.account.username}`;
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  });
+    });
 
 
 const setImage = async(username) => {
