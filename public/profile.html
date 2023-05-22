@@ -285,26 +285,33 @@
                 <div class="middle-area">
                     <form action="#" id="uploadForm">
                         <div id="form-content">
-                            <input id="fileUpload" class="file-input" type="file" name="file" accept=".png,.jpg,.jpeg" hidden>
-                            <label for="fileUpload"><i class="fas fa-cloud-upload-alt"></i>
-                            <p>Browse File to Upload</p></label>
+                            <label for="fileUpload">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Browse File to Upload</p>
+                                <input id="fileUpload" class="file-input" type="file" name="file" accept=".png,.jpg,.jpeg" hidden>
+                            </label>
                         </div>
                     </form>
                 </div>
                 <div class="footer-area">
-                    <select name="select">
-                        <option value="value1">Value 1</option>
-                        <option value="value2" selected>Value 2</option>
-                        <option value="value3">Value 3</option>
-                    </select>
-                    <button>Publicar</button>
+                    <div class="select-menu">
+                        <div class="select-btn">
+                          <span>Select Song</span>
+                          <i class="uil uil-angle-down"></i>
+                        </div>
+                        <div class="content">
+                          <div class="search">
+                            <i class="uil uil-search"></i>
+                            <input spellcheck="false" type="text" placeholder="Search">
+                          </div>
+                          <ul class="options"></ul>
+                        </div>
+                      </div>
+                    <button id="btn-post">Post</button>
                 </div>
             </div>
         </div>
-
-
-        
-        
+          
     </main>
     <script src="./js/profile.js"></script>
     <script src="./js/feed.js"></script>

@@ -75,7 +75,7 @@ a
     max-width: 40vh;
     justify-content: center;
     align-items: center;
-    display: flex;
+    
     margin-right: 10%;
 }
 
@@ -137,7 +137,6 @@ a
     content: "";
     bottom: -16px;
     display: block;
-    background: #cccccc;
     height: 1px;
     width: 200%;
   }
