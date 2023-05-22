@@ -457,6 +457,33 @@ main .container .left .profile{
     margin-left: 0.5rem;
 }
 
+/*----------------------------- PROGRESS BAR  ----------------------*/
+.middle .feed .song-post .progressBar{
+    background: black;
+    border-radius: 5px;
+    cursor: pointer;
+    /*margin: 40px 20px;*/
+    margin: 20px auto 20px;
+    width: 90%;
+    height: 4px;
+}
+
+.middle .feed .song-post .progressBar .progress{
+    background: #999999;
+    border-radius: 5px;
+    width: 0%;
+    height: 100%;
+    transition: width 0.1s linear;
+}
+
+.middle .feed .song-post .progressBar .duracion{
+    position: relative;
+    top: -25px;
+    display: flex;
+    justify-content: space-between;
+
+} 
+
 /*----------------------------- RIGHT ----------------------*/
 main .container .right{
     height: max-content;
