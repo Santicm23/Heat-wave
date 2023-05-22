@@ -108,7 +108,7 @@ function handleCredentialResponse(response) {
     .catch((error)=>alerta1(error.message));
 }
 
-function prenderaros() {
+function prenderAros() {
     const aros = document.querySelectorAll('.waves');
 
     aros.forEach(element => {
@@ -122,4 +122,4 @@ function prenderaros() {
 }
 
 
-setInterval(prenderaros,15000);
+setInterval(prenderAros,15000);

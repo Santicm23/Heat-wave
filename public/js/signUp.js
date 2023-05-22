@@ -68,7 +68,7 @@ btnSignUp.addEventListener('click', async() => {
 });
 
 
-function prenderaros() {
+function prenderAros() {
     const aros = document.querySelectorAll('.waves');
 
     aros.forEach(element => {
@@ -82,4 +82,4 @@ function prenderaros() {
 }
 
 
-setInterval(prenderaros,15000);
+setInterval(prenderAros,15000);

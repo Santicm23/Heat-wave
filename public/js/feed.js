@@ -1,57 +1,58 @@
-
 const url = `http://${window.location.host}`;
 
-const username = document.getElementById('username');
-const name = document.getElementById('name');
-const feeds = document.querySelector('.feeds');
-
-console.log(feeds);
-
-let sesionToken = localStorage.getItem('token');
-
-const profilePictures = document.querySelectorAll('.foto-perfil');
-
-let account;
-
-fetch(`${url}/auth/`, {
-    headers: {
+document.addEventListener("DOMContentLoaded", function() {
+    let sesionToken = localStorage.getItem('token');
+    let fotosPerfil = document.querySelectorAll('.foto-perfil');
+    let nameElement = document.getElementById('name');  // Selecciona por ID
+    let usernameElement = document.getElementById('username'); // Selecciona por ID
+  
+    if (fotosPerfil.length === 0) {
+      console.error('Elemento .foto-perfil no encontrado');
+      return;
+    }
+  
+    fetch(`${url}/auth/`, {
+      headers: {
         'x-token': sesionToken
-    }
-})
-.then(resp => {
-    if (resp.ok) {
-        return resp.json();
-    } else {
-        throw new Error('Error con el token');
-    }
-})
-.then(data => {
-    sesionToken = data.token;
-    account = data.account;
-    username.textContent = `@${data.account.username}`;
-    name.textContent = data.account.name;
-
-    fetch(`${url}/accounts/image/${account.username}`)
-    .then(resp => {
+      }
+    })
+      .then(resp => {
         if (resp.ok) {
-            return resp.blob();
+          return resp.json();
         } else {
-            throw new Error('Error en el servidor');
+          throw new Error('Error con el token');
         }
-    })
-    .then(blob => {
-        const imgUrl = URL.createObjectURL(blob);
-        console.log(profilePictures);
-        profilePictures.forEach(img => img.src = imgUrl);
-    })
-    .catch(err => {
-        console.error(err);
-    });
-})
-.catch(err => {
-    console.error(err);
-    window.location = 'index.html';
-});
+      })
+      .then(data => {
+        console.log(data);
+  
+        let fotoUrl = data.account.image;
+        
+        if (fotoUrl === null) {
+          fotoUrl = "assets/imgs/babyYoda.jpg";
+        }
+        
+        // Cambiamos la imagen de cada foto de perfil
+        fotosPerfil.forEach(fotoPerfil => {
+          fotoPerfil.src = fotoUrl;
+          fotoPerfil.alt = data.account.name;
+        });
+  
+        // Asegúrate de que los elementos de nombre y correo electrónico existan antes de asignarles un valor
+        if (nameElement) {
+          nameElement.textContent = data.account.name;
+        }
+        
+        if (usernameElement) {
+          usernameElement.textContent = `@${data.account.username}`;
+        }
+  
+        console.log(fotoPerfil.src);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  });
 
 
 // Código para que funcionen cositas solo de front
@@ -258,3 +259,5 @@ async function solicitarImagen(id) {
 //         audioPlayer.play();
 //     })
 //     .catch(console.error);
+
+
