@@ -2,7 +2,7 @@ let url = `http://${window.location.host}`;
 
 const feeds = document.querySelector('.feeds');
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
     let sesionToken = localStorage.getItem('token');
     let fotosPerfil = document.querySelectorAll('.foto-perfil');
     let nameElement = document.getElementById('name');  // Selecciona por ID
@@ -43,19 +43,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Asegúrate de que los elementos de nombre y correo electrónico existan antes de asignarles un valor
         if (nameElement) {
-        nameElement.textContent = data.account.name;
+            nameElement.textContent = data.account.name;
         }
     
         if (usernameElement) {
-        usernameElement.textContent = `@${data.account.username}`;
+            usernameElement.textContent = `@${data.account.username}`;
         }
     })
     .catch(error => {
         console.error(error);
     });
 });
-
-llenarFeedPublicaciones();
 
 
 const setImage = async(username) => {
@@ -100,6 +98,7 @@ menuItems.forEach(item => {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+llenarFeedPublicaciones();
 
 async function llenarFeedPublicaciones() {
     const resp = await fetch(`${url}/posts/feed`);
@@ -110,7 +109,7 @@ async function llenarFeedPublicaciones() {
     let audio_sonando = null;
 
     for (let i = 0; i < listaPublicaciones.length; i++) {
-        const { id_feed_post } = listaPublicaciones[i];
+        const { id_feed_post, id_song } = listaPublicaciones[i];
 
         feeds.innerHTML += `
         <div class="feed">
@@ -173,9 +172,10 @@ async function llenarFeedPublicaciones() {
             <div class="text-muted">View all 227 comments</div>
         </div>
         `
-        
+
+        listaPublicaciones[i].cancion = await solicitarCancion(id_song);
     }
-    listaPublicaciones.forEach(async({ id_feed_post, username, location, description, image, id_song }) => {
+    listaPublicaciones.forEach(async({ id_feed_post, username, location, description, image, cancion }) => {
 
         const perfil = document.querySelector(`#perfil_${id_feed_post}`);
         perfil.src = './assets/imgs/noProfilePhoto.jpeg';
@@ -186,7 +186,7 @@ async function llenarFeedPublicaciones() {
         const descElement = document.querySelector(`#desc_${id_feed_post}`);
         descElement.textContent = description;
 
-        const cancion = await solicitarCancion(id_song);
+        // const cancion = await solicitarCancion(id_song);
 
         const cancionElement = document.querySelector(`#cancion_${id_feed_post}`);
         cancionElement.textContent = cancion.name;
@@ -227,7 +227,7 @@ async function llenarFeedPublicaciones() {
         
         if (image) {
             const imagenFeed = document.querySelector(`#photo_${id_feed_post}`);
-            solicitarImagen(id_feed_post, imagenFeed);
+            await solicitarImagen(id_feed_post, imagenFeed);
         }
         //const nombreAutor = document.querySelector(`autor_${id_feed_post}`)
         //nombreAutor = p.cancion.
@@ -268,23 +268,3 @@ async function solicitarImagen(id, img) {
         console.error(error);
     }
 }
-
-
-
-// fetch(`${url}/songs/track/27`)
-//     .then(resp => {
-//         if (resp.ok) {
-//             return resp.blob();
-//         } else {
-//             throw new Error('Error al descargar el sonido de la publicación');
-//         }
-//     })
-//     .then(blob => {
-//         console.log('playing...');
-//         const audioUrl = URL.createObjectURL(blob);
-//         const audioPlayer = new Audio(audioUrl);
-//         audioPlayer.play();
-//     })
-//     .catch(console.error);
-
-

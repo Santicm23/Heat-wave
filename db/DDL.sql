@@ -1,18 +1,18 @@
 
 
-DROP TABLE feed_post_images;
-DROP TABLE chatXaccount;
-DROP TABLE comments;
-DROP TABLE feed_posts;
-DROP TABLE messages;
-DROP TABLE dailys;
-DROP TABLE states;
-DROP TABLE visibilities;
-DROP TABLE chats;
-DROP TABLE songs;
-DROP TABLE accounts;
-DROP TABLE roles;
-DROP TABLE hashtags;
+DROP TABLE IF EXISTS feed_postXhashtags;
+DROP TABLE IF EXISTS chatXaccount;
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS feed_posts;
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS dailys;
+DROP TABLE IF EXISTS states;
+DROP TABLE IF EXISTS visibilities;
+DROP TABLE IF EXISTS chats;
+DROP TABLE IF EXISTS songs;
+DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS hashtags;
 
 
 CREATE TABLE roles (
@@ -31,10 +31,10 @@ CREATE TABLE accounts (
     `active` TINYINT NOT NULL DEFAULT 1,
     `google` TINYINT NOT NULL DEFAULT 1,
     `image` VARCHAR(255) DEFAULT NULL,
-    `role` BIGINT(20) UNSIGNED NOT NULL,
+    `id_role` BIGINT(20) UNSIGNED NOT NULL,
     `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (`role`) REFERENCES roles(id_role)
+    FOREIGN KEY (`id_role`) REFERENCES roles(id_role)
         ON DELETE CASCADE ON UPDATE CASCADE,
     UNIQUE (`email`)
 );
@@ -115,6 +115,7 @@ CREATE TABLE feed_posts (
     `location` VARCHAR(255) DEFAULT NULL,
     `username` VARCHAR(255) NOT NULL,
     `likes` INT(11) NOT NULL DEFAULT 0,
+    `image` VARCHAR(255) DEFAULT NULL,
     `active` TINYINT NOT NULL DEFAULT 1,
     `id_song` BIGINT(20) UNSIGNED NOT NULL,
     `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -170,14 +171,17 @@ CREATE TABLE feed_postXhashtags (
 
 -- inserts:
 --Roles Cuenta
+
 INSERT INTO roles(`name`) values ('ADMIN');
 INSERT INTO roles(`name`) values ('USER');
 
 --Estado mensajes
+
 INSERT INTO states(`name`) values ('SENT');
 INSERT INTO states(`name`) values ('RECIEVED');
 INSERT INTO states(`name`) values ('SEEN');
 
 --Visibilidad dailys
+
 INSERT INTO visibilities(`name`) values ('ALL');
 INSERT INTO visibilities(`name`) values ('BEST_FRIENDS');
