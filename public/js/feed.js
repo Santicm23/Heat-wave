@@ -132,6 +132,8 @@ async function llenarFeedPublicaciones() {
     const data = await resp.json();
     const listaPublicaciones = data.feedposts;
 
+    let audio_sonando = null;
+
     for (let i = 0; i < listaPublicaciones.length; i++) {
         const p = listaPublicaciones[i];
         p.cancion = await solicitarCancion(p.id_song);
@@ -148,8 +150,8 @@ async function llenarFeedPublicaciones() {
                         <img id="perfil_${id_feed_post}">
                     </div>
                     <div class="ingo">
-                        <h3>Lana Rose</h3>
-                        <small id="desc_${id_feed_post}">Bogotá, 15 MINUTES AGO</small>
+                        <h3 id="username_${id_feed_post}">Lana Rose</h3>
+                        <small id="location_${id_feed_post}">Bogotá, 15 MINUTES AGO</small>
                     </div>
                 </div>
                 <span class="edit">
@@ -162,7 +164,7 @@ async function llenarFeedPublicaciones() {
             <!-------------------- MUSIC -------------------->
             <div class="music">
                 <span>
-                    <i class="uil uil-play" id="play"></i>
+                    <i id="play_${id_feed_post}" class="uil uil-play" ></i>
                 </span>
             </div>
             <div class="song-post">
@@ -175,8 +177,8 @@ async function llenarFeedPublicaciones() {
                     </div>
                 </div>
 
-                <p>Titulo cancion</p>
-                <p class="text-muted" id="autor_${id_feed_post}">Artista</p>
+                <p id="cancion_${id_feed_post}">Titulo cancion</p>
+                <p id="autor_${id_feed_post}" class="text-muted">Artista</p>
             </div>
 
             <div class="action-buttons">
@@ -196,22 +198,42 @@ async function llenarFeedPublicaciones() {
                 <p>Liked by <b>Nico Millan</b> and 323 others</p>
             </div>
             <div class="caption">
-                <p>Lana Rose Lorem ipsum dolor sit amet <span class="harsh-tag">#MusicOfTheDay</span></p>
+                <p id="desc_${id_feed_post}">Lana Rose Lorem ipsum dolor sit amet <span class="hash-tag">#MusicOfTheDay</span></p>
             </div>
             <div class="text-muted">View all 227 comments</div>
         </div>
         `
         
     }
-    listaPublicaciones.forEach(async({ id_feed_post, image }) => {
+    listaPublicaciones.forEach(async({ id_feed_post, username, location, description, cancion, image, }) => {
 
         const perfil = document.querySelector(`#perfil_${id_feed_post}`);
-        perfil.src = './assets/imgs/noProfilePhoto.jpeg'; 
-        const desc = document.querySelector(`#desc_${id_feed_post}`);
-        desc.textContent = 'holissss como vannnn';
-        const imagenFeed = document.querySelector(`#photo_${id_feed_post}`);
+        perfil.src = './assets/imgs/noProfilePhoto.jpeg';
+        const usernameElement = document.querySelector(`#username_${id_feed_post}`);
+        usernameElement.textContent = username;
+        const locationElement = document.querySelector(`#location_${id_feed_post}`);
+        locationElement.textContent = location;
+        const descElement = document.querySelector(`#desc_${id_feed_post}`);
+        descElement.textContent = description;
+        const cancionElement = document.querySelector(`#cancion_${id_feed_post}`);
+        cancionElement.textContent = cancion.name;
+        const autorElement = document.querySelector(`#autor_${id_feed_post}`);
+        autorElement.textContent = cancion.author;
+        const audio = document.querySelector(`#audio_${id_feed_post}`);
+        audio.src = cancion.sonido;
+
+        const play = document.querySelector(`#play_${id_feed_post}`);
+        play.addEventListener('click', () => {
+            if (audio_sonando) {
+                audio_sonando.pause();
+            }
+            audio.play();
+            audio_sonando = audio;
+        });
+
         
         if (image) {
+            const imagenFeed = document.querySelector(`#photo_${id_feed_post}`);
             await solicitarImagen(id_feed_post, imagenFeed);
         }
         //const nombreAutor = document.querySelector(`autor_${id_feed_post}`)
@@ -238,8 +260,7 @@ async function solicitarSonido(id) {
         const resp = await fetch(`${url}/songs/track/${id}`)
         const blob = await resp.blob()
         const audioUrl = URL.createObjectURL(blob);
-        const audioPlayer = new Audio(audioUrl);
-        return audioPlayer;
+        return audioUrl;
     } catch (error) {
         console.error(error)
     }

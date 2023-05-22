@@ -415,12 +415,9 @@ main .container .left .profile{
 }
 
 .middle .feed .music{
-    /*display: flex;*/
-    /*justify-content: space-between;*/
-    align-items: center;
     font-size: 1.4rem;
     margin: 0.6rem;
-    padding-left: 47%;
+    text-align:center;
 }
 
 .middle .feed .song-post{
