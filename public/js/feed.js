@@ -1,18 +1,20 @@
-const url = `http://${window.location.host}`;
+let url = `http://${window.location.host}`;
+
+const feeds = document.querySelector('.feeds');
 
 document.addEventListener("DOMContentLoaded", function() {
     let sesionToken = localStorage.getItem('token');
     let fotosPerfil = document.querySelectorAll('.foto-perfil');
     let nameElement = document.getElementById('name');  // Selecciona por ID
     let usernameElement = document.getElementById('username'); // Selecciona por ID
-  
+
     if (fotosPerfil.length === 0) {
-      console.error('Elemento .foto-perfil no encontrado');
-      return;
+        console.error('Elemento .foto-perfil no encontrado');
+        return;
     }
-  
+
     fetch(`${url}/auth/`, {
-      headers: {
+        headers: {
         'x-token': sesionToken
       }
     })
@@ -23,19 +25,20 @@ document.addEventListener("DOMContentLoaded", function() {
           throw new Error('Error con el token');
         }
       })
-      .then(data => {
-        console.log(data);
+      .then(async data => {
   
-        let fotoUrl = data.account.image;
+        let fotoUrl;
         
         if (fotoUrl === null) {
-          fotoUrl = "assets/imgs/babyYoda.jpg";
+            fotoUrl = "assets/imgs/babyYoda.jpg";
+        } else {
+            fotoUrl = await setImage(data.account.username);
         }
         
         // Cambiamos la imagen de cada foto de perfil
         fotosPerfil.forEach(fotoPerfil => {
-          fotoPerfil.src = fotoUrl;
-          fotoPerfil.alt = data.account.name;
+            fotoPerfil.src = fotoUrl;
+            fotoPerfil.alt = data.account.name;
         });
   
         // Asegúrate de que los elementos de nombre y correo electrónico existan antes de asignarles un valor
@@ -46,8 +49,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if (usernameElement) {
           usernameElement.textContent = `@${data.account.username}`;
         }
-  
-        console.log(fotoPerfil.src);
       })
       .catch(error => {
         console.error(error);
@@ -55,6 +56,14 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 
+const setImage = async(username) => {
+    const resp = await fetch(`${url}/accounts/image/${username}`);
+
+    const blob = await resp.blob();
+    
+    const imgUrl = URL.createObjectURL(blob);
+    return imgUrl;
+}
 // Código para que funcionen cositas solo de front
 
 // SIDEBAR
@@ -123,23 +132,27 @@ async function llenarFeedPublicaciones() {
     const data = await resp.json();
     const listaPublicaciones = data.feedposts;
 
+    let boton_play = null;
+    let audio_sonando = null;
+
     for (let i = 0; i < listaPublicaciones.length; i++) {
         const p = listaPublicaciones[i];
         p.cancion = await solicitarCancion(p.id_song);
     }
 
-    let k = 0;
-    listaPublicaciones.forEach(p => {
+    for (let i = 0; i < listaPublicaciones.length; i++) {
+        const { id_feed_post } = listaPublicaciones[i];
+
         feeds.innerHTML += `
         <div class="feed">
             <div class="head">
                 <div class="user">
                     <div class="profile-photo">
-                        <img id="perfil_${k}" src="./styles/images/profile-13.jpg">
+                        <img id="perfil_${id_feed_post}">
                     </div>
                     <div class="ingo">
-                        <h3>Lana Rose</h3>
-                        <small id="desc_${k}">Bogotá, 15 MINUTES AGO</small>
+                        <h3 id="username_${id_feed_post}">Lana Rose</h3>
+                        <small id="location_${id_feed_post}">Bogotá, 15 MINUTES AGO</small>
                     </div>
                 </div>
                 <span class="edit">
@@ -147,16 +160,16 @@ async function llenarFeedPublicaciones() {
                 </span>
             </div>
             <div class="photo">
-                <img src="./styles/images/feed-1.jpg">
+                <img id="photo_${id_feed_post}">
             </div>
             <!-------------------- MUSIC -------------------->
             <div class="music">
                 <span>
-                    <i class="uil uil-play" id="play"></i>
+                    <i id="play_${id_feed_post}" class="uil uil-play" ></i>
                 </span>
             </div>
             <div class="song-post">
-                <audio src="./assets/imgs/BAD BUNNY - OTRA NOCHE EN MIAMI - X100PRE [Visualizer].mp4"></audio>
+                <audio id="audio_${id_feed_post}"></audio>
                 <div class="progressBar" id="progressBar">
                     <div class="progress"></div>
                     <div class="duracion">
@@ -165,8 +178,8 @@ async function llenarFeedPublicaciones() {
                     </div>
                 </div>
 
-                <p>Titulo cancion</p>
-                <p class="text-muted">Artista</p>
+                <p id="cancion_${id_feed_post}">Titulo cancion</p>
+                <p id="autor_${id_feed_post}" class="text-muted">Artista</p>
             </div>
 
             <div class="action-buttons">
@@ -186,17 +199,63 @@ async function llenarFeedPublicaciones() {
                 <p>Liked by <b>Nico Millan</b> and 323 others</p>
             </div>
             <div class="caption">
-                <p>Lana Rose Lorem ipsum dolor sit amet <span class="harsh-tag">#MusicOfTheDay</span></p>
+                <p id="desc_${id_feed_post}">Lana Rose Lorem ipsum dolor sit amet <span class="hash-tag">#MusicOfTheDay</span></p>
             </div>
             <div class="text-muted">View all 227 comments</div>
         </div>
         `
+        
+    }
+    listaPublicaciones.forEach(async({ id_feed_post, username, location, description, cancion, image, }) => {
 
-        const perfil = document.querySelector(`#perfil_${k}`);
-        const desc = document.querySelector(`#desc_${k}`);
-        perfil.src = './assets/imgs/nico.jpeg';
-        desc.textContent = 'holissss como vannnn';
-        k++;
+        const perfil = document.querySelector(`#perfil_${id_feed_post}`);
+        perfil.src = './assets/imgs/noProfilePhoto.jpeg';
+        const usernameElement = document.querySelector(`#username_${id_feed_post}`);
+        usernameElement.textContent = username;
+        const locationElement = document.querySelector(`#location_${id_feed_post}`);
+        locationElement.textContent = location;
+        const descElement = document.querySelector(`#desc_${id_feed_post}`);
+        descElement.textContent = description;
+        const cancionElement = document.querySelector(`#cancion_${id_feed_post}`);
+        cancionElement.textContent = cancion.name;
+        const autorElement = document.querySelector(`#autor_${id_feed_post}`);
+        autorElement.textContent = cancion.author;
+        const audio = document.querySelector(`#audio_${id_feed_post}`);
+        audio.src = cancion.sonido;
+
+        const play = document.querySelector(`#play_${id_feed_post}`);
+
+        const eventPlay = () => {
+            if (audio_sonando) {
+                boton_play.classList.remove('uil-pause');
+                audio_sonando.pause();
+                boton_play.removeEventListener('click', eventPause);
+                boton_play.addEventListener('click', eventPlay);
+            }
+            boton_play = play;
+            boton_play.classList.add('uil-pause');
+            audio.play();
+            audio_sonando = audio;
+            boton_play.removeEventListener('click', eventPlay);
+            boton_play.addEventListener('click', eventPause);
+        };
+
+        const eventPause = () => {
+            boton_play.classList.remove('uil-pause');
+            boton_play.addEventListener('click', eventPlay);
+            audio_sonando.pause();
+            audio_sonando = null;
+        };
+
+        play.addEventListener('click', eventPlay);
+
+        
+        if (image) {
+            const imagenFeed = document.querySelector(`#photo_${id_feed_post}`);
+            await solicitarImagen(id_feed_post, imagenFeed);
+        }
+        //const nombreAutor = document.querySelector(`autor_${id_feed_post}`)
+        //nombreAutor = p.cancion.
     });
 }
 
@@ -210,7 +269,7 @@ async function solicitarCancion(id) {
         return cancion;
 
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 }
 
@@ -219,12 +278,24 @@ async function solicitarSonido(id) {
         const resp = await fetch(`${url}/songs/track/${id}`)
         const blob = await resp.blob()
         const audioUrl = URL.createObjectURL(blob);
-        const audioPlayer = new Audio(audioUrl);
-        return audioPlayer
+        return audioUrl;
     } catch (error) {
         console.error(error)
     }
 }
+
+async function solicitarImagen(id, img) {
+    try {
+        const resp = await fetch(`${url}/posts/feed/image/${id}`);
+        const blob = await resp.blob();
+        const imgUrl = URL.createObjectURL(blob);
+        img.src = imgUrl;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 
 // fetch(`${url}/songs/track/27`)
 //     .then(resp => {

@@ -404,18 +404,20 @@ main .container .left .profile{
 }
 
 .middle .feed .photo{
-    border-radius: var(--card-border-radius);
-    overflow: hidden;
     margin: 0.7rem 0;
 }
 
+.middle .feed .photo img {
+    border-radius: var(--card-border-radius);
+    max-height: calc(30vw);
+    object-fit: cover;
+    object-position: center;
+}
+
 .middle .feed .music{
-    /*display: flex;*/
-    /*justify-content: space-between;*/
-    align-items: center;
     font-size: 1.4rem;
     margin: 0.6rem;
-    padding-left: 47%;
+    text-align:center;
 }
 
 .middle .feed .song-post{
