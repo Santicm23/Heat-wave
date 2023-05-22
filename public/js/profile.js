@@ -244,17 +244,17 @@ fetch(`${url}/auth/`, {
 	});
 
 
-  if (nameElement) {
-    nameElement.textContent = data.account.name;
-  }
-  
-  if (usernameElement) {
-    usernameElement.textContent = `@${data.account.username}`;
-  }
-  
-  if (h2Element) {
-    h2Element.textContent = data.account.name;
-  }
+	if (nameElement) {
+		nameElement.textContent = data.account.name;
+	}
+	
+	if (usernameElement) {
+		usernameElement.textContent = `@${data.account.username}`;
+	}
+	
+	if (h2Element) {
+		h2Element.textContent = data.account.name;
+	}
 
 
 })
@@ -272,12 +272,12 @@ const setImage = async(username) => {
 }
 
 let postBtn = document.querySelector('#btn-post');
-postBtn.addEventListener('click', postFeed);
+postBtn.addEventListener('click', () => postFeed(usernameElement.textContent.slice(1)));
 
 
-async function postFeed() {
+async function postFeed(username) {
 	if (!selectedSong) {
-		console.error('Canción no seleccionada');
+		alerta1('Canción no seleccionada');
 		return;
 	}
 
@@ -285,7 +285,7 @@ async function postFeed() {
 	formData.append('image', selectedImage);
   
 	try {
-		let response = await fetch(`${url}/posts/feed/${usernameElement.textContent}/${selectedSong}`, {
+		let response = await fetch(`${url}/posts/feed/${username}/${selectedSong}`, {
 			method: 'POST',
 			headers: {
 				'x-token': sesionToken
@@ -297,9 +297,6 @@ async function postFeed() {
 			throw new Error('Error al publicar en el feed');
 		}
 
-		let result = await response.json();
-		console.log(result);
-
 		// Cierra el popup después de subir la publicación
 		cerrarPopup();
 
@@ -308,6 +305,14 @@ async function postFeed() {
 	}
 }
 
-
-
-
+const alerta1 = (text) => { 
+    
+    Swal.fire({
+        title:'¡Ups!',
+        text,
+        icon:'error',
+        backdrop:true,
+        background:'#ffefd8',
+        showCloseButton:true
+    })
+}

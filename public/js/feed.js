@@ -13,47 +13,49 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-        fetch(`${url}/auth/`, {
-            headers: {
+    fetch(`${url}/auth/`, {
+        headers: {
             'x-token': sesionToken
         }
-        })
-        .then(resp => {
-            if (resp.ok) {
-                return resp.json();
-            } else {
-                throw new Error('Error con el token');
-            }
-        })
-        .then(async data => {
-  
-            let fotoUrl;
-            
-            if (data.account.image) {
-                fotoUrl = await setImage(data.account.username);
-            } else {
-                fotoUrl = 'assets/imgs/babyYoda.jpg';
-            }
-            
-            // Cambiamos la imagen de cada foto de perfil
-            fotosPerfil.forEach(fotoPerfil => {
-                fotoPerfil.src = fotoUrl;
-                fotoPerfil.alt = data.account.name;
-            });
-  
-            // Asegúrate de que los elementos de nombre y correo electrónico existan antes de asignarles un valor
-            if (nameElement) {
-            nameElement.textContent = data.account.name;
-            }
+    })
+    .then(resp => {
+        if (resp.ok) {
+            return resp.json();
+        } else {
+            throw new Error('Error con el token');
+        }
+    })
+    .then(async data => {
+
+        let fotoUrl;
         
-            if (usernameElement) {
-            usernameElement.textContent = `@${data.account.username}`;
-            }
-        })
-        .catch(error => {
-            console.error(error);
+        if (data.account.image) {
+            fotoUrl = await setImage(data.account.username);
+        } else {
+            fotoUrl = 'assets/imgs/babyYoda.jpg';
+        }
+        
+        // Cambiamos la imagen de cada foto de perfil
+        fotosPerfil.forEach(fotoPerfil => {
+            fotoPerfil.src = fotoUrl;
+            fotoPerfil.alt = data.account.name;
         });
+
+        // Asegúrate de que los elementos de nombre y correo electrónico existan antes de asignarles un valor
+        if (nameElement) {
+        nameElement.textContent = data.account.name;
+        }
+    
+        if (usernameElement) {
+        usernameElement.textContent = `@${data.account.username}`;
+        }
+    })
+    .catch(error => {
+        console.error(error);
     });
+});
+
+llenarFeedPublicaciones();
 
 
 const setImage = async(username) => {
@@ -124,8 +126,6 @@ messagesNotification.addEventListener('click', () => {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-llenarFeedPublicaciones();
-
 
 async function llenarFeedPublicaciones() {
     const resp = await fetch(`${url}/posts/feed`);
@@ -134,11 +134,6 @@ async function llenarFeedPublicaciones() {
 
     let boton_play = null;
     let audio_sonando = null;
-
-    for (let i = 0; i < listaPublicaciones.length; i++) {
-        const p = listaPublicaciones[i];
-        p.cancion = await solicitarCancion(p.id_song);
-    }
 
     for (let i = 0; i < listaPublicaciones.length; i++) {
         const { id_feed_post } = listaPublicaciones[i];
@@ -206,7 +201,7 @@ async function llenarFeedPublicaciones() {
         `
         
     }
-    listaPublicaciones.forEach(async({ id_feed_post, username, location, description, cancion, image, }) => {
+    listaPublicaciones.forEach(async({ id_feed_post, username, location, description, image, id_song }) => {
 
         const perfil = document.querySelector(`#perfil_${id_feed_post}`);
         perfil.src = './assets/imgs/noProfilePhoto.jpeg';
@@ -216,10 +211,14 @@ async function llenarFeedPublicaciones() {
         locationElement.textContent = location;
         const descElement = document.querySelector(`#desc_${id_feed_post}`);
         descElement.textContent = description;
+
+        const cancion = await solicitarCancion(id_song);
+
         const cancionElement = document.querySelector(`#cancion_${id_feed_post}`);
         cancionElement.textContent = cancion.name;
         const autorElement = document.querySelector(`#autor_${id_feed_post}`);
         autorElement.textContent = cancion.author;
+
         const audio = document.querySelector(`#audio_${id_feed_post}`);
         audio.src = cancion.sonido;
 
@@ -252,7 +251,7 @@ async function llenarFeedPublicaciones() {
         
         if (image) {
             const imagenFeed = document.querySelector(`#photo_${id_feed_post}`);
-            await solicitarImagen(id_feed_post, imagenFeed);
+            solicitarImagen(id_feed_post, imagenFeed);
         }
         //const nombreAutor = document.querySelector(`autor_${id_feed_post}`)
         //nombreAutor = p.cancion.
@@ -262,11 +261,10 @@ async function llenarFeedPublicaciones() {
 async function solicitarCancion(id) {
     try {
         const resp = await fetch(`${url}/songs/${id}`);
-        const data = await resp.json();
+        const { song } = await resp.json();
 
-        const cancion = data.song;
-        cancion.sonido = await solicitarSonido(id);
-        return cancion;
+        song.sonido = await solicitarSonido(id);
+        return song;
 
     } catch (error) {
         console.error(error);
@@ -275,8 +273,8 @@ async function solicitarCancion(id) {
 
 async function solicitarSonido(id) {
     try {
-        const resp = await fetch(`${url}/songs/track/${id}`)
-        const blob = await resp.blob()
+        const resp = await fetch(`${url}/songs/track/${id}`);
+        const blob = await resp.blob();
         const audioUrl = URL.createObjectURL(blob);
         return audioUrl;
     } catch (error) {
