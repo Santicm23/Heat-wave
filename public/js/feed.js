@@ -109,7 +109,7 @@ async function llenarFeedPublicaciones() {
     let audio_sonando = null;
 
     for (let i = 0; i < listaPublicaciones.length; i++) {
-        const { id_feed_post, id_song } = listaPublicaciones[i];
+        const { id_feed_post, username, location, description, id_song } = listaPublicaciones[i];
 
         feeds.innerHTML += `
         <div class="feed">
@@ -173,10 +173,6 @@ async function llenarFeedPublicaciones() {
         </div>
         `
 
-        listaPublicaciones[i].cancion = await solicitarCancion(id_song);
-    }
-    listaPublicaciones.forEach(async({ id_feed_post, username, location, description, image, cancion }) => {
-
         const perfil = document.querySelector(`#perfil_${id_feed_post}`);
         perfil.src = './assets/imgs/noProfilePhoto.jpeg';
         const usernameElement = document.querySelector(`#username_${id_feed_post}`);
@@ -187,50 +183,58 @@ async function llenarFeedPublicaciones() {
         descElement.textContent = description;
 
         // const cancion = await solicitarCancion(id_song);
+        listaPublicaciones[i].cancion = await solicitarCancion(id_song);
 
         const cancionElement = document.querySelector(`#cancion_${id_feed_post}`);
-        cancionElement.textContent = cancion.name;
+        cancionElement.textContent = listaPublicaciones[i].cancion.name;
         const autorElement = document.querySelector(`#autor_${id_feed_post}`);
-        autorElement.textContent = cancion.author;
+        autorElement.textContent = listaPublicaciones[i].cancion.author;
 
-        const audio = document.querySelector(`#audio_${id_feed_post}`);
-        audio.src = cancion.sonido;
+    }
+    listaPublicaciones.forEach(async({ id_feed_post, image, cancion }) => {
         // const duracion = document.querySelector(`#tiempoDuracion_${id_feed_post}`);
         // duracion.textContent = cancion.duracion;
 
-        const play = document.querySelector(`#play_${id_feed_post}`);
+        const audio = document.querySelector(`#audio_${id_feed_post}`);
+        audio.src = cancion.sonido;
 
-        const eventPlay = () => {
-            if (audio_sonando) {
-                boton_play.classList.remove('uil-pause');
+        const player = document.querySelector(`#play_${id_feed_post}`);
+
+        player.addEventListener('click', () => {
+            if (audio.paused) {
+                if (audio_sonando) {
+                    audio_sonando.pause();
+                    audio_sonando.currentTime = 0;
+                    boton_play.classList.remove('uil-pause');
+                    boton_play.classList.add('uil-play');
+                }
+                audio_sonando = audio;
+                audio_sonando.play();
+                boton_play = player;
+                player.classList.remove('uil-play');
+                player.classList.add('uil-pause');
+            } else if (audio_sonando) {
                 audio_sonando.pause();
-                boton_play.removeEventListener('click', eventPause);
-                boton_play.addEventListener('click', eventPlay);
+                if (audio_sonando !== audio) {
+                    audio_sonando.currentTime = 0;
+                }
+                audio_sonando = null;
+                boton_play.classList.remove('uil-pause');
+                boton_play.classList.add('uil-play');
+            } else {
+                audio.pause();
+                audio_sonando = null;
+                boton_play = null;
+                player.classList.remove('uil-pause');
+                player.classList.add('uil-play');
             }
-            boton_play = play;
-            boton_play.classList.add('uil-pause');
-            audio.play();
-            audio_sonando = audio;
-            boton_play.removeEventListener('click', eventPlay);
-            boton_play.addEventListener('click', eventPause);
-        };
-
-        const eventPause = () => {
-            boton_play.classList.remove('uil-pause');
-            boton_play.addEventListener('click', eventPlay);
-            audio_sonando.pause();
-            audio_sonando = null;
-        };
-
-        play.addEventListener('click', eventPlay);
+        });
 
         
         if (image) {
             const imagenFeed = document.querySelector(`#photo_${id_feed_post}`);
             await solicitarImagen(id_feed_post, imagenFeed);
         }
-        //const nombreAutor = document.querySelector(`autor_${id_feed_post}`)
-        //nombreAutor = p.cancion.
     });
 }
 
