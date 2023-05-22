@@ -1,18 +1,20 @@
 const url = `http://${window.location.host}`;
 
+const feeds = document.querySelector('.feeds');
+
 document.addEventListener("DOMContentLoaded", function() {
     let sesionToken = localStorage.getItem('token');
     let fotosPerfil = document.querySelectorAll('.foto-perfil');
     let nameElement = document.getElementById('name');  // Selecciona por ID
     let usernameElement = document.getElementById('username'); // Selecciona por ID
-  
+
     if (fotosPerfil.length === 0) {
-      console.error('Elemento .foto-perfil no encontrado');
-      return;
+        console.error('Elemento .foto-perfil no encontrado');
+        return;
     }
-  
+
     fetch(`${url}/auth/`, {
-      headers: {
+        headers: {
         'x-token': sesionToken
       }
     })
@@ -24,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       })
       .then(data => {
-        console.log(data);
   
         let fotoUrl = data.account.image;
         
@@ -126,10 +127,11 @@ async function llenarFeedPublicaciones() {
     for (let i = 0; i < listaPublicaciones.length; i++) {
         const p = listaPublicaciones[i];
         p.cancion = await solicitarCancion(p.id_song);
+        console.log(p.id_feed_post);
     }
 
     let k = 0;
-    listaPublicaciones.forEach(p => {
+    listaPublicaciones.forEach(async p => {
         feeds.innerHTML += `
         <div class="feed">
             <div class="head">
@@ -197,9 +199,9 @@ async function llenarFeedPublicaciones() {
         const desc = document.querySelector(`#desc_${k}`);
         desc.textContent = 'holissss como vannnn';
         const imagenFeed = document.querySelector(`#photo_${k}`);
-        imagenFeed.src = solicitarImagen(k);
-        const nombreAutor = document.querySelector(`autor__${k}`)
-        nombreAutor = p.cancion.
+        imagenFeed.src = await solicitarImagen(p.id_feed_post);
+        //const nombreAutor = document.querySelector(`autor__${k}`)
+        //nombreAutor = p.cancion.
         k++;
     });
 }
@@ -232,7 +234,10 @@ async function solicitarSonido(id) {
 
 async function solicitarImagen(id) {
     try {
-        const resp = await fetch(`${url}/posts/feed/image/${id}`) 
+        const resp = await fetch(`${url}/posts/feed/image/${id}`)
+        if (!resp.ok) {
+            return;
+        }
         const blob = await resp.blob()
         const imgUrl = URL.createObjectURL(blob);
         const imagen = new Image(imgUrl);
