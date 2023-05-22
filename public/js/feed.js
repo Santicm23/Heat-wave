@@ -166,7 +166,7 @@ async function llenarFeedPublicaciones() {
                 </span>
             </div>
             <div class="song-post">
-                <audio src=""></audio>
+                <audio id="audio_${id_feed_post}"></audio>
                 <div class="progressBar" id="progressBar">
                     <div class="progress"></div>
                     <div class="duracion">

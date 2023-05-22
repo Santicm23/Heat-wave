@@ -409,8 +409,7 @@ main .container .left .profile{
 
 .middle .feed .photo img {
     border-radius: var(--card-border-radius);
-    max-width: 422px;
-    max-height: 253px;
+    max-height: calc(30vw);
     object-fit: cover;
     object-position: center;
 }
