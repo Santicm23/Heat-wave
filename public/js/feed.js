@@ -145,8 +145,8 @@ async function llenarFeedPublicaciones() {
                     <i class="uil uil-ellipsis-h"></i>
                 </span>
             </div>
-            <div class="photo">
-                <img src="./styles/images/feed-1.jpg">
+            <div class="photo"">
+                <img id="photo_${k}" src="./styles/images/feed-1.jpg">
             </div>
             <!-------------------- MUSIC -------------------->
             <div class="music">
@@ -165,7 +165,7 @@ async function llenarFeedPublicaciones() {
                 </div>
 
                 <p>Titulo cancion</p>
-                <p class="text-muted">Artista</p>
+                <p class="text-muted" id="autor__${k}">Artista</p>
             </div>
 
             <div class="action-buttons">
@@ -192,9 +192,13 @@ async function llenarFeedPublicaciones() {
         `
 
         const perfil = document.querySelector(`#perfil_${k}`);
+        perfil.src = './assets/imgs/noProfilePhoto.jpeg'; 
         const desc = document.querySelector(`#desc_${k}`);
-        perfil.src = './assets/imgs/nico.jpeg';
         desc.textContent = 'holissss como vannnn';
+        const imagenFeed = document.querySelector(`#photo_${k}`);
+        imagenFeed.src = solicitarImagen(k);
+        const nombreAutor = document.querySelector(`autor__${k}`)
+        nombreAutor = p.cancion.
         k++;
     });
 }
@@ -224,6 +228,20 @@ async function solicitarSonido(id) {
         console.error(error)
     }
 }
+
+async function solicitarImagen(id) {
+    try {
+        const resp = await fetch(`${url}/posts/feed/image/${id}`) 
+        const blob = await resp.blob()
+        const imgUrl = URL.createObjectURL(blob);
+        const imagen = new Image(imgUrl);
+        return imagen
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+
 
 // fetch(`${url}/songs/track/27`)
 //     .then(resp => {
