@@ -243,17 +243,19 @@ fetch(`${url}/auth/`, {
 		fotoPerfil.alt = data.account.name;
 	});
 
-	if (nameElement) {
-		nameElement.textContent = data.account.name;
-	}
-	
-	if (usernameElement) {
-		usernameElement.textContent = data.account.username;
-	}
-	
-	if (h2Element) {
-		h2Element.textContent = data.account.name;
-	}
+
+  if (nameElement) {
+    nameElement.textContent = data.account.name;
+  }
+  
+  if (usernameElement) {
+    usernameElement.textContent = `@${data.account.username}`;
+  }
+  
+  if (h2Element) {
+    h2Element.textContent = data.account.name;
+  }
+
 
 })
 .catch(error => {
