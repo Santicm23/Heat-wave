@@ -135,29 +135,29 @@ async function llenarFeedPublicaciones() {
     for (let i = 0; i < listaPublicaciones.length; i++) {
         const p = listaPublicaciones[i];
         p.cancion = await solicitarCancion(p.id_song);
-        console.log(p.id_feed_post);
     }
 
-    let k = 0;
-    listaPublicaciones.forEach(async p => {
+    for (let i = 0; i < listaPublicaciones.length; i++) {
+        const { id_feed_post } = listaPublicaciones[i];
+
         feeds.innerHTML += `
         <div class="feed">
             <div class="head">
                 <div class="user">
                     <div class="profile-photo">
-                        <img id="perfil_${k}" src="./styles/images/profile-13.jpg">
+                        <img id="perfil_${id_feed_post}">
                     </div>
                     <div class="ingo">
                         <h3>Lana Rose</h3>
-                        <small id="desc_${k}">Bogotá, 15 MINUTES AGO</small>
+                        <small id="desc_${id_feed_post}">Bogotá, 15 MINUTES AGO</small>
                     </div>
                 </div>
                 <span class="edit">
                     <i class="uil uil-ellipsis-h"></i>
                 </span>
             </div>
-            <div class="photo"">
-                <img id="photo_${k}" src="./styles/images/feed-1.jpg">
+            <div class="photo">
+                <img id="photo_${id_feed_post}">
             </div>
             <!-------------------- MUSIC -------------------->
             <div class="music">
@@ -176,7 +176,7 @@ async function llenarFeedPublicaciones() {
                 </div>
 
                 <p>Titulo cancion</p>
-                <p class="text-muted" id="autor__${k}">Artista</p>
+                <p class="text-muted" id="autor_${id_feed_post}">Artista</p>
             </div>
 
             <div class="action-buttons">
@@ -201,16 +201,21 @@ async function llenarFeedPublicaciones() {
             <div class="text-muted">View all 227 comments</div>
         </div>
         `
+        
+    }
+    listaPublicaciones.forEach(async({ id_feed_post, image }) => {
 
-        const perfil = document.querySelector(`#perfil_${k}`);
+        const perfil = document.querySelector(`#perfil_${id_feed_post}`);
         perfil.src = './assets/imgs/noProfilePhoto.jpeg'; 
-        const desc = document.querySelector(`#desc_${k}`);
+        const desc = document.querySelector(`#desc_${id_feed_post}`);
         desc.textContent = 'holissss como vannnn';
-        const imagenFeed = document.querySelector(`#photo_${k}`);
-        imagenFeed.src = await solicitarImagen(p.id_feed_post);
-        //const nombreAutor = document.querySelector(`autor__${k}`)
+        const imagenFeed = document.querySelector(`#photo_${id_feed_post}`);
+        
+        if (image) {
+            await solicitarImagen(id_feed_post, imagenFeed);
+        }
+        //const nombreAutor = document.querySelector(`autor_${id_feed_post}`)
         //nombreAutor = p.cancion.
-        k++;
     });
 }
 
@@ -224,7 +229,7 @@ async function solicitarCancion(id) {
         return cancion;
 
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 }
 
@@ -234,24 +239,20 @@ async function solicitarSonido(id) {
         const blob = await resp.blob()
         const audioUrl = URL.createObjectURL(blob);
         const audioPlayer = new Audio(audioUrl);
-        return audioPlayer
+        return audioPlayer;
     } catch (error) {
         console.error(error)
     }
 }
 
-async function solicitarImagen(id) {
+async function solicitarImagen(id, img) {
     try {
-        const resp = await fetch(`${url}/posts/feed/image/${id}`)
-        if (!resp.ok) {
-            return;
-        }
-        const blob = await resp.blob()
+        const resp = await fetch(`${url}/posts/feed/image/${id}`);
+        const blob = await resp.blob();
         const imgUrl = URL.createObjectURL(blob);
-        const imagen = new Image(imgUrl);
-        return imagen
+        img.src = imgUrl;
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
 }
 

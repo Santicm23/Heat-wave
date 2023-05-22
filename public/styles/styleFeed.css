@@ -404,9 +404,15 @@ main .container .left .profile{
 }
 
 .middle .feed .photo{
-    border-radius: var(--card-border-radius);
-    overflow: hidden;
     margin: 0.7rem 0;
+}
+
+.middle .feed .photo img {
+    border-radius: var(--card-border-radius);
+    max-width: 422px;
+    max-height: 253px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .middle .feed .music{
