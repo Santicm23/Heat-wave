@@ -230,10 +230,12 @@ fetch(`${url}/auth/`, {
 	}
 })
 .then(async data => {
-	let fotoUrl = await setImage(data.account.username);
+	let fotoUrl;
 	
-	if (fotoUrl === null) {
-		fotoUrl = "assets/imgs/babyYoda.jpg";
+	if (data.account.image) {
+		fotoUrl = await setImage(data.account.username);
+	} else {
+		fotoUrl = 'assets/imgs/babyYoda.jpg';
 	}
 	
 	fotosPerfil.forEach(fotoPerfil => {
