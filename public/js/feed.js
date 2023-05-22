@@ -132,6 +132,7 @@ async function llenarFeedPublicaciones() {
     const data = await resp.json();
     const listaPublicaciones = data.feedposts;
 
+    let boton_play = null;
     let audio_sonando = null;
 
     for (let i = 0; i < listaPublicaciones.length; i++) {
@@ -223,13 +224,30 @@ async function llenarFeedPublicaciones() {
         audio.src = cancion.sonido;
 
         const play = document.querySelector(`#play_${id_feed_post}`);
-        play.addEventListener('click', () => {
+
+        const eventPlay = () => {
             if (audio_sonando) {
+                boton_play.classList.remove('uil-pause');
                 audio_sonando.pause();
+                boton_play.removeEventListener('click', eventPause);
+                boton_play.addEventListener('click', eventPlay);
             }
+            boton_play = play;
+            boton_play.classList.add('uil-pause');
             audio.play();
             audio_sonando = audio;
-        });
+            boton_play.removeEventListener('click', eventPlay);
+            boton_play.addEventListener('click', eventPause);
+        };
+
+        const eventPause = () => {
+            boton_play.classList.remove('uil-pause');
+            boton_play.addEventListener('click', eventPlay);
+            audio_sonando.pause();
+            audio_sonando = null;
+        };
+
+        play.addEventListener('click', eventPlay);
 
         
         if (image) {
