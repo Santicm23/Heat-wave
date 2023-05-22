@@ -98,32 +98,6 @@ menuItems.forEach(item => {
     })
 })
 
-// MESSAGES --------------------------------------------------------------------------------------------------
-//Searches chats
-const searchMessage = () => {
-    const val = messageSearch.value.toLowerCase();
-    message.forEach(user => {
-        let name = user.querySelectorAll('h5').textContent.toLowerCase();
-        if(name.indexOf(val) != -1){
-            user.style.display = 'flex';
-        } else {
-            user.style.display = 'none';
-        }
-    })
-}
-
-// Search chat
-messageSearch.addEventListener('keyup', searchMessage);
-
-// Hightlight message card when message menu item is clicked
-messagesNotification.addEventListener('click', () => {
-    messages.style.boxShadow = '0 0 1rem var(--color-primary)';
-    messagesNotification.querySelector('.notification-count').style.display = 'none';
-    setTimeout(() => {
-        messages.style.boxShadow = 'none';
-    }, 2000)
-})
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -165,11 +139,11 @@ async function llenarFeedPublicaciones() {
             </div>
             <div class="song-post">
                 <audio id="audio_${id_feed_post}"></audio>
-                <div class="progressBar" id="progressBar">
-                    <div class="progress"></div>
+                <div class="progressBar" id="progressBar_${id_feed_post}">
+                    <div class="progress" id="progress_${id_feed_post}"></div>
                     <div class="duracion">
-                        <span id="tiempoActual">0:00</span>
-                        <span id="tiempoDuracion">2:00</span>
+                        <span id="tiempoActual_${id_feed_post}">0:00</span>
+                        <span id="tiempoDuracion_${id_feed_post}">2:00</span>
                     </div>
                 </div>
 
@@ -221,6 +195,8 @@ async function llenarFeedPublicaciones() {
 
         const audio = document.querySelector(`#audio_${id_feed_post}`);
         audio.src = cancion.sonido;
+        // const duracion = document.querySelector(`#tiempoDuracion_${id_feed_post}`);
+        // duracion.textContent = cancion.duracion;
 
         const play = document.querySelector(`#play_${id_feed_post}`);
 
