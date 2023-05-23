@@ -1,5 +1,9 @@
 // Constante que guarda la url actual del servidor
 let url = `http://${window.location.host}`;
+let sesionToken; // Declaración global
+
+
+sesionToken = localStorage.getItem('token');  // Asignación dentro de la función
 
 /! Función para cambiar entre los diferentes Grids (secciones de contenido)!/
 function changeSection(activeSectionId) {
@@ -44,6 +48,47 @@ function checkEmptyGrid() {
 }
 // Verifica si hay secciones vacías al cargar la página
 checkEmptyGrid();
+
+llenarPerfilPublicaciones();
+
+async function llenarPerfilPublicaciones() {
+    // const grid = document.querySelector(".grid");
+    
+    // const resp = await fetch(`${url}/posts/feed`, {
+    //     headers: {
+    //         'x-token': sesionToken
+    //     }
+    // });
+    
+    // const data = await resp.json();
+    // const listaPublicaciones = data.feedposts;
+    
+    // console.log(listaPublicaciones.length);
+    
+    // for (let i = 0; i < listaPublicaciones.length; i++) {
+    //     const { id_feed_post, id_song } = listaPublicaciones[i];
+        
+    //     grid.innerHTML += `
+    //         <div class="frame">
+    //             <div class="daddy-posti">
+    //                 <div class="posti">
+    //                     <img src="assets/imgs/babyYoda.jpg" alt="">
+    //                 </div>
+    //             </div>
+    //             <div class="bottom-posti">
+    //                 <span><i class='uil uil-play'></i></span>
+    //             </div>
+    //         </div>
+    //     `;
+    // }
+}
+
+
+
+  
+
+
+
 
 /* --------------------------------------PopUp--------------------------------------------- */
 const formContent = document.querySelector("#form-content"),
@@ -208,59 +253,86 @@ obtenerCanciones().then(() => {
 
 /! Función para obtener y mostrar información del usuario al cargar la página !/
 
-let sesionToken; // Declaración global
 
-
-sesionToken = localStorage.getItem('token');  // Asignación dentro de la función
 let fotosPerfil = document.querySelectorAll('.foto-perfil');
 let nameElement = document.getElementById('name');
 let usernameElement = document.getElementById('username');
 let h2Element = document.querySelector('.left__col h2');
 
+const grid = document.querySelector(".grid");
+
 fetch(`${url}/auth/`, {
-	headers: {
-	'x-token': sesionToken
-	}
+    headers: {
+        'x-token': sesionToken
+    }
 })
-.then(resp => {
-	if (resp.ok) {
-		return resp.json();
-	} else {
-		throw new Error('Error con el token');
-	}
-})
-.then(async data => {
-	let fotoUrl;
-	
-	if (data.account.image) {
-		fotoUrl = await setImage(data.account.username);
-	} else {
-		fotoUrl = 'assets/imgs/babyYoda.jpg';
-	}
-	
-	fotosPerfil.forEach(fotoPerfil => {
-		fotoPerfil.src = fotoUrl;
-		fotoPerfil.alt = data.account.name;
-	});
+    .then(resp => {
+        if (resp.ok) {
+            return resp.json();
+        } else {
+            throw new Error('Error con el token');
+        }
+    })
+    .then(async data => {
+        let fotoUrl;
 
+        if (data.account.image) {
+            fotoUrl = await setImage(data.account.username);
+        } else {
+            fotoUrl = 'assets/imgs/babyYoda.jpg';
+        }
 
-	if (nameElement) {
-		nameElement.textContent = data.account.name;
-	}
-	
-	if (usernameElement) {
-		usernameElement.textContent = `@${data.account.username}`;
-	}
-	
-	if (h2Element) {
-		h2Element.textContent = data.account.name;
-	}
+        fotosPerfil.forEach(fotoPerfil => {
+            fotoPerfil.src = fotoUrl;
+            fotoPerfil.alt = data.account.name;
+        });
 
+        if (nameElement) {
+            nameElement.textContent = data.account.name;
+        }
 
-})
-.catch(error => {
-	console.error(error);
-});
+        if (usernameElement) {
+            usernameElement.textContent = `@${data.account.username}`;
+        }
+
+        if (h2Element) {
+            h2Element.textContent = data.account.name;
+        }
+
+        // Obtener las publicaciones del usuario
+        const resp = await fetch(`${url}/posts/feed/${data.account.username}`, {
+            headers: {
+                'x-token': sesionToken
+            }
+        });
+
+        const feedData = await resp.json();
+        const listaPublicaciones = feedData.feedposts;
+
+        console.log(listaPublicaciones.length);
+
+        // Agregar las publicaciones al grid
+        for (let i = 0; i < listaPublicaciones.length; i++) {
+            const { id_feed_post, id_song } = listaPublicaciones[i];
+
+            grid.innerHTML += `
+                <div class="frame">
+                    <div class="daddy-posti">
+                        <div class="posti">
+                            <img src="assets/imgs/babyYoda.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="bottom-posti">
+                        <span><i class='uil uil-play'></i></span>
+                    </div>
+                </div>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
 
 const setImage = async(username) => {
   const resp = await fetch(`${url}/accounts/image/${username}`);
@@ -274,7 +346,7 @@ const setImage = async(username) => {
 let postBtn = document.querySelector('#btn-post');
 postBtn.addEventListener('click', () => postFeed(usernameElement.textContent.slice(1)));
 
-
+/!-------------------------------------Poster en el feed----------------------------------------!/
 async function postFeed(username) {
 	if (!selectedSong) {
 		alerta1('Canción no seleccionada');

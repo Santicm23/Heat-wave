@@ -42,6 +42,20 @@ body{
     background: var(--color-light);
 }
 
+  body::-webkit-scrollbar {
+    width: 15px;
+  }
+  
+  body::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: #d4aa70;
+    border-radius: 100px;
+  }
+
 /*----------------------------------- GENERAL STYLE */
 .container{
     width: 90%;
@@ -904,6 +918,5 @@ form p {
     background-color: #e5a70b;
 }
 
-  
   
   

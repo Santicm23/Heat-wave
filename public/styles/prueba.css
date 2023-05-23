@@ -195,9 +195,46 @@ a
   .header__wrapper .right__col .section-content .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
-    gap: 20px;
+    gap: 10px;
   }
   
+  .frame {
+    height: 50vh; /* Establece el tamaño fijo deseado para el frame */
+    width: 100%;
+    background-color: #fff;
+    display: grid;
+    grid-template-rows: 80% 20%;
+    border: 2px solid #000;
+    border-radius: 8px;
+    box-sizing: border-box; /* Asegura que el tamaño se calcule incluyendo el borde y el relleno */
+  }
+  
+  .daddy-posti {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  
+  .posti {
+    padding-top: 1vh;
+    width: 95%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .bottom-posti {
+    height: 100%;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 1.1vh;
+    font-size: 1.4rem;
+  }
+  
+  
+  
+
   .header__wrapper .right__col .section-content .grid img {
     max-width: 100%;
     display: block;
@@ -230,10 +267,23 @@ a
     }
   
     .header__wrapper .right__col .section-content .grid {
-      height: 300px;
+      height: 360px;
       overflow: auto;
       padding: 0 0 30px;
     }
+  }
+  .header__wrapper .right__col .section-content .grid::-webkit-scrollbar {
+    width: 15px;
+  }
+  
+  .header__wrapper .right__col .section-content .grid::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+  }
+  
+  .header__wrapper .right__col .section-content .grid::-webkit-scrollbar-thumb {
+    background-color: rgb(49, 48, 48);
+    border-radius: 100px;
   }
   
   @media (min-width: 1017px) {
