@@ -755,7 +755,7 @@ main .container .right{
     justify-content: center;
 }
 
-#form-content.active {
+.form-content.active {
     display: none;
 }
 
@@ -900,7 +900,7 @@ form p {
     background: #f2f2f2;
   }
   
-#btn-post
+.btn-post
 {
     background: var(--color-gray);
     color: #fff;
@@ -913,7 +913,7 @@ form p {
     margin: 1vh;
     transition: 200ms;
 }
-#btn-post:hover
+.btn-post:hover
 {
     background-color: #e5a70b;
 }

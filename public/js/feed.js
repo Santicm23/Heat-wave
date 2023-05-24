@@ -233,6 +233,7 @@ async function llenarFeedPublicaciones() {
         
         if (image) {
             const imagenFeed = document.querySelector(`#photo_${id_feed_post}`);
+            
             await solicitarImagen(id_feed_post, imagenFeed);
         }
     });

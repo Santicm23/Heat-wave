@@ -29,70 +29,13 @@ document.getElementById("favorities-btn").addEventListener("click", function() {
 });
 
 // Muestra la sección de publicaciones al cargar la página
-changeSection("post");
-/!Función para revisar si la sección está vacía, y en caso de que lo esté muestra una advertencia!/
-function checkEmptyGrid() {
-	var sections = document.querySelectorAll(".section-content");
-
-	sections.forEach(function (section) {
-		var grid = section.querySelector(".grid");
-
-		if (grid && grid.children.length === 0) {
-			grid.innerHTML = `
-				<img src="assets/imgs/blanco.jpg" alt="post" />
-				<img src="assets/imgs/noPublicacion.jpg" alt="post" />
-				<img src="assets/imgs/blanco.jpg" alt="post" />
-			`;
-		}
-	});
-}
-// Verifica si hay secciones vacías al cargar la página
-checkEmptyGrid();
-
-llenarPerfilPublicaciones();
-
-async function llenarPerfilPublicaciones() {
-    // const grid = document.querySelector(".grid");
-    
-    // const resp = await fetch(`${url}/posts/feed`, {
-    //     headers: {
-    //         'x-token': sesionToken
-    //     }
-    // });
-    
-    // const data = await resp.json();
-    // const listaPublicaciones = data.feedposts;
-    
-    // console.log(listaPublicaciones.length);
-    
-    // for (let i = 0; i < listaPublicaciones.length; i++) {
-    //     const { id_feed_post, id_song } = listaPublicaciones[i];
-        
-    //     grid.innerHTML += `
-    //         <div class="frame">
-    //             <div class="daddy-posti">
-    //                 <div class="posti">
-    //                     <img src="assets/imgs/babyYoda.jpg" alt="">
-    //                 </div>
-    //             </div>
-    //             <div class="bottom-posti">
-    //                 <span><i class='uil uil-play'></i></span>
-    //             </div>
-    //         </div>
-    //     `;
-    // }
-}
-
-
-
-  
-
 
 
 
 /* --------------------------------------PopUp--------------------------------------------- */
-const formContent = document.querySelector("#form-content"),
-    fileInput = document.querySelector(".file-input");
+const formContent = document.querySelectorAll(".form-content"),
+    fileInput = document.querySelector(".file-input"),
+    middleAreas = document.querySelectorAll('.middle-area');
 
 let selectedSong = null;  
 let selectedImage = null; 
@@ -114,8 +57,10 @@ fileInput.onchange = ({target}) => {
 		let reader = new FileReader();
 		reader.onload = function (e) {
 			// Modifica el CSS de tu pop-up para incluir la imagen seleccionada como fondo
-			let middleArea = document.querySelector('.middle-area');
-			middleArea.style.backgroundImage = 'url(' + e.target.result + ')';
+
+			middleAreas.forEach((middleArea) => {
+                middleArea.style.backgroundImage = 'url(' + e.target.result + ')';
+            });
 		}
 		// Lee el archivo de imagen
 		reader.readAsDataURL(file);
@@ -124,42 +69,56 @@ fileInput.onchange = ({target}) => {
 		fileInput.disabled = true;
 
 		// Oculta el contenido del formulario
-		formContent.classList.add('active');
+        formContent.forEach(formContent => formContent.classList.add('active'));
 	}
 }
 
-function cerrarPopup(){
-	// Reinicia el input del archivo al cerrar el popup
-	fileInput.value = "";
-	fileInput.disabled = false;
 
-	if (audioPlayer) {// Detenemos la canción que se está reproduciendo
-		audioPlayer.pause();
-		audioPlayer = null;
-	}
 
-	// Limpia la imagen de fondo
-	let middleArea = document.querySelector('.middle-area');
-	middleArea.style.backgroundImage = '';
-	let popup = document.getElementById('popup');
-	let wrapper = document.querySelector('.wrapper');
-	popup.classList.remove('active');
-	wrapper.classList.remove('active');
-	let btnclose=document.querySelector('.btn-cerrar-popup');
-	btnclose.classList.remove('active');
+function cerrarPopup() {
+    // Reinicia el input del archivo al cerrar el popup
+    fileInput.value = "";
+    fileInput.disabled = false;
 
-	// Muestra el contenido del formulario
-	formContent.classList.remove('active');
+    if (audioPlayer) {
+        // Detenemos la canción que se está reproduciendo
+        audioPlayer.pause();
+        audioPlayer = null;
+    }
+    // Limpia la imagen de fondo
+    middleAreas.forEach((middleArea) => {middleArea.style.backgroundImage = "";});
+    // Cierra todos los elementos de tipo popup
+    let popups = document.querySelectorAll('.popup');
+    let wrappers = document.querySelectorAll('.wrapper');
+    let btnCloses = document.querySelectorAll('.btn-cerrar-popup');
+    
+    popups.forEach(popup => popup.classList.remove('active'));
+    wrappers.forEach(wrapper => wrapper.classList.remove('active'));
+    btnCloses.forEach(btnclose => btnclose.classList.remove('active'));
+
+    // Muestra el contenido del formulario
+    formContent.forEach(formContent => formContent.classList.remove('active'));
 }
+
 
 function togglePopup() {
-	let popup = document.querySelector('.popup');
-	let wrapper = document.querySelector('.wrapper');
-	popup.classList.add('active');
-	wrapper.classList.add('active');
-	let btnclose=document.querySelector('.btn-cerrar-popup');
+    let popup = document.getElementById('popup');
+    let wrapper = popup.querySelector('.wrapper');
+    popup.classList.add('active');
+    wrapper.classList.add('active');
+    let btnclose=document.querySelector('.btn-cerrar-popup');
 	btnclose.classList.add('active');
 }
+
+function togglePopup2() {
+    let popup = document.getElementById('popup2');
+    let wrapper = popup.querySelector('.wrapper');
+    popup.classList.add('active');
+    wrapper.classList.add('active');
+    let btnclose=document.querySelector('.btn-cerrar-popup');
+	btnclose.classList.add('active');
+}
+
 
 /* --------------------------------------selectMenu--------------------------------------------- */
 
@@ -309,8 +268,8 @@ fetch(`${url}/auth/`, {
         const feedData = await resp.json();
         const listaPublicaciones = feedData.feedposts;
 
-        console.log(listaPublicaciones.length);
-
+        let boton_play = null;
+        let audio_sonando = null;
         // Agregar las publicaciones al grid
         for (let i = 0; i < listaPublicaciones.length; i++) {
             const { id_feed_post, id_song } = listaPublicaciones[i];
@@ -319,20 +278,98 @@ fetch(`${url}/auth/`, {
                 <div class="frame">
                     <div class="daddy-posti">
                         <div class="posti">
-                            <img src="assets/imgs/babyYoda.jpg" alt="">
+                            <img id="photo_${id_feed_post}" src="assets/imgs/babyYoda.jpg" alt="">
                         </div>
                     </div>
                     <div class="bottom-posti">
-                        <span><i class='uil uil-play'></i></span>
+                    <i id="play_${id_feed_post}" class="uil uil-play" ></i>
+                    <audio id="audio_${id_feed_post}"></audio>
                     </div>
                 </div>
             `;
+            listaPublicaciones[i].cancion = await solicitarCancion(id_song);
         }
+        console.log(listaPublicaciones);
+        listaPublicaciones.forEach(async({ id_feed_post, image, cancion }) => {
+            const audio = document.querySelector(`#audio_${id_feed_post}`);
+            audio.src = cancion.sonido;
+            
+            const player = document.querySelector(`#play_${id_feed_post}`);
+    
+            player.addEventListener('click', () => {
+                if (audio.paused) {
+                    if (audio_sonando) {    
+                        audio_sonando.pause();
+                        audio_sonando.currentTime = 0;
+                        boton_play.classList.remove('uil-pause');
+                        boton_play.classList.add('uil-play');
+                    }
+                    audio_sonando = audio;
+                    audio_sonando.play();
+                    boton_play = player;
+                    player.classList.remove('uil-play');
+                    player.classList.add('uil-pause');
+                } else if (audio_sonando) {
+                    audio_sonando.pause();
+                    if (audio_sonando !== audio) {
+                        audio_sonando.currentTime = 0;
+                    }
+                    audio_sonando = null;
+                    boton_play.classList.remove('uil-pause');
+                    boton_play.classList.add('uil-play');
+                } else {
+                    audio.pause();
+                    audio_sonando = null;
+                    boton_play = null;
+                    player.classList.remove('uil-pause');
+                    player.classList.add('uil-play');
+                }
+            });
+    
+            
+            if (image) {
+                const imagenFeed = document.querySelector(`#photo_${id_feed_post}`);
+                console.log(imagenFeed);
+                await solicitarImagen(id_feed_post, imagenFeed);
+            }
+        });
     })
     .catch(error => {
         console.error(error);
     });
+async function solicitarCancion(id) {
+    try {
+        const resp = await fetch(`${url}/songs/${id}`);
+        const { song } = await resp.json();
 
+        song.sonido = await solicitarSonido(id);
+        return song;
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+async function solicitarSonido(id) {
+    try {
+        const resp = await fetch(`${url}/songs/track/${id}`);
+        const blob = await resp.blob();
+        const audioUrl = URL.createObjectURL(blob);
+        return audioUrl;
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+async function solicitarImagen(id, img) {
+    try {
+        const resp = await fetch(`${url}/posts/feed/image/${id}`);
+        const blob = await resp.blob();
+        const imgUrl = URL.createObjectURL(blob);
+        img.src = imgUrl;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 const setImage = async(username) => {
   const resp = await fetch(`${url}/accounts/image/${username}`);
@@ -343,10 +380,10 @@ const setImage = async(username) => {
   return imgUrl;
 }
 
-let postBtn = document.querySelector('#btn-post');
-postBtn.addEventListener('click', () => postFeed(usernameElement.textContent.slice(1)));
 
 /!-------------------------------------Poster en el feed----------------------------------------!/
+let postBtn = document.querySelector('#btn-post');
+postBtn.addEventListener('click', () => postFeed(usernameElement.textContent.slice(1)));
 async function postFeed(username) {
 	if (!selectedSong) {
 		alerta1('Canción no seleccionada');
@@ -376,6 +413,30 @@ async function postFeed(username) {
 		console.error(error);
 	}
 }
+let postBtn2 = document.querySelector('#btn-post2');
+postBtn2.addEventListener('click', () => postProfilePhoto(usernameElement.textContent.slice(1)));
+async function postProfilePhoto(username) {
+	let formData = new FormData();
+	formData.append('image', selectedImage);
+	try {
+		let response = await fetch(`${url}/accounts/image/${username}`, {
+			method: 'PUT',
+			headers: {
+				'x-token': sesionToken
+			},
+			body: formData
+		});
+
+		if (!response.ok) {
+			throw new Error('Error al publicar en el feed');
+		}
+		// Cierra el popup después de subir la publicación
+		cerrarPopup();
+
+	} catch (error) {
+		console.error(error);
+	}
+}
 
 const alerta1 = (text) => { 
     
@@ -388,3 +449,23 @@ const alerta1 = (text) => {
         showCloseButton:true
     })
 }
+
+
+changeSection("post");
+/!Función para revisar si la sección está vacía, y en caso de que lo esté muestra una advertencia!/
+function checkEmptyGrid() {
+	var sections = document.querySelectorAll(".section-content");
+
+	sections.forEach(function (section) {
+		var grid = section.querySelector(".grid");
+
+		if (grid && grid.children.length === 0) {
+			grid.innerHTML = `
+				<img src="assets/imgs/blanco.jpg" alt="post" />
+				<img src="assets/imgs/noPublicacion.jpg" alt="post" />
+				<img src="assets/imgs/blanco.jpg" alt="post" />
+			`;
+		}
+	});
+}
+

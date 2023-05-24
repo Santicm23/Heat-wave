@@ -168,30 +168,14 @@
                                     <button id="playlist-btn">Playlists</button>
                                     <button id="favorities-btn">Favoritos</button>
                                 </ul>
-                                <button class="btn btn-primary">Editar Pefil</button>
+                                <button class="btn btn-primary" onclick="togglePopup2()">Editar Pefil</button>
                             </div>
                             <div class="profile-sections">
                                 <div class="post section-content active" id="post">
                                     <div class="grid">
                                         
-                                        <div class="frame">
-                                            <div class="daddy-posti">
-                                                <div class="posti">
-                                                    <img src="assets/imgs/babyYoda.jpg" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="bottom-posti">
-                                                <span><i class='uil uil-play'></i></span>
-                                            </div>
-                                        </div>
                                         
-                                        
-                                        
-                                        
-                                        
-
-                                
-                                        
+                                        <!-- ACA VAN LAS FOTOSSS -->    
                                     </div>
                                 </div>
                                 <div class="playlist section-content" id="playlist">
@@ -291,11 +275,11 @@
         <div class="popup" id="popup">
             <div class="wrapper">
                 <div class="header-area">
-                    <header>File Uploader JavaScript</header>
+                    <header>Upload a photo and enjoy life!</header>
                 </div>
                 <div class="middle-area">
                     <form action="#" id="uploadForm">
-                        <div id="form-content">
+                        <div class="form-content">
                             <label for="fileUpload">
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <p>Browse File to Upload</p>
@@ -317,8 +301,31 @@
                           </div>
                           <ul class="options"></ul>
                         </div>
-                      </div>
-                    <button id="btn-post">Post</button>
+                    </div>
+                    <button id="btn-post" class="btn-post">Post</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="popup" id="popup2">
+            <div class="wrapper">
+                <div class="header-area">
+                    <header>Change your profile photo!</header>
+                </div>
+                <div class="middle-area">
+                    <form action="#" id="uploadForm">
+                        <div class="form-content">
+                            <label for="fileUpload">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Browse File to Upload</p>
+                                <input id="fileUpload2" class="file-input" type="file" name="file" accept=".png,.jpg,.jpeg" hidden>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="footer-area">
+                    <button id="btn-post2" class="btn-post">Post</button>
                 </div>
             </div>
         </div>
