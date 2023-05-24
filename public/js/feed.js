@@ -105,11 +105,18 @@ async function llenarFeedPublicaciones() {
     const data = await resp.json();
     const listaPublicaciones = data.feedposts;
 
+    let lista10ultimas;
+    if (listaPublicaciones.length < 10) {
+        lista10ultimas = listaPublicaciones.reverse();
+    } else {
+        lista10ultimas = listaPublicaciones.slice(listaPublicaciones.length-10).reverse();
+    }
+
     let boton_play = null;
     let audio_sonando = null;
 
-    for (let i = 0; i < listaPublicaciones.length; i++) {
-        const { id_feed_post, username, location, description, id_song } = listaPublicaciones[i];
+    for (let i = 0; i < lista10ultimas.length; i++) {
+        const { id_feed_post, username, location, description, id_song } = lista10ultimas[i];
 
         feeds.innerHTML += `
         <div class="feed">
@@ -183,15 +190,15 @@ async function llenarFeedPublicaciones() {
         descElement.textContent = description;
 
         // const cancion = await solicitarCancion(id_song);
-        listaPublicaciones[i].cancion = await solicitarCancion(id_song);
+        lista10ultimas[i].cancion = await solicitarCancion(id_song);
 
         const cancionElement = document.querySelector(`#cancion_${id_feed_post}`);
-        cancionElement.textContent = listaPublicaciones[i].cancion.name;
+        cancionElement.textContent = lista10ultimas[i].cancion.name;
         const autorElement = document.querySelector(`#autor_${id_feed_post}`);
-        autorElement.textContent = listaPublicaciones[i].cancion.author;
+        autorElement.textContent = lista10ultimas[i].cancion.author;
 
     }
-    listaPublicaciones.forEach(async({ id_feed_post, image, cancion }) => {
+    lista10ultimas.forEach(async({ id_feed_post, image, cancion }) => {
         // const duracion = document.querySelector(`#tiempoDuracion_${id_feed_post}`);
         // duracion.textContent = cancion.duracion;
 
@@ -233,7 +240,6 @@ async function llenarFeedPublicaciones() {
         
         if (image) {
             const imagenFeed = document.querySelector(`#photo_${id_feed_post}`);
-            
             await solicitarImagen(id_feed_post, imagenFeed);
         }
     });

@@ -268,11 +268,18 @@ fetch(`${url}/auth/`, {
         const feedData = await resp.json();
         const listaPublicaciones = feedData.feedposts;
 
+        let lista10ultimas;
+        if (listaPublicaciones.length < 10) {
+            lista10ultimas = listaPublicaciones.reverse();
+        } else {
+            lista10ultimas = listaPublicaciones.slice(listaPublicaciones.length-10).reverse();
+        }
+
         let boton_play = null;
         let audio_sonando = null;
         // Agregar las publicaciones al grid
-        for (let i = 0; i < listaPublicaciones.length; i++) {
-            const { id_feed_post, id_song } = listaPublicaciones[i];
+        for (let i = 0; i < lista10ultimas.length; i++) {
+            const { id_feed_post, id_song } = lista10ultimas[i];
 
             grid.innerHTML += `
                 <div class="frame">
@@ -287,10 +294,9 @@ fetch(`${url}/auth/`, {
                     </div>
                 </div>
             `;
-            listaPublicaciones[i].cancion = await solicitarCancion(id_song);
+            lista10ultimas[i].cancion = await solicitarCancion(id_song);
         }
-        console.log(listaPublicaciones);
-        listaPublicaciones.forEach(async({ id_feed_post, image, cancion }) => {
+        lista10ultimas.forEach(async({ id_feed_post, image, cancion }) => {
             const audio = document.querySelector(`#audio_${id_feed_post}`);
             audio.src = cancion.sonido;
             
