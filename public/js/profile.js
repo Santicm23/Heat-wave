@@ -164,6 +164,7 @@ function playSong(id) {
     fetch(`${url}/songs/track/${id}`)
         .then(resp => {
             if (resp.ok) {
+                console.log(resp);
                 return resp.blob();
             } else {
                 throw new Error('Error al descargar el sonido de la canción');
