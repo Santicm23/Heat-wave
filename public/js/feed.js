@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     })
     .catch(error => {
         console.error(error);
+        window.location.href = 'index.html';
     });
 });
 
