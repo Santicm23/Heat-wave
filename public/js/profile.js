@@ -182,11 +182,13 @@ function playSong(id) {
 searchInp.addEventListener("keyup", () => {
     let arr = [];
     let searchWord = searchInp.value.toLowerCase();
+    let i = 0;
     arr = songs.filter(data => {
         return data.toLowerCase().startsWith(searchWord);
     }).map(data => {
         let isSelected = data == selectBtn.firstElementChild.innerText ? "selected" : "";
-        return `<li onclick="updateName(this)" class="${isSelected}">${data}</li>`;
+        i++;
+        return `<li id="cancion${i}" onclick="updateName(this)" class="${isSelected}">${data}</li>`;
     }).join("");
     options.innerHTML = arr ? arr : `<p style="margin-top: 10px;">Oops! Song not found</p>`;
 });

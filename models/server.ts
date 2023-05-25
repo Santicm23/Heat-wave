@@ -12,7 +12,7 @@ import mongo from '../db/mongo';
 
 
 class Server {
-    private app: Application;
+    public app: Application;
     private port: string;
     private paths = {
         auth: '/auth',

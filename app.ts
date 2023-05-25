@@ -4,6 +4,6 @@ import 'dotenv/config';
 import Server from './models/server';
 
 
-const server = new Server();
+export const server = new Server();
 
 server.listen();

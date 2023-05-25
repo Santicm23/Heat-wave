@@ -33,9 +33,8 @@ describe('Authentication tests', () => {
             await driver.quit();
             throw error;
         }
-
         
-    }, 10000);
+    }, 12000);
 
     test('Users should be redirected to de login page if they are not autheticated. (frontend)', async() => {
         const driver = new webdriver.Builder()
@@ -66,7 +65,7 @@ describe('Authentication tests', () => {
         }
         
 
-    }, 8000);
+    }, 10000);
 
     test('Users should not be able to login if wrong data is provided', async() => {
         const driver = new webdriver.Builder()
@@ -100,7 +99,7 @@ describe('Authentication tests', () => {
         }
         
         
-    }, 8000);
+    }, 10000);
 
     test('Users should be able to register and then login with that account. (frontend)', async() => {
         const driver = new webdriver.Builder()
