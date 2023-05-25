@@ -164,6 +164,7 @@ function playSong(id) {
     fetch(`${url}/songs/track/${id}`)
         .then(resp => {
             if (resp.ok) {
+                
                 return resp.blob();
             } else {
                 throw new Error('Error al descargar el sonido de la canción');
@@ -338,6 +339,7 @@ fetch(`${url}/auth/`, {
                 console.log(imagenFeed);
                 await solicitarImagen(id_feed_post, imagenFeed);
             }
+
         });
     })
     .catch(error => {
@@ -476,3 +478,6 @@ function checkEmptyGrid() {
 	});
 }
 
+setTimeout(function() {
+    checkEmptyGrid();
+  }, 9000);
