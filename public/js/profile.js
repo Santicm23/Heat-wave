@@ -343,6 +343,7 @@ fetch(`${url}/auth/`, {
     })
     .catch(error => {
         console.error(error);
+        window.location.href = 'index.html';
     });
 async function solicitarCancion(id) {
     try {
