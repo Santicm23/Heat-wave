@@ -476,4 +476,4 @@ function checkEmptyGrid() {
 		}
 	});
 }
-
+checkEmptyGrid();
