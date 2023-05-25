@@ -339,6 +339,7 @@ fetch(`${url}/auth/`, {
                 console.log(imagenFeed);
                 await solicitarImagen(id_feed_post, imagenFeed);
             }
+
         });
     })
     .catch(error => {
@@ -476,4 +477,7 @@ function checkEmptyGrid() {
 		}
 	});
 }
-checkEmptyGrid();
+
+setTimeout(function() {
+    checkEmptyGrid();
+  }, 9000);
