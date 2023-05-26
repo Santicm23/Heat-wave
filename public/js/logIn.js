@@ -1,7 +1,7 @@
 
 const url = window.location.host.includes('localhost')
-    ? `http://${window.location.host}/auth`
-    : `https://${window.location.host}/auth`;
+    ? `http://${window.location.host}`
+    : `https://${window.location.host}`;
 
 const btnLogin = document.querySelector('#btnLogin');
 const inputUser = document.querySelector('#un-email');
@@ -63,7 +63,7 @@ btnLogin.addEventListener('click', event => {
     }
 
 
-    fetch(`${url}/login`, {
+    fetch(`${url}/auth/login`, {
         method: 'POST',
         headers: {
             'content-Type': 'application/json'
@@ -89,7 +89,7 @@ btnLogin.addEventListener('click', event => {
 function handleCredentialResponse(response) {
     // Google token
     // console.log('ID TOKEN: ',response.credential);
-    fetch(`${url}/google`, {
+    fetch(`${url}/auth/google`, {
         method: 'POST',
         headers: {
             'content-Type': 'application/json'

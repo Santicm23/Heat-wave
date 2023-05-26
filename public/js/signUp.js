@@ -1,7 +1,7 @@
 
 const url = window.location.host.includes('localhost')
-    ? `http://${window.location.host}/auth`
-    : `https://${window.location.host}/auth`;
+    ? `http://${window.location.host}`
+    : `https://${window.location.host}`;
 
 const login = document.querySelector('#login');
 const logo = document.querySelector('#logo');
