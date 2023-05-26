@@ -1,5 +1,7 @@
 
-const url = `http://${window.location.host}/auth`;
+const url = window.location.host.includes('localhost')
+    ? `http://${window.location.host}/auth`
+    : `https://${window.location.host}/auth`;
 
 const btnLogin = document.querySelector('#btnLogin');
 const inputUser = document.querySelector('#un-email');
@@ -18,7 +20,7 @@ animatelogin();
 
 /! --------------------------------------------Alertas-------------------------------------------------------!/
 
-const alerta1=(text)=>{ 
+const alerta1 = (text) => { 
     
     Swal.fire({
         title:'¡Ups!',

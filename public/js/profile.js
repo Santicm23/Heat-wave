@@ -1,5 +1,8 @@
 // Constante que guarda la url actual del servidor
-let url = `http://${window.location.host}`;
+const url = window.location.host.includes('localhost')
+    ? `http://${window.location.host}/auth`
+    : `https://${window.location.host}/auth`;
+
 let sesionToken; // Declaración global
 
 

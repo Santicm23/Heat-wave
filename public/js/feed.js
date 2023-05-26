@@ -1,4 +1,7 @@
-let url = `http://${window.location.host}`;
+
+const url = window.location.host.includes('localhost')
+    ? `http://${window.location.host}/auth`
+    : `https://${window.location.host}/auth`;
 
 const feeds = document.querySelector('.feeds');
 
