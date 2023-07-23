@@ -7,7 +7,7 @@
     "dev": "nodemon dist/app",
     "build-dev": "tsc --watch",
     "test": "jest",
-    "build": "tsc",
+    "build": "npm install && tsc",
     "start": "node dist/app.js"
   },
   "repository": {
