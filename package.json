@@ -20,6 +20,9 @@
   "bugs": {
     "url": "https://github.com/Santicm23/Heat-wave/issues"
   },
+  "engines": {
+    "node": ">=16.9"
+  },
   "homepage": "https://github.com/Santicm23/Heat-wave#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
