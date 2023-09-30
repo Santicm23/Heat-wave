@@ -41,7 +41,7 @@ window.onload = () => {
         callback: handleCredentialResponse,
         auto_prompt: false,
     });
-  };
+};
   
 // Inicia el flujo de inicio de sesión de Google al hacer clic en tu icono.
 $('.fa-google').click(function () {
