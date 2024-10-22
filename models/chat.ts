@@ -11,6 +11,7 @@ class Chat extends Model<InferAttributes<Chat>, InferCreationAttributes<Chat>> {
     declare creation_date: Date;
 }
 
+
 Chat.init({
     id_chat: {
         type: DataTypes.BIGINT,
