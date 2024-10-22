@@ -1,5 +1,7 @@
 
-const url = `http://${window.location.host}/auth`;
+const url = window.location.host.includes('localhost')
+    ? `http://${window.location.host}`
+    : `https://${window.location.host}`;
 
 const btnLogin = document.querySelector('#btnLogin');
 const inputUser = document.querySelector('#un-email');
@@ -18,7 +20,7 @@ animatelogin();
 
 /! --------------------------------------------Alertas-------------------------------------------------------!/
 
-const alerta1=(text)=>{ 
+const alerta1 = (text) => { 
     
     Swal.fire({
         title:'¡Ups!',
@@ -39,7 +41,7 @@ window.onload = () => {
         callback: handleCredentialResponse,
         auto_prompt: false,
     });
-  };
+};
   
 // Inicia el flujo de inicio de sesión de Google al hacer clic en tu icono.
 $('.fa-google').click(function () {
@@ -61,7 +63,7 @@ btnLogin.addEventListener('click', event => {
     }
 
 
-    fetch(`${url}/login`, {
+    fetch(`${url}/auth/login`, {
         method: 'POST',
         headers: {
             'content-Type': 'application/json'
@@ -87,7 +89,7 @@ btnLogin.addEventListener('click', event => {
 function handleCredentialResponse(response) {
     // Google token
     // console.log('ID TOKEN: ',response.credential);
-    fetch(`${url}/google`, {
+    fetch(`${url}/auth/google`, {
         method: 'POST',
         headers: {
             'content-Type': 'application/json'

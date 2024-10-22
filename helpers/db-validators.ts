@@ -1,5 +1,6 @@
 
 import Account from '../models/account';
+import FeedPost from '../models/feedPost';
 import Song from '../models/song';
 
 
@@ -36,3 +37,15 @@ export const songExists = async(id_song: number): Promise<void> => {
         throw new Error(`La cancion con id '${id_song}' no existe`);
     }
 }
+
+export const countPosts = async(username: string): Promise<number> => {
+    if (!username) return 0;
+
+    const cant = await FeedPost.count({
+        where: {
+            username
+        }
+    });
+
+    return cant;
+};

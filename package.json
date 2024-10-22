@@ -1,6 +1,6 @@
 {
   "name": "heat-wave",
-  "version": "0.0.1",
+  "version": "0.8.1",
   "description": "- **`Nombre de Grupo`**: Scalae\r - **`Nombre de Proyecto`**: Heat wave\r - **`Integrantes`**:\r     <!-- Nombre, foto, biografía(Un párrafo), rol, responsabilidades -->\r     | Nombre | Foto | Biografía | Rol | Responsabilidades |\r     |---|---|---|---|---|\r     | Jose Manuel Rodriguez | | Escribe tu biografía | Líder de Proyecto | <ul><li>A</li><li>B</li><li>C</li></ul> |\r     | Santiago Castro | | Nací el 30/10/2003 en Bogotá Colombia, me encanta jugar tenis, programar, tocar piano y jugar ajedrez. Ahora mismo estudio ingeniería de sistemas y estoy viendo mi cuarto semestre. Soy una persona responsable y aplicada :) | Líder de Desarrollo | <ul><li>A</li><li>B</li><li>C</li></ul> |\r     | Nicolás David Rincon | | Hola | Líder de Arquitectura | <ul><li>Hola</li><li>B</li><li>C</li></ul> |\r     | Laura Valentina Ovalle | | Nací el 5 de octubre del 2004 en Bogotá Colombia, mis pasatiempos favoritos son leer, escuchar música y hacer ejercicio. Actualmente me encuentro cursando el 4 semestre de Ingeniería de Sistemas. Mis principales habilidades son la creatividad, disciplina y liderazgo| Líder de Diseño | <ul><li>A</li><li>B</li><li>C</li></ul> |\r     | Michael Joel Gonzalez | | | Líder de Documentación | |",
   "main": "dist/app.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "build-dev": "tsc --watch",
     "test": "jest",
     "build": "tsc",
-    "start": "node dist/app.js"
+    "start": "node ./dist/app.js"
   },
   "repository": {
     "type": "git",
@@ -20,9 +20,13 @@
   "bugs": {
     "url": "https://github.com/Santicm23/Heat-wave/issues"
   },
+  "engines": {
+    "node": ">=16.9"
+  },
   "homepage": "https://github.com/Santicm23/Heat-wave#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "casual": "^1.6.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -35,17 +39,18 @@
     "selenium-webdriver": "^4.9.2",
     "sequelize": "^6.31.0",
     "serve-favicon": "^2.5.0",
-    "socket.io": "^4.6.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.1",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/multer": "^1.4.7",
     "@types/selenium-webdriver": "^4.1.14",
     "@types/serve-favicon": "^2.5.4",
+    "@types/supertest": "^2.0.12",
     "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
